@@ -7,8 +7,7 @@
 <p>
   <a href="https://arxiv.org/abs/2610.22512"><img src="https://img.shields.io/badge/arXiv-2610.22512-B31B1B?logo=arxiv&logoColor=white" alt="Paper on arXiv"/></a>
   <a href="https://huggingface.co/datasets/zkjzou/PI-OPSD"><img src="https://img.shields.io/badge/Dataset-Hugging%20Face-FFCC00?logo=huggingface&logoColor=black" alt="Dataset on Hugging Face"/></a>
-  <!-- TODO: replace https://x.com/TODO with the announcement thread before publishing. -->
-  <a href="https://x.com/TODO"><img src="https://img.shields.io/badge/Thread-X-000000?logo=x&logoColor=white" alt="Announcement thread"/></a>
+  <a href="https://x.com/zkjzou/status/2112596992660824201"><img src="https://img.shields.io/badge/Thread-X-000000?logo=x&logoColor=white" alt="Announcement thread"/></a>
 </p>
 
 </div>
