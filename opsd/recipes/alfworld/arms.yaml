@@ -1,0 +1,654 @@
+# ALFWorld arm tables. Every arm id below resolves (python -m opsd.recipes resolve <arm_id>) to the
+# exact environment scripts/alfworld/run.sh runs with: base.env < students/<s>.env <
+# objectives/<o>.env < pis.yaml < table env < table extra < seed.
+#
+# Each table entry carries the EVALUATION PROTOCOL the arm ran under (anchors in `protocols:` below), so an
+# arm reproduces its own run, not a later convention:
+#   dev200      the first trajectory-PI arms: in-training validation on the 200-task dev split (taken from the
+#               train pool), N=1, every 25 steps. Their paper numbers come from re-scoring the saved
+#               checkpoints on valid_seen + valid_unseen at N=4 after training.
+#   seen_n1     valid_seen + valid_unseen at N=1 every 25 (re-scored at N=4 the same way).
+#   campaign    valid_seen + valid_unseen at N=4 every 10 steps, checkpoints every 10.
+#   rs01        reward scale 0.1, valid_seen + valid_unseen at N=4 every 25, 2 epochs (200 steps), autoresume.
+#   rs01_1ep    as rs01 with 1 epoch (100 steps).
+# A table entry whose reported numbers come from a checkpoint re-score (the dev200 / seen_n1 main-table arms
+# and the beta sweep) lists, under `rescore:`, the exact KEY=VAL arguments of the re-score of record. Run it
+# after training, with the same RUN_ROOT / RUN_NAME as training:
+#   scripts/alfworld/run.sh <arm> <each rescore KEY=VAL>
+# The launcher runs it in its own directory (<training RUN_DIR>__ckpteval) and reads the training run's
+# checkpoints; the training run's resolved.env and provenance.json stay untouched (see the launcher header).
+# "Paper" cells: tab:opsd_results (main table and its base row), tab:alfworld_coef_sweep (lambda / beta /
+# GRPO sweep). Arms with paper: null are reported in the appendix or not at all.
+#
+# Where the launch configuration recorded at submission differs from what actually ran (verified from the
+# run's logged configuration and its rollout dumps), the table encodes what RAN and says so in `note:`.
+
+seed_var: TRAINER_SEED
+
+keys:
+  lambda: OPSD_MIX_LAMBDA
+  beta: OPSD_DISTILL_LOSS_COEF
+  decay: OPSD_RLSD_DECAY_STEPS
+  reward_scale: ALFWORLD_REWARD_SCALE
+  placement: ALFWORLD_HINT_PLACEMENT
+  teacher:
+    var: OPSD_TEACHER
+    values:
+      frozen: {OPSD_TEACHER: frozen, OPSD_TEACHER_ALPHA: "0.01", OPSD_EMA_INTERVAL: "1"}
+      ema: {OPSD_TEACHER: ema, OPSD_TEACHER_ALPHA: "0.01", OPSD_EMA_INTERVAL: "5"}
+      live: {OPSD_TEACHER: live, OPSD_TEACHER_ALPHA: "0.01", OPSD_EMA_INTERVAL: "1"}
+      h10: {OPSD_TEACHER: ema, OPSD_TEACHER_ALPHA: "1.0", OPSD_EMA_INTERVAL: "10"}
+  # selection rule of the per-task PI pool; it only names the hint file (pis.yaml / seed entries)
+  select:
+    values: {rand: {}, rand8: {}, top3d: {}, top3e: {}}
+  eval:
+    values:
+      # in-context PI utility on ALFWorld-Passcode: evaluation only, one eval set per hint set over the same
+      # 200 train tasks, each set in its own eval bucket (eval/alfworld_<set>/*)
+      utility:
+        EVAL_ONLY: "true"
+        EVAL_HINT_SETS: nohint+pc_key+pc_rawkey+pc_rawwrong+pc_wrongraw
+        EVAL_HINT_DIR: ${OPSD_DATA_ROOT}/alfworld/passcode/hints_v1
+        EVAL_HINT_TASK_IDS_PATH: ${OPSD_DATA_ROOT}/alfworld/passcode/task_ids_util200.json
+        EVAL_TEMPERATURE: "1.0"
+        EVAL_TOP_P: "0.95"
+
+defaults:
+  status: done
+
+# Protocol anchors. They only list what differs from the default protocol in base.env (valid_seen +
+# valid_unseen at N=4 every 25 steps, checkpoints every 25, 1 epoch = 100 steps, autoresume, reward scale
+# 1.0). The resolver rejects a key repeated inside one mapping, so a table extends an anchor only with keys
+# the anchor does not set.
+protocols:
+  step0: &step0
+    EVAL_ONLY: "true"
+    RESUME_MODE: "null"
+  dev200: &dev200
+    EVAL_DEV: "true"
+    FINAL_TEST: "true"
+    EVAL_N_SAMPLES: "1"
+    RESUME_MODE: "null"
+  seen_n1: &seen_n1
+    EVAL_N_SAMPLES: "1"
+    RESUME_MODE: "null"
+  campaign: &campaign
+    EVAL_BATCH_SIZE: "64"
+    EVAL_INTERVAL: "10"
+    CKPT_INTERVAL: "10"
+    RESUME_MODE: "null"
+  rs01: &rs01
+    ALFWORLD_REWARD_SCALE: "0.1"
+    TRAINER_EPOCHS: "2"
+  rs01_1ep: &rs01_1ep
+    ALFWORLD_REWARD_SCALE: "0.1"
+  lambda_grid: &lambda_grid
+    ALFWORLD_REWARD_SCALE: "0.1"
+    TRAINER_EPOCHS: "2"
+    EVAL_N_SAMPLES: "1"
+    RESUME_MODE: "null"
+
+tables:
+  # ===================================================================== step 0 (untrained student, no PI)
+  - table: step0
+    students: [4bi, 4bt, 30bi]
+    pis: none
+    objective: opsd
+    env: *step0
+    paper: "tab:opsd_results"
+    note: >-
+      evaluation-only run of the untrained student under the training env contract (valid_seen 140 +
+      valid_unseen 134, N=4). The paper's base row averages the step-0 evaluation of 10 training runs.
+
+  # ================================================================================= main table (vanilla OPSD)
+  # Trajectory PIs, launched before the campaign protocol existed (dev200 validation). Their paper numbers
+  # are checkpoint re-scores (`rescore:`).
+  - table: main
+    students: [4bi]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env:
+      <<: *dev200
+      KL_LOSS_COEF: "0.05"
+    rescore: &rescore_instruct
+      EVAL_CKPT_STEPS: 25+50+75+100
+      STOP_TOKENS: "['</action>']"
+    paper: "tab:opsd_results"
+    note: >-
+      KL_LOSS_COEF=0.05 is what ran (the old launcher default; inert because USE_KL_LOSS=false). The
+      re-score of record stopped evaluation turns at the first </action> (the launcher default at the
+      time; it set STOP_TOKENS=[] only for the thinking student), unlike training, which ran without stop
+      strings. Expected effect: none or negligible, since Instruct turns end at </action> anyway; this was
+      read off the re-score submitter, not measured in its dumps (the stop string is kept in the output, so
+      the two settings look the same there).
+  - table: main
+    students: [4bt]
+    pis: [glm_a, glm_ao, glm_aot]
+    objective: opsd
+    env:
+      <<: *dev200
+      KL_LOSS_COEF: "0.05"
+      INVALID_ACTION_FEEDBACK_GUIDE: "true"
+    rescore:
+      EVAL_CKPT_STEPS: 25+50+75+100
+      INVALID_ACTION_FEEDBACK_GUIDE: "false"
+      ALFWORLD_THINK_TAGS_IN_PROMPT: "true"
+    paper: "tab:opsd_results"
+    note: &traj_4bt_note >-
+      CAVEAT. The six 4bt trajectory-PI arms (glm/qwen x a/ao/aot) were trained under one prompt and scored
+      under another. Training: the full action guide repeated in every invalid-action observation
+      (INVALID_ACTION_FEEDBACK_GUIDE=true, verified in the training rollouts; every other arm ran without it)
+      and the 4bt prompt, which does not name the <think> tags (ALFWORLD_THINK_TAGS_IN_PROMPT=false). Paper
+      numbers: a checkpoint re-score with NO guide and a prompt that DOES name the tags ("first reason
+      step-by-step inside <think> </think> tags"; ALFWORLD_THINK_TAGS_IN_PROMPT=true, verified in the
+      re-score dumps, whose step-100 pass@1 matches the reported curve). Every other 4bt main-table cell
+      (analyzer-written, checklist and Action+Thoughts PIs) was scored during training, without the tags in
+      the prompt, so these six cells are not scored under the same prompt as the rest of the 4bt column.
+      Reproduce them with the `rescore:` overrides. KL_LOSS_COEF=0.05 is what ran (inert because
+      USE_KL_LOSS=false).
+  - table: main
+    students: [4bt]
+    pis: [qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env:
+      <<: *dev200
+      KL_LOSS_COEF: "0.05"
+      INVALID_ACTION_FEEDBACK_GUIDE: "true"
+      CKPT_INTERVAL: "10"
+    rescore:
+      EVAL_CKPT_STEPS: 20+50+80+100
+      INVALID_ACTION_FEEDBACK_GUIDE: "false"
+      ALFWORLD_THINK_TAGS_IN_PROMPT: "true"
+    paper: "tab:opsd_results"
+    note: *traj_4bt_note
+  - table: main
+    students: [30bi]
+    pis: [glm_a, glm_ao, glm_aot]
+    objective: opsd
+    env: *dev200
+    rescore: *rescore_instruct
+    paper: "tab:opsd_results"
+    note: &traj_30bi_note >-
+      The re-score of record stopped evaluation turns at the first </action> (the launcher default at the
+      time), unlike training, which ran without stop strings; expected effect none or negligible (see the 4bi
+      trajectory arms).
+  - table: main
+    students: [30bi]
+    pis: [qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env: *seen_n1
+    rescore: *rescore_instruct
+    paper: "tab:opsd_results"
+    note: *traj_30bi_note
+  # Analyzer-written PIs (skill / summary / checklist), campaign protocol.
+  - table: main
+    students: [4bi, 4bt, 30bi]
+    pis: [glm_skill, qwen_skill, self_skill, glm_summ, qwen_summ, self_summ, glm_chk, qwen_chk]
+    objective: opsd
+    env: *campaign
+    paper: "tab:opsd_results"
+  # Action+Thoughts renders: the two rows the 16-PI main table adds to the paper's 14. Not a paper cell; the
+  # reported numbers are these training runs' own in-training evaluation (campaign protocol).
+  - table: main
+    students: [4bi, 4bt, 30bi]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    env: *campaign
+    paper: null
+
+  # ======================================================================================= null PIs
+  - table: null
+    students: [4bi]
+    pis: [null_task, null_xdomain]
+    objective: opsd
+    env: *campaign
+    paper: null
+    note: >-
+      null_task is fully bundled. null_xdomain reads its hint file (cross-domain hints taken from AppWorld
+      test_normal and tau2 training-pool reference trajectories) from the encrypted
+      appworld/appworld_opsd_xdnull.bundle: fetch it (--bench appworld --include
+      appworld/appworld_opsd_xdnull.bundle) and decrypt it with scripts/setup/setup_appworld.sh before training.
+      EVALUATION-SPLIT MATERIAL -- its AppWorld donors are test_normal tasks, so never evaluate a model trained
+      on null_xdomain on AppWorld test_normal; the arm reproduces the paper's control only.
+
+  # ============================================================ OPSD+GRPO advantage mix (lambda sweep)
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.5", "0.9", "0.99"]
+    env: *lambda_grid
+    paper: "tab:alfworld_coef_sweep"
+    note: &lambda_note >-
+      The lambda grid validated at N=1 (so the eval-worker guard leaves EVAL_BATCH_SIZE at 200) without
+      autoresume, as logged by the runs. glm_ao lambda=0.5 ran as two 100-step segments (the second resumed
+      from step 100 with the dataloader reset); TRAINER_EPOCHS=2 reproduces the same 200-step budget in one.
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.999"]
+    env:
+      <<: *lambda_grid
+      EVAL_BEFORE_TRAIN: "false"
+    paper: "tab:alfworld_coef_sweep"
+    note: *lambda_note
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.1"]
+    env: *lambda_grid
+    paper: null
+    note: *lambda_note
+  # beta-form arm: A_GRPO + 0.1 * A_SDPO == lambda 1/(1+0.1), on the launcher of record (N=4, autoresume).
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.9090909091"]
+    env: *rs01
+    paper: null
+
+  # ============================================== env-anchored coefficient sweep (reward scale 1.0, dev200)
+  - table: beta
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      beta: ["0.5", "5e-4", "1e-4"]
+    env: *dev200
+    rescore: &beta_rescore
+      EVAL_CKPT_STEPS: "100"
+    paper: "tab:alfworld_coef_sweep"
+    note: &beta_note >-
+      the reported number is the step-100 checkpoint evaluated on valid_seen + valid_unseen at N=4 after
+      training (`rescore:`)
+  - table: beta
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      lambda: ["0.5"]
+    env: *dev200
+    rescore: *beta_rescore
+    paper: "tab:alfworld_coef_sweep"
+    note: *beta_note
+  - table: teacher
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      lambda: ["0.9"]
+      teacher: [ema]
+      reward_scale: ["1.0"]
+    env: *dev200
+    paper: null
+    note: the EMA teacher state is local to the run and is not restored on resume
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      decay: ["50"]
+      teacher: [frozen]
+      reward_scale: ["1.0"]
+    env:
+      <<: *dev200
+      OPSD_RLSD: "1"
+    paper: null
+
+  # ============================================================================ RLSD (reward scale 0.1)
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: rlsd
+    env: *rs01
+    paper: null
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_ao, glm_skill, glm_chk]
+    objective: rlsd
+    extra:
+      decay: ["100"]
+    env: *rs01
+    paper: null
+    note: glm_ao and glm_chk were stopped early (about steps 111 and 130); their curves are partial
+
+  # ================================================================ matched no-PI GRPO control (3 replicates)
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    env:
+      <<: *rs01
+      OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/hints/glm-5.2/hints_traj_nothink_cap24k.json
+      OPSD_HINTS_CONTENT_SHA256: 66a3d8d925394c9b0bee986627b2aaf6244784173f831bb55e02c7fd9ac6669c
+      OPSD_REF_SEQ_CAP: "65536"
+    seeds: {1: 42, 2: 42, 3: 42}
+    paper: "tab:alfworld_coef_sweep"
+    note: >-
+      all three replicates ran trainer seed 42 and differ only by nondeterminism; the glm_ao hint file is
+      loaded and the teacher forward runs (same compute as the PI arms) but never reaches the gradient
+
+  # ===================================================== lambda schedule and the teacher ablation on it
+  - table: lamsched
+    students: [4bi]
+    pis: [glm_ao]
+    objective: lamsched
+    env: *rs01
+    paper: null
+  - table: teacher
+    students: [4bi]
+    pis: [glm_ao]
+    objective: lamsched
+    extra:
+      teacher: [frozen, ema, live, h10]
+    env: *rs01
+    paper: null
+    note: >-
+      teacher=frozen is the same configuration as lamsched; h10 = the teacher hard-copied from the student
+      every 10 steps; the live and h10 runs stopped early and their curves are partial; the EMA teacher state
+      is not restored on resume
+
+  # ============================================================================== ALFWorld-Passcode
+  - table: passcode
+    students: [4bi]
+    pis: [pc_key, pc_rawkey, pc_rawwrong, pc_wrongraw]
+    objective: opsd
+    env:
+      <<: *rs01_1ep
+      ALFWORLD_PASSCODE: "true"
+    paper: null
+  - table: passcode
+    students: [4bi]
+    pis: none
+    objective: opsd
+    extra:
+      eval: [utility]
+      placement: [user, system]
+    env:
+      <<: *rs01_1ep
+      ALFWORLD_PASSCODE: "true"
+      RESUME_MODE: "null"
+    status: in_progress
+    paper: null
+    note: >-
+      the reported utility numbers were produced by the local generation path
+      (opsd/alfworld/generate_alfworld_local.py), not by this trainer-based evaluation
+
+  # ============================================================================ per-task PI selection
+  - table: selection
+    students: [4bi]
+    pis: [mix_rand8]
+    objective: opsd
+    env: &selection_env
+      <<: *rs01_1ep
+      OPSD_NO_STATIC_FALLBACK: "1"
+      OPSD_SKIP_NO_HINT: "1"
+    seeds:
+      1: {TRAINER_SEED: "42"}
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s1/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: c82d223da12bea737075e95520e9df5900ba576c78a9fc9211a3930b19175831
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s2/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: 199d2b511df7caf44d7397856b8ca29c524bcbddf1bc90b241f38797ca77b163
+      4:
+        TRAINER_SEED: "45"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s3/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: 4a80d751c48a5e0367aa8cd6241311a3c0ca5bb8847eed12042e9e97995ab639
+    paper: null
+    note: &selection_note >-
+      replicate seed=n uses PI pool draw n-1 (hint directory without suffix for draw 0, _s<n-1> otherwise)
+      and trainer seed 41+n; tasks without a hint get none and leave the loss (no static fallback)
+  - table: selection
+    students: [4bi]
+    pis: [mix_top3d]
+    objective: opsd
+    env: *selection_env
+    seeds:
+      1: {TRAINER_SEED: "42"}
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s1/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 3805c288b9a4742f26dd4a599dc3af2f744de12f3eaa33331b12f1a73fd220f9
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s2/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 6ea00d626364cf8648da816c729037634d2dbd9848fc2808b8047bb91c019208
+      4:
+        TRAINER_SEED: "45"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s3/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 983a9191e82cf1526811c984d14802f7637c3087ff8ec7e66ba1033596d42d7f
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [mix_top3e]
+    objective: opsd
+    env: *selection_env
+    seeds:
+      1: {TRAINER_SEED: "42"}
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s1/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: 56cca37795c518d3fde1862b5d598dfe20508983f5bd06ae7b9026b1b101b882
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s2/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: e3bd095d194b00b0da390b551f1c7168e7de2f643b89498a44435c9eb8bc3068
+      4:
+        TRAINER_SEED: "45"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_mix_s3/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: 9a1ad03ce2084e684b2566ee2d233d2caa69e7000de66f582ab7ad8e16a92c83
+    paper: null
+    note: *selection_note
+  # Self pools on the 483 train tasks with >= 8 self wins: 4 epochs (120 steps), eval every 20 steps. One
+  # entry per pool x selection rule; each replicate reads its own hint file, pinned by its content hash.
+  - table: selection
+    students: [4bi]
+    pis: [sw8]
+    objective: opsd
+    extra: {select: [rand]}
+    env: &self16_env
+      <<: *selection_env
+      TASK_IDS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16/task_ids_483.json
+      TRAINER_EPOCHS: "4"
+      EVAL_INTERVAL: "20"
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: 714b13faa96aef12e9ea6fa406cac22f1e8aa9783de64c19789ea6137310aa39
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sw8_rand.json
+        OPSD_HINTS_CONTENT_SHA256: a7ddaa955b91a6ebfb20bb799a86ee0821f427278af2542748257655144ef4dd
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sw8_rand.json
+        OPSD_HINTS_CONTENT_SHA256: a5b851676a7b5bc7ad2a9c3ed000f42676aa32308f31a1ecf164363320ef5a57
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [sw8]
+    objective: opsd
+    extra: {select: [top3d]}
+    env: *self16_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: 4fd554bffc124bcdf8e9bd603a465925b0850bdf7c802ddd93de2250b52436f8
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sw8_top3d.json
+        OPSD_HINTS_CONTENT_SHA256: 3f9601eecfaddd06185cb105b9f7d9a6961e3caea388aaf3eb705f7f1119de16
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sw8_top3d.json
+        OPSD_HINTS_CONTENT_SHA256: 0da019317688067133bbaee88d56b945ca3554a79fe083318e7996e26ffc6aaa
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [sw8]
+    objective: opsd
+    extra: {select: [top3e]}
+    env: *self16_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: 54e72267a7703b0294917ab83b58e7e35774008ac8e562fc909f0d8e367cde43
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sw8_top3e.json
+        OPSD_HINTS_CONTENT_SHA256: 63e6522dd9fc890c633f45c60adba5ec6a11c8688f237e26972d64e74949931c
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sw8_top3e.json
+        OPSD_HINTS_CONTENT_SHA256: fd04402a8a6ce40d5a5c329cfefa8e1af0811b1cdd11d524150a7e1e3cbaf77f
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [sa16]
+    objective: opsd
+    extra: {select: [rand]}
+    env: *self16_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: 91c64bea68ac61dca3ff344805310de2ef5c190d0ceb770978b4f013f339b4be
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sa16_rand.json
+        OPSD_HINTS_CONTENT_SHA256: abc9440a1b59d4e27372fc4524bf658db2e917caf0f40b67cd71847dc5a8da78
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sa16_rand.json
+        OPSD_HINTS_CONTENT_SHA256: 42a06f9154f8cf5d0a0575d84dc8e94111329e716896ffdf7f73977296171107
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [sa16]
+    objective: opsd
+    extra: {select: [top3d]}
+    env: *self16_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: cff5af40021913c7cedd99bd2eda6138eff3d657c1abe9aded52aef516f35822
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sa16_top3d.json
+        OPSD_HINTS_CONTENT_SHA256: 5194c8d0e2b94871d5ec67b58aca4c8bbd3d785aca0a0d4246d4b0eedb03cd1b
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sa16_top3d.json
+        OPSD_HINTS_CONTENT_SHA256: cac2f558a6bca5fb5ced7fe75a7a3245ae868c646561169114c0ee171f986091
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [sa16]
+    objective: opsd
+    extra: {select: [top3e]}
+    env: *self16_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_CONTENT_SHA256: 18bd662a3872c45114de07ef5c077c44cf82681a5c9925c39cc5345ff773eaa2
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s1/hints_sa16_top3e.json
+        OPSD_HINTS_CONTENT_SHA256: ba5c496ab1bcf77122c3245e4ec7035b9adb92ff020e7430bac042825f1b938d
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_self16_s2/hints_sa16_top3e.json
+        OPSD_HINTS_CONTENT_SHA256: e24a39b0b1d92ce0bc09b96ef09fc47d9b93f9ca4b4356702ec360a9bd623645
+    paper: null
+    note: *selection_note
+  # Same-source pool: per task one of up to 8 GLM-5.3-flash wins (1,593 of the 1,600 train1600 tasks; the other
+  # 7 get no hint and leave the loss), with the train1600 recipe of the mix_* arms.
+  - table: selection
+    students: [4bi]
+    pis: [f8]
+    objective: opsd
+    extra:
+      select: [rand8]
+    env: *selection_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: 7a47fdf9787b46e047e9aa2ae1120ac87949b7e80db1c1db6ea5388559a6f379
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s1/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: c4ca79168fd7b12d34777348fc824f419374b118080699acbff84424053b613f
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s2/hints_mix_random8.json
+        OPSD_HINTS_CONTENT_SHA256: d75e0f3f85ab7fe3c38e7a21f78e49e9f0ac7272143580b3887029c5ef56633b
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [f8]
+    objective: opsd
+    extra:
+      select: [top3d]
+    env: *selection_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 05194712f9bd559d4c620efc99f15d29e4e49d52dc4581773334ab40236a5f6e
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s1/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 84244e9f6a3d18eb49b7bc2420371866dd9a93270598884e54cfc07d4e7770f5
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s2/hints_mix_top3_d.json
+        OPSD_HINTS_CONTENT_SHA256: 6e0097c666f9d1777b348b66f312dc1b8358f102998ec1271b6f1c1fc8669e92
+    paper: null
+    note: *selection_note
+  - table: selection
+    students: [4bi]
+    pis: [f8]
+    objective: opsd
+    extra:
+      select: [top3e]
+    env: *selection_env
+    seeds:
+      1:
+        TRAINER_SEED: "42"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: 25f5ac69b8ae500e0d5cd47ee99cd1432907c8451cd2d89a549c081a84b17907
+      2:
+        TRAINER_SEED: "43"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s1/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: bc203f28b9261242c483018034f442bfcf25fc91d1125d7bca928743de291cdf
+      3:
+        TRAINER_SEED: "44"
+        OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/alfworld/selection/hints_flash8_s2/hints_mix_top3_derr.json
+        OPSD_HINTS_CONTENT_SHA256: b3e109ebb0066e6c5b93b8ddfe22fb8e981c8eae5532a6fc952f045e6bccac09
+    paper: null
+    note: *selection_note
+
+  # ======================================================================== the student's own failures
+  - table: selfwrong
+    students: [4bi]
+    pis: [self_aot]
+    objective: opsd
+    env: *selection_env
+    paper: null

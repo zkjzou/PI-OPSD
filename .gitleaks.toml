@@ -1,0 +1,15 @@
+title = "OPSD release gitleaks config"
+[extend]
+useDefault = true
+
+[allowlist]
+description = "the guard's own patterns and two reviewed false positives"
+# unanchored on purpose: `gitleaks dir <export>` reports paths under the scanned directory
+paths = ['''(^|/)scripts/release_guard/''']
+regexTarget = "line"
+regexes = [
+  # ALFWorld-Passcode: alphabet of the synthetic per-task passcodes (not a credential)
+  '''KEY_ALPHABET\s*=''',
+  # tau2 main.py comment about chat-template keys (not a credential)
+  '''keys\. Verified: Instruct-2507 renders identically''',
+]

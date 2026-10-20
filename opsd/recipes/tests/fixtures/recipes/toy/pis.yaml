@@ -1,0 +1,20 @@
+# synthetic PI registry (test fixture)
+glm_a:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action
+  4bi: toy/hints/glm/hints_actions.json
+  4bt: {hint: toy/hints/glm/hints_actions_4bt.json}
+glm_ao:
+  author: glm-5.2
+  paper_row: Action+Obs.
+  4bi:
+    hint: toy/hints/glm/hints_traj_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 0000000000000000000000000000000000000000000000000000000000000000
+self_summ:
+  author: self
+  analyzer: student
+  env: {OPSD_PI_SOURCE: self}
+  default: {hint: "toy/hints/self/summ_{student}.json"}
+  4bt: {hint: toy/hints/self/summ_4bt_special.json, env: {MAX_TURNS: "20"}}

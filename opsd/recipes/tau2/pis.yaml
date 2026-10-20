@@ -1,0 +1,184 @@
+# tau2 privileged-information (PI) hint files, per student, as used by the main table (vanilla OPSD).
+#   hint            path relative to $OPSD_DATA_ROOT (the unpacked data bundle) -> OPSD_HINTS_PATH
+#   ref_seq_cap     OPSD_REF_SEQ_CAP the run used: the bound on |hint + prompt + response| of the teacher
+#                   forward. With OPSD_REQUIRE_HINT=1 an over-cap episode is an error, never a silent drop,
+#                   so the cap is a guard: a run that completes computes the same thing under any cap it
+#                   never reaches. Where a larger value is kept on purpose, the comment next to it says so.
+#   content_sha256  sha256 of the canonical {task_id: hint} JSON (checked by preflight; = bundle manifest)
+#   env             per-student settings tied to the artifact (checklists cover a student-specific pool)
+# Forms: a = actions only, ao = actions + observations (raw trajectory without the author's reasoning),
+# aot = actions + observations + thoughts (raw trajectory), aat = actions + thoughts (no observations),
+# skill = on-policy skill analysis of the reference trajectory, summ = plain summary, chk = checklist
+# (winning vs losing rollout). Every author/analyzer read the same GLM-5.2 reference trajectories except
+# the qwen trajectory forms (a/ao/aot/aat), which render Qwen3.7-Plus's own trajectories.
+# Action+Thoughts (glm_aat, qwen_aat) is not a row of the paper's main table; those arms are training runs
+# reported alongside it (see arms.yaml).
+# Other tables override hint/cap/pool through their table env (see arms.yaml).
+
+# 4bt trajectory caps: every glm arm ran at 80000 (the 4bt launcher default when they were launched), every
+# qwen arm at 100000 (the default after it was raised for qwen's longer hints: longest 33,276 tokens vs
+# glm's 12,547).
+glm_a:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action
+  4bi: {hint: tau2/hints/glm-5.2/pool424/hints_actions.json, ref_seq_cap: "80000", content_sha256: f32858fc697152754e11b7c34c416867cca6af92b2a002c13ebc532976871a58}
+  4bt: {hint: tau2/hints/glm-5.2/pool424/hints_actions.json, ref_seq_cap: "80000", content_sha256: f32858fc697152754e11b7c34c416867cca6af92b2a002c13ebc532976871a58}
+  30bi: {hint: tau2/hints/glm-5.2/pool424/hints_actions.json, ref_seq_cap: "56000", content_sha256: f32858fc697152754e11b7c34c416867cca6af92b2a002c13ebc532976871a58}
+
+glm_ao:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action+Obs.
+  4bi: {hint: tau2/hints/glm-5.2/pool424/hints_raw_no_think.json, ref_seq_cap: "80000", content_sha256: baaa0307135d43f0cf0e260d654ef31a8a8dd72269dbf20705cc79b0aad72870}
+  4bt: {hint: tau2/hints/glm-5.2/pool424/hints_raw_no_think.json, ref_seq_cap: "80000", content_sha256: baaa0307135d43f0cf0e260d654ef31a8a8dd72269dbf20705cc79b0aad72870}
+  30bi: {hint: tau2/hints/glm-5.2/pool424/hints_raw_no_think.json, ref_seq_cap: "56000", content_sha256: baaa0307135d43f0cf0e260d654ef31a8a8dd72269dbf20705cc79b0aad72870}
+
+glm_aot:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action+Obs.+Thou.
+  4bi: {hint: tau2/hints/glm-5.2/pool424/hints_raw.json, ref_seq_cap: "80000", content_sha256: db8bb29435a37a3d4b3a24f9b0d2e8c4ec1c46a61050ee99bb3cdd0c376b9d44}
+  4bt: {hint: tau2/hints/glm-5.2/pool424/hints_raw.json, ref_seq_cap: "80000", content_sha256: db8bb29435a37a3d4b3a24f9b0d2e8c4ec1c46a61050ee99bb3cdd0c376b9d44}
+  30bi: {hint: tau2/hints/glm-5.2/pool424/hints_raw.json, ref_seq_cap: "56000", content_sha256: db8bb29435a37a3d4b3a24f9b0d2e8c4ec1c46a61050ee99bb3cdd0c376b9d44}
+
+glm_aat:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action+Thou.
+  4bi: {hint: tau2/hints/glm-5.2/pool424/hints_actions_think.json, ref_seq_cap: "80000", content_sha256: 127a27af477d5208ebfa26f12f6288cf6aa1eca410be7d283cd4bcb4e5c978f7}
+  4bt: {hint: tau2/hints/glm-5.2/pool424/hints_actions_think.json, ref_seq_cap: "80000", content_sha256: 127a27af477d5208ebfa26f12f6288cf6aa1eca410be7d283cd4bcb4e5c978f7}
+  30bi: {hint: tau2/hints/glm-5.2/pool424/hints_actions_think.json, ref_seq_cap: "56000", content_sha256: 127a27af477d5208ebfa26f12f6288cf6aa1eca410be7d283cd4bcb4e5c978f7}
+
+qwen_a:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action
+  4bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions.json, ref_seq_cap: "80000", content_sha256: 89b5df6f4f3418b4973edd7394456aa7612972d63a67d819e037e6a748849cc0}
+  4bt: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions.json, ref_seq_cap: "100000", content_sha256: 89b5df6f4f3418b4973edd7394456aa7612972d63a67d819e037e6a748849cc0}
+  30bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions.json, ref_seq_cap: "80000", content_sha256: 89b5df6f4f3418b4973edd7394456aa7612972d63a67d819e037e6a748849cc0}
+
+qwen_ao:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action+Obs.
+  4bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_raw_no_think.json, ref_seq_cap: "80000", content_sha256: 069afcbbf3be148cd70c70ad8e6784b96e414cba7ab30f3c565bc8e17ef976a1}
+  4bt: {hint: tau2/hints/qwen3.7-plus/pool415/hints_raw_no_think.json, ref_seq_cap: "100000", content_sha256: 069afcbbf3be148cd70c70ad8e6784b96e414cba7ab30f3c565bc8e17ef976a1}
+  30bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_raw_no_think.json, ref_seq_cap: "80000", content_sha256: 069afcbbf3be148cd70c70ad8e6784b96e414cba7ab30f3c565bc8e17ef976a1}
+
+qwen_aot:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action+Obs.+Thou.
+  4bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_raw.json, ref_seq_cap: "80000", content_sha256: a53dae065b8665dd4c691acce1d1fe782388f60dcc48f5dcf2fc827922e65cf7}
+  4bt: {hint: tau2/hints/qwen3.7-plus/pool415/hints_raw.json, ref_seq_cap: "100000", content_sha256: a53dae065b8665dd4c691acce1d1fe782388f60dcc48f5dcf2fc827922e65cf7}
+  # The 30bi arm ran with cap 56000 and OPSD_REQUIRE_HINT=0: a teacher sequence over the cap was trained
+  # WITHOUT its hint instead of failing the run (measured: 4 of ~9,600 rollouts, 0.04%).
+  30bi:
+    hint: tau2/hints/qwen3.7-plus/pool415/hints_raw.json
+    ref_seq_cap: "56000"
+    content_sha256: a53dae065b8665dd4c691acce1d1fe782388f60dcc48f5dcf2fc827922e65cf7
+    env: {OPSD_REQUIRE_HINT: "0"}
+
+qwen_aat:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action+Thou.
+  4bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions_think.json, ref_seq_cap: "80000", content_sha256: 298b21c5ceb49ae867fd6745c5d12ce60859fbb343f9d3706d9a8948a7aec5a6}
+  4bt: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions_think.json, ref_seq_cap: "100000", content_sha256: 298b21c5ceb49ae867fd6745c5d12ce60859fbb343f9d3706d9a8948a7aec5a6}
+  30bi: {hint: tau2/hints/qwen3.7-plus/pool415/hints_actions_think.json, ref_seq_cap: "80000", content_sha256: 298b21c5ceb49ae867fd6745c5d12ce60859fbb343f9d3706d9a8948a7aec5a6}
+
+glm_skill:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: On-policy skill
+  4bi: {hint: tau2/hints/derived/anlz_glm.json, ref_seq_cap: "48000", content_sha256: 61102382f78532fab4fa62f99ab05fa9e74814dd09d927c97caf03ad88c2b4e3}
+  # 4bt ran at 48000 (launched before the 4bt default was raised to 64000; it completed, so no teacher
+  # sequence exceeded 48000). 64000 is kept ON PURPOSE: a sibling 4bt arm (glm_summ) hit a 50,131-token
+  # teacher sequence at 48000 and failed, so a rerun at 48000 can fail where the original did not; a run
+  # that completes is identical under either cap.
+  4bt: {hint: tau2/hints/derived/anlz_glm.json, ref_seq_cap: "64000", content_sha256: 61102382f78532fab4fa62f99ab05fa9e74814dd09d927c97caf03ad88c2b4e3}
+  30bi: {hint: tau2/hints/derived/anlz_glm.json, ref_seq_cap: "56000", content_sha256: 61102382f78532fab4fa62f99ab05fa9e74814dd09d927c97caf03ad88c2b4e3}
+
+qwen_skill:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: On-policy skill
+  4bi: {hint: tau2/hints/derived/anlz_qwn.json, ref_seq_cap: "48000", content_sha256: 1099e215a0dd9a53be97300ca49a6c02e0c6c983658826a51c421cef3bbd471c}
+  4bt: {hint: tau2/hints/derived/anlz_qwn.json, ref_seq_cap: "64000", content_sha256: 1099e215a0dd9a53be97300ca49a6c02e0c6c983658826a51c421cef3bbd471c}
+  30bi: {hint: tau2/hints/derived/anlz_qwn.json, ref_seq_cap: "80000", content_sha256: 1099e215a0dd9a53be97300ca49a6c02e0c6c983658826a51c421cef3bbd471c}
+
+self_skill:
+  author: glm-5.2
+  analyzer: self
+  paper_row: On-policy skill
+  4bi: {hint: tau2/hints/derived/anlz_self_4bi.json, ref_seq_cap: "48000", content_sha256: 3f6b1d181c27d8f68a3b6120639112bf3f163a5af0a6df60f82f5883136acfa9}
+  4bt: {hint: tau2/hints/derived/anlz_self_4bt.json, ref_seq_cap: "64000", content_sha256: 11fb4180ce678caa4c913604db76629892094b9d69b85818825e484ae0f6ad1c}
+  30bi: {hint: tau2/hints/derived/anlz_self_30bi.json, ref_seq_cap: "56000", content_sha256: aba2a232913dffd4f9f910873e7c46b35428d314c5987dc36c2df391ad6f6fbe}
+
+glm_summ:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: Summarised reference
+  4bi: {hint: tau2/hints/derived/summarizer/summ_glm.json, ref_seq_cap: "48000", content_sha256: 19fa30a3ac9837011b75f2bc1e37acb0854dbf5f7b1c26d594751a6d6ed4f07c}
+  4bt: {hint: tau2/hints/derived/summarizer/summ_glm.json, ref_seq_cap: "64000", content_sha256: 19fa30a3ac9837011b75f2bc1e37acb0854dbf5f7b1c26d594751a6d6ed4f07c}
+  30bi: {hint: tau2/hints/derived/summarizer/summ_glm.json, ref_seq_cap: "56000", content_sha256: 19fa30a3ac9837011b75f2bc1e37acb0854dbf5f7b1c26d594751a6d6ed4f07c}
+
+qwen_summ:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: Summarised reference
+  4bi: {hint: tau2/hints/derived/summ_qwn.json, ref_seq_cap: "48000", content_sha256: c599a6123e063e8142b5b87f3d4c24c4f1568df5bea63044558541267175fcde}
+  4bt: {hint: tau2/hints/derived/summ_qwn.json, ref_seq_cap: "64000", content_sha256: c599a6123e063e8142b5b87f3d4c24c4f1568df5bea63044558541267175fcde}
+  30bi: {hint: tau2/hints/derived/summ_qwn.json, ref_seq_cap: "80000", content_sha256: c599a6123e063e8142b5b87f3d4c24c4f1568df5bea63044558541267175fcde}
+
+self_summ:
+  author: glm-5.2
+  analyzer: self
+  paper_row: Summarised reference
+  4bi: {hint: tau2/hints/derived/summ_self_4bi.json, ref_seq_cap: "48000", content_sha256: 6111475ad36603847ed4c1918440cf8859d32876bda233746dd9bd9371bde377}
+  4bt: {hint: tau2/hints/derived/summ_self_4bt.json, ref_seq_cap: "64000", content_sha256: b92ac1339b92d3055e1af603228827d2142852ab51ea3530eb4a9f064476ad81}
+  30bi: {hint: tau2/hints/derived/summ_self_30bi.json, ref_seq_cap: "56000", content_sha256: 00bdaf7770f6e19a32fb098e647b843a51c1e43945d8d550d48e5610578f9212}
+
+# Checklists need the student's own losing rollouts, so each covers a student-specific subset of the
+# 352-task pool; the arm trains on exactly that subset (OPSD_REQUIRE_HINT=1 fails on an uncovered task).
+glm_chk:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: Checklist
+  4bi:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/4bi/glm/hints_checklist.json
+    ref_seq_cap: "48000"
+    content_sha256: d927001b88f40a2ea04dddf3f6ae735d110214027edae8db7bc3b8abbd94df91
+    env: {TRAIN_DATA: retail_chk4bi323.jsonl}
+  4bt:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/4bt/glm/hints_checklist.json
+    # ran at 48000; 64000 kept on purpose, as for glm_skill/4bt above
+    ref_seq_cap: "64000"
+    content_sha256: 7591a2f219ff4bf83152608f6a572e21967268f4bcf4de2b50e34ad9444eea5c
+    env: {TRAIN_DATA: retail_chk4bt347.jsonl}
+  30bi:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/30bi/glm/hints_checklist.json
+    ref_seq_cap: "56000"
+    content_sha256: 3afc1a4628ccd885734e22295a9d50808f127eaa83718286a8fa2aa4153ab5e0
+    env: {TRAIN_DATA: retail_chk30bi348.jsonl}
+
+qwen_chk:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: Checklist
+  4bi:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/4bi/qwn/hints_checklist.json
+    ref_seq_cap: "48000"
+    content_sha256: cee640a7c91cba2fcebe05d4078602078bc91c58d5d9c16dbfb6f7880f3fd17c
+    env: {TRAIN_DATA: retail_chk4bi323.jsonl}
+  4bt:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/4bt/qwn/hints_checklist.json
+    ref_seq_cap: "64000"
+    content_sha256: fc7481ffacbf8abcec24d2e28bbf08eee02637794481a505e5bec3c08b62ef93
+    env: {TRAIN_DATA: retail_chk4bt344.jsonl}
+  30bi:
+    hint: tau2/hints/checklist/pi_tau2_chk_tri352/30bi/qwn/hints_checklist.json
+    ref_seq_cap: "80000"
+    content_sha256: 011ccc3794bb8311c8dae94fed45783d625aed036507d93b35c624b8ede0f84a
+    env: {TRAIN_DATA: retail_chk30bi348.jsonl}

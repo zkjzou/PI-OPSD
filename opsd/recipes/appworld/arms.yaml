@@ -1,0 +1,228 @@
+# AppWorld arm tables. Arm id: appworld/<table>/<student>/<pi>[/<key>=<value>...][/seed=<n>].
+#   python -m opsd.recipes list --bench appworld --long
+#   python -m opsd.recipes show appworld/main/4bi/glm_aot
+#   bash scripts/appworld/run.sh appworld/main/4bi/glm_aot          (DRY_RUN=1 prints the command)
+#
+# Every training arm runs 150 steps (train-90, batch 18 x 8 samples, 30 epochs) and evaluates on
+# test_normal-168 with 4 samples per task every 25 steps; the reported number is the best mean pass@1 over
+# 3 consecutive evaluations (opsd.eval). Table env values below record where an arm ran with
+# settings different from its objective (all verified against the runs' resolved configs).
+#
+# Infrastructure-only differences that are NOT reproduced (they do not change the episodes or updates):
+# AppWorld server recycling (some early arms ran without it), the number of retained checkpoints, logging
+# and rollout-dump knobs, and where checkpoints were stored.
+seed_var: TRAINER_SEED
+keys:
+  lambda: OPSD_MIX_LAMBDA
+  beta: OPSD_DISTILL_LOSS_COEF
+  teacher:
+    var: OPSD_TEACHER
+    values:
+      frozen: {OPSD_TEACHER: frozen}
+      # The current policy (with the hint) is the teacher.
+      live: {OPSD_TEACHER: live}
+      # EMA of the student, alpha 0.01, applied every 5 steps (effective rate 1-(1-0.01)^5 = 0.049).
+      ema: {OPSD_TEACHER: ema, OPSD_TEACHER_ALPHA: "0.01", OPSD_EMA_INTERVAL: "5"}
+      # Hard copy of the student every 10 steps (EMA with alpha 1).
+      h10: {OPSD_TEACHER: ema, OPSD_TEACHER_ALPHA: "1.0", OPSD_EMA_INTERVAL: "10"}
+defaults:
+  status: done
+
+tables:
+  # =========================================================== main: vanilla OPSD, 16 PIs x 3 students
+  # The 16 PIs = the paper's 14 main-table rows + Action+Thoughts (glm_aat / qwen_aat, hints_actions_think.json of
+  # each author), which were trained like the other forms but are not rows of the paper's main table.
+  # 4bi trajectory forms (the first AppWorld OPSD runs): validated on dev-57 AND test_normal-168 every
+  # evaluation (VAL_ON_TEST=both). The reported curve is the test_normal one.
+  - table: main
+    students: [4bi]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env: {VAL_ON_TEST: both}
+    paper: "tab:opsd_results"
+  - table: main
+    students: [4bi, 4bt]
+    pis: [glm_skill, glm_summ, glm_chk, qwen_skill, qwen_summ, qwen_chk, self_skill, self_summ]
+    objective: opsd
+    paper: "tab:opsd_results"
+  # Action+Thoughts (not in the paper's main table): same recipe as the analyzer PIs above.
+  - table: main
+    students: [4bi, 4bt]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    paper: null
+  - table: main
+    students: [4bt]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    paper: "tab:opsd_results"
+  # 30bi: two nodes (16 GPUs, expert parallelism 16 on policy and teacher), context 24576 with 4096 per
+  # turn. These ran through the DAPO launcher with the OPSD objective swapped in, hence LR 3e-6, the
+  # policy-budget teacher cap (OPSD_REF_SEQ_CAP empty), no hint-less-rollout skipping and checkpoints
+  # every 25 steps. The chained final test is off (it does not apply to Megatron checkpoints here).
+  - table: main
+    students: [30bi]
+    pis: [glm_skill, glm_summ, glm_chk, qwen_a, qwen_ao, qwen_aot, qwen_skill, qwen_summ, qwen_chk, self_skill,
+          self_summ]
+    objective: opsd
+    env: &moe_opsd
+      NUM_NODES: "2"
+      MEGATRON_EP: "16"
+      MAX_MODEL_LEN: "24576"
+      MAX_GENERATE_LENGTH: "4096"
+      LR: "3.0e-6"
+      GRPO_NORM_BY_STD: "true"
+      KL_LOSS_COEF: "0.0"
+      OPSD_REF_SEQ_CAP: ""
+      OPSD_SKIP_NO_HINT: "0"
+      OPSD_KL_LOG_INTERVAL: ""
+      CKPT_INTERVAL: "25"
+      FINAL_TEST: "false"
+      EVAL_OOD: "false"
+    paper: "tab:opsd_results"
+  # Action+Thoughts (not in the paper's main table): same recipe as the analyzer PIs above.
+  - table: main
+    students: [30bi]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    env: *moe_opsd
+    paper: null
+  # The first three 30bi arms: no step-0 evaluation; glm_a / glm_ao also kept the 4B context
+  # (49152 with 8192 per turn).
+  - table: main
+    students: [30bi]
+    pis: [glm_aot]
+    objective: opsd
+    env:
+      <<: *moe_opsd
+      EVAL_BEFORE_TRAIN: "false"
+    paper: "tab:opsd_results"
+  - table: main
+    students: [30bi]
+    pis: [glm_a, glm_ao]
+    objective: opsd
+    env:
+      <<: *moe_opsd
+      MAX_MODEL_LEN: "49152"
+      MAX_GENERATE_LENGTH: "8192"
+      EVAL_BEFORE_TRAIN: "false"
+    paper: "tab:opsd_results"
+
+  # ===================================================================== null: controls for the PI content
+  - table: null
+    students: [4bi]
+    pis: [null_task, null_xdomain]
+    objective: opsd
+    paper: null
+
+  # ========================================== step0: the untrained students (evaluation only, no training)
+  - table: step0
+    students: [4bi, 4bt]
+    pis: none
+    objective: step0
+    paper: "tab:opsd_results"
+  # The 30bi step-0 numbers come from the 30bi OPSD runs: two nodes at context 24576 / 4096.
+  - table: step0
+    students: [30bi]
+    pis: none
+    objective: step0
+    env: {NUM_NODES: "2", MEGATRON_EP: "16", MAX_MODEL_LEN: "24576", MAX_GENERATE_LENGTH: "4096"}
+    paper: "tab:opsd_results"
+
+  # ======================================================================== grpo: the DAPO baseline (no PI)
+  # Three replicates with the same trainer seed; they differ only through nondeterminism. vLLM ran as
+  # 4 engines x TP2 on these arms.
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    env: {INFERENCE_ENGINE_TP_SIZE: "2"}
+    seeds: {1: 42, 2: 42, 3: 42}
+    paper: "tab:appworld_coef_sweep"
+  # 30bi DAPO fits on ONE node (no reference model): TP4 x CP2 x EP8. Not reported in the paper.
+  - table: grpo
+    students: [30bi]
+    pis: none
+    objective: grpo
+    paper: null
+
+  # ============================================== opsd_grpo: DAPO + OPSD advantage mix, lambda x 3 PIs
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_skill, glm_chk, glm_aot]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.5", "0.9", "0.99", "0.999"]
+    exclude: ["4bi/glm_skill/lambda=0.99", "4bi/glm_aot/lambda=0.99"]
+    paper: "tab:appworld_coef_sweep"
+  # lambda=0.99 replicated three times for two of the PIs.
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_skill, glm_aot]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0.99"]
+    seeds: {1: 42, 2: 42, 3: 42}
+    paper: "tab:appworld_coef_sweep"
+
+  # ============================== beta: DAPO + loss-side k3 distillation, on the glm_ao (code + obs.) PI
+  # The original beta=0.5 run stopped after 100 steps and beta=1e-4/teacher=live after 125; the published
+  # numbers use the steps they reached (the recipes run the full 150).
+  - table: beta
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      beta: ["0.5", "0.25", "0.1", "0.05", "1e-3", "5e-4", "1e-4"]
+    paper: "tab:appworld_coef_sweep"
+  - table: beta
+    students: [4bi]
+    pis: [glm_ao]
+    objective: beta
+    extra:
+      beta: ["1e-3", "5e-4", "1e-4"]
+      teacher: [live]
+    paper: "tab:appworld_coef_sweep"
+
+  # ======================================================================== rlsd: DAPO + RLSD reweighting
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_aot, glm_chk, glm_skill]
+    objective: rlsd
+    paper: null
+  # Constant lambda (no decay): OPSD_RLSD_DECAY_STEPS=0 pins lambda at its initial value.
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_aot]
+    objective: rlsd
+    keys:
+      lambda: OPSD_RLSD_LAMBDA
+      decay: OPSD_RLSD_DECAY_STEPS
+    extra:
+      lambda: ["0.5", "0.99"]
+      decay: ["0"]
+    paper: null
+
+  # ==================================================== lamsched / teacher: scheduled lambda 0.5 -> 0.99
+  - table: lamsched
+    students: [4bi]
+    pis: [glm_aot]
+    objective: lamsched
+    paper: null
+  # Teacher ablation on the lamsched recipe; teacher=frozen is the lamsched arm itself.
+  - table: teacher
+    students: [4bi]
+    pis: [glm_aot]
+    objective: lamsched
+    extra:
+      teacher: [frozen, ema, live]
+    paper: null
+  # The h10 run had reached step 75 when the results were exported.
+  - table: teacher
+    students: [4bi]
+    pis: [glm_aot]
+    objective: lamsched
+    extra:
+      teacher: [h10]
+    status: in_progress
+    paper: null

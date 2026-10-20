@@ -1,0 +1,179 @@
+# tau2 (retail) arm tables. Arm id: tau2/<table>/<student>/<pi>[/<key>=<value>...][/seed=<n>].
+#   python -m opsd.recipes list --bench tau2 --long
+#   python -m opsd.recipes show tau2/main/4bi/glm_aot
+#   bash scripts/tau2/run.sh tau2/main/4bi/glm_aot            (DRY_RUN=1 prints the full command)
+# Every table runs 200 steps (100 batches x 2 epochs) and evaluates on retail_base (114 tasks x 4) every
+# 25 steps, with gpt-5.6-luna as the simulated user for training and evaluation.
+#
+# Step-0 baselines (tau2/step0/<student>/none) are not separate runs: they are the
+# step-0 evaluations (eval_before_train) of the runs below, averaged over 10 runs per student. Any main-table
+# arm of that student reproduces one of them at its first evaluation.
+seed_var: SEED
+keys:
+  lambda: OPSD_MIX_LAMBDA
+defaults:
+  status: done
+
+tables:
+  # ---------------------------------------------------------------- main table: vanilla OPSD, 16 PIs x 3
+  # The 14 PIs of the paper's main table, plus Action+Thoughts (glm_aat, qwen_aat): training runs with the same
+  # recipe as their trajectory-form siblings, reported alongside the table (not a paper row, so paper: null).
+  # Trajectory forms (a / ao / aot / aat): 128 concurrent episodes per run.
+  - table: main
+    students: [4bi]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env: &traj_4bi {MAX_CONCURRENCY: "128"}
+    paper: "tab:opsd_results"
+  - table: main
+    students: [4bi]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    env: *traj_4bi
+    paper: null
+  # Derived forms (skill / summ / chk), 64 concurrent episodes.
+  - table: main
+    students: [4bi]
+    pis: [glm_skill, qwen_skill, self_skill, glm_summ, qwen_summ, self_summ, glm_chk, qwen_chk]
+    objective: opsd
+    paper: "tab:opsd_results"
+  # 4bt trajectory forms additionally pin the thinking-preservation switch and the KL-plot turn range.
+  - table: main
+    students: [4bt]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot]
+    objective: opsd
+    env: &traj_4bt {MAX_CONCURRENCY: "128", PRESERVE_THINKING: "1", OPSD_KL_MAX_TURNS: "32"}
+    paper: "tab:opsd_results"
+  - table: main
+    students: [4bt]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    env: *traj_4bt
+    paper: null
+  - table: main
+    students: [4bt]
+    pis: [glm_skill, qwen_skill, self_skill, glm_summ, qwen_summ, self_summ, glm_chk, qwen_chk]
+    objective: opsd
+    paper: "tab:opsd_results"
+  # 30bi: 2 nodes, Megatron (see students/30bi.env).
+  - table: main
+    students: [30bi]
+    pis: [glm_a, glm_ao, glm_aot, qwen_a, qwen_ao, qwen_aot,
+          glm_skill, qwen_skill, self_skill, glm_summ, qwen_summ, self_summ, glm_chk, qwen_chk]
+    objective: opsd
+    env: &main_30bi {OPSD_KL_MAX_TURNS: "32", TAU2_WANDB_TRAJ_N: "8"}
+    paper: "tab:opsd_results"
+  - table: main
+    students: [30bi]
+    pis: [glm_aat, qwen_aat]
+    objective: opsd
+    env: *main_30bi
+    paper: null
+
+  # ---------------------------------------------------------------- DAPO baseline (no PI), 3 replicates
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    seeds: {1: "42", 2: "43", 3: "44"}
+    paper: "tab:tau2_coef_sweep"
+  # DAPO on the 352-task pool: the matched control of rlsd/4bi/glm_aot/pool=tri352 (research-log study).
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    extra:
+      pool: {var: TRAIN_DATA, values: {tri352: retail_tri352.jsonl}}
+    paper: null
+  # DAPO with a self-hosted simulated user for TRAINING rollouts (Qwen/Qwen3.5-35B-A3B served by
+  # opsd/tau2_bench/serve_user_sim.sh: 4 replicas x TP 2 on 8 dedicated GPUs, i.e. a second
+  # node in the original runs); evaluation keeps gpt-5.6-luna. Give the launcher SIMULATOR_BASE_URL (comma-
+  # separated replica URLs) or SIM_SERVE_LOCAL=1 + SIM_CUDA_VISIBLE_DEVICES. Research-log study.
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    extra:
+      sim: {values: {qwen35: {SIM_SERVE_MODEL: Qwen/Qwen3.5-35B-A3B, SIMULATOR_MODEL: Qwen/Qwen3.5-35B-A3B}}}
+    env:
+      TRAIN_DATA: retail_areal_instruct_drop8of8.jsonl
+      SIM_API_KEY_ENV: TAU2_LOCAL_SIM_API_KEY
+      SIM_REPLICAS: "4"
+      SIM_TP: "2"
+      SIM_PORT: "8000"
+      SIM_MAX_LEN: "16384"
+      SIM_GPU_UTIL: "0.90"
+      SIM_EXTRA_ARGS: "--language-model-only --enforce-eager --reasoning-parser qwen3 --trust-remote-code --enable-auto-tool-choice --tool-call-parser hermes"
+    paper: null
+  - table: grpo
+    students: [4bt]
+    pis: none
+    objective: grpo
+    extra:
+      sim: {values: {qwen35: {SIM_SERVE_MODEL: Qwen/Qwen3.5-35B-A3B, SIMULATOR_MODEL: Qwen/Qwen3.5-35B-A3B}}}
+    env:
+      TRAIN_DATA: tau2_train332_frontier.jsonl
+      SIM_API_KEY_ENV: TAU2_LOCAL_SIM_API_KEY
+      SIM_REPLICAS: "4"
+      SIM_TP: "2"
+      SIM_PORT: "8000"
+      SIM_MAX_LEN: "16384"
+      SIM_GPU_UTIL: "0.90"
+      SIM_EXTRA_ARGS: "--language-model-only --enforce-eager --reasoning-parser qwen3 --trust-remote-code --enable-auto-tool-choice --tool-call-parser hermes"
+    paper: null
+
+  # ---------------------------------------------------------------- DAPO x OPSD lambda mix, 424-task pool
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_aot]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0", "0.5", "0.9", "0.99"]
+    env: {OPSD_REF_SEQ_CAP: "56000"}
+    paper: "tab:tau2_coef_sweep"
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_skill]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0", "0.5", "0.9", "0.99"]
+    env: {OPSD_REF_SEQ_CAP: "48000"}
+    paper: "tab:tau2_coef_sweep"
+  # The 4bi glm checklist that covers all 424 tasks of this pool (the main-table one covers 323 of 352).
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_chk]
+    objective: opsd_grpo
+    extra:
+      lambda: ["0", "0.5", "0.9", "0.99"]
+    env:
+      OPSD_HINTS_PATH: ${OPSD_DATA_ROOT}/tau2/hints/checklist/pi_tau2_chk_pi424/4bi/glm/hints_checklist.json
+      OPSD_HINTS_CONTENT_SHA256: 609770fb663e5198591f417d816dc45310e4ef54172e15c4901862397d59a75a
+      OPSD_REF_SEQ_CAP: "48000"
+      TRAIN_DATA: retail_pi424.jsonl
+    paper: "tab:tau2_coef_sweep"
+
+  # ---------------------------------------------------------------- RLSD (research-log study)
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_aot]
+    objective: rlsd
+    env: {OPSD_REF_SEQ_CAP: "56000"}
+    paper: null
+  - table: rlsd
+    students: [4bi]
+    pis: [glm_aot]
+    objective: rlsd
+    extra:
+      pool: {var: TRAIN_DATA, values: {tri352: retail_tri352.jsonl}}
+    env: {OPSD_REF_SEQ_CAP: "56000"}
+    paper: null
+
+  # ---------------------------------------------------------------- lambda schedule (never run)
+  - table: lamsched
+    students: [4bi]
+    pis: [glm_aot]
+    objective: lamsched
+    env: {OPSD_REF_SEQ_CAP: "56000"}
+    status: planned
+    paper: null

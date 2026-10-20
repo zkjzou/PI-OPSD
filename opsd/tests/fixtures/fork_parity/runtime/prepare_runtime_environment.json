@@ -1,0 +1,880 @@
+{
+ "meta": {
+  "source": "OLD tree (SkyRL fork) skyrl/train/utils/utils.py + skyrl/train/utils/tracking.py",
+  "upstream_base": "ecdaa946",
+  "fixed_now": [
+   2026,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "default_module_flags": {
+   "_SKYRL_USE_NEW_INFERENCE": true,
+   "SKYRL_LD_LIBRARY_PATH_EXPORT": false,
+   "SKYRL_PYTHONPATH_EXPORT": false
+  }
+ },
+ "cases": [
+  {
+   "name": "empty",
+   "environ": {},
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    }
+   ]
+  },
+  {
+   "name": "prefix_vars",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "ALFWORLD_BASE_PORT": "8200",
+    "APPWORLD_ROOT": "data/appworld",
+    "TAU2_REVISION": "rev-synthetic",
+    "SKYRL_EVAL_COMPACT": "1",
+    "PYTHONHASHSEED": "0",
+    "HOME": "/nonexistent/home",
+    "PATH": "/nonexistent/bin",
+    "XOPSD_FOO": "1",
+    "opsd_lower": "1",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "RAY_ADDRESS": "local"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "SKYRL_EVAL_COMPACT": "1",
+    "ALFWORLD_BASE_PORT": "8200",
+    "APPWORLD_ROOT": "data/appworld",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "PYTHONHASHSEED": "0",
+    "TAU2_REVISION": "rev-synthetic",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_COMPACT=1 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 5 prefixed env vars to ray runtime env: ALFWORLD_BASE_PORT, APPWORLD_ROOT, OPSD_HINTS_PATH, PYTHONHASHSEED, TAU2_REVISION"
+    }
+   ]
+  },
+  {
+   "name": "credential_names",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY": "not-a-real-key-1",
+    "OPSD_ONLINE_HINTS_ANALYZER_API_KEY": "not-a-real-key-2",
+    "TAU2_JUDGE_TOKEN": "not-a-real-key-3",
+    "APPWORLD_SECRET": "not-a-real-key-4",
+    "ALFWORLD_PASSWORD": "not-a-real-key-5",
+    "ALFWORLD_PASSWD": "not-a-real-key-6",
+    "SKYRL_DATABASE_URL": "not-a-real-url",
+    "OPSD_AWS_CREDENTIALS": "not-a-real-key-7",
+    "OPSD_TOKEN": "not-a-real-key-8",
+    "OPSD_TOKEN_CLIP_API_KEY": "not-a-real-key-9",
+    "opsd_api_key": "not-a-real-key-10",
+    "TAU2_api_key": "not-a-real-key-11",
+    "OPENAI_API_KEY": "not-a-real-key-12",
+    "WANDB_API_KEY": "not-a-real-wandb-key",
+    "MLFLOW_TRACKING_URI": "http://mlflow.invalid",
+    "MLFLOW_TRACKING_TOKEN": "not-a-real-mlflow-token",
+    "DAYTONA_API_KEY": "not-a-real-daytona-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "WANDB_API_KEY": "not-a-real-wandb-key",
+    "MLFLOW_TRACKING_URI": "http://mlflow.invalid",
+    "MLFLOW_TRACKING_TOKEN": "not-a-real-mlflow-token",
+    "DAYTONA_API_KEY": "not-a-real-daytona-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting wandb api key to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting mlflow tracking uri to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting mlflow tracking token to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting DAYTONA_API_KEY to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "allowlisted_marker_names",
+   "environ": {
+    "OPSD_TOKEN_ADV": "1",
+    "OPSD_TOKEN_ADV_COEF": "0.5",
+    "OPSD_TOKEN_ADV_STD": "1",
+    "OPSD_TOKEN_ADV_ENV": "alfworld",
+    "OPSD_TOKEN_CLIP": "0",
+    "OPSD_HINT_KEY_FIELD": "task_id",
+    "OPSD_ONLINE_HINTS_KEY": "uid",
+    "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS": "4096",
+    "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS": "1024",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "SYNTH_PROVIDER_API_KEY",
+    "SYNTH_PROVIDER_API_KEY": "not-a-real-key"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINT_KEY_FIELD": "task_id",
+    "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS": "1024",
+    "OPSD_ONLINE_HINTS_KEY": "uid",
+    "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS": "4096",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "SYNTH_PROVIDER_API_KEY",
+    "OPSD_TOKEN_ADV": "1",
+    "OPSD_TOKEN_ADV_COEF": "0.5",
+    "OPSD_TOKEN_ADV_ENV": "alfworld",
+    "OPSD_TOKEN_ADV_STD": "1",
+    "OPSD_TOKEN_CLIP": "0",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 10 prefixed env vars to ray runtime env: OPSD_HINT_KEY_FIELD, OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS, OPSD_ONLINE_HINTS_KEY, OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS, OPSD_PI_ANALYZER_API_KEY_ENV, OPSD_TOKEN_ADV, OPSD_TOKEN_ADV_COEF, OPSD_TOKEN_ADV_ENV, OPSD_TOKEN_ADV_STD, OPSD_TOKEN_CLIP"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_prefixed_target",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "OPSD_ANALYZER_AUTH",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "OPSD_ANALYZER_AUTH",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, OPSD_PI_ANALYZER_API_KEY_ENV"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_pythonhashseed_target",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "PYTHONHASHSEED",
+    "PYTHONHASHSEED": "0",
+    "TAU2_FW_CRED": "not-a-real-key"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "PYTHONHASHSEED",
+    "TAU2_FW_CRED": "not-a-real-key",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_PI_ANALYZER_API_KEY_ENV, TAU2_FW_CRED"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_invalid_value",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "sk-not-a-real-key",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "WARNING",
+     "message": "Not exporting OPSD_PI_ANALYZER_API_KEY_ENV to the ray runtime env: its value is not a valid env-var name (value not shown). Set it to the NAME of the variable that holds the key."
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_ANALYZER_AUTH, OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_padded_value",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": " OPSD_ANALYZER_AUTH",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "WARNING",
+     "message": "Not exporting OPSD_PI_ANALYZER_API_KEY_ENV to the ray runtime env: its value is not a valid env-var name (value not shown). Set it to the NAME of the variable that holds the key."
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_empty",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, OPSD_PI_ANALYZER_API_KEY_ENV"
+    }
+   ]
+  },
+  {
+   "name": "allowlist_vars",
+   "environ": {
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "WANDB_PROJECT": "synth-project"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun01 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RESUME=must to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_GROUP=synth-group to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_NAMESPACE=test to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_LOG_STEP_OVERRIDE=121 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_COMPACT=1 to ray runtime env"
+    }
+   ]
+  },
+  {
+   "name": "allowlist_vars_empty",
+   "environ": {
+    "WANDB_RUN_ID": "",
+    "WANDB_RESUME": "",
+    "WANDB_RUN_GROUP": "",
+    "SKYRL_EVAL_NAMESPACE": "",
+    "SKYRL_LOG_STEP_OVERRIDE": "",
+    "SKYRL_EVAL_COMPACT": ""
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "SKYRL_EVAL_COMPACT": "",
+    "SKYRL_EVAL_NAMESPACE": "",
+    "SKYRL_LOG_STEP_OVERRIDE": "",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 3 prefixed env vars to ray runtime env: SKYRL_EVAL_COMPACT, SKYRL_EVAL_NAMESPACE, SKYRL_LOG_STEP_OVERRIDE"
+    }
+   ]
+  },
+  {
+   "name": "empty_values",
+   "environ": {
+    "OPSD_STRIP_THINK": "",
+    "TAU2_USER_MODEL": "",
+    "APPWORLD_EXPERIMENT": "",
+    "PYTHONHASHSEED": ""
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "APPWORLD_EXPERIMENT": "",
+    "OPSD_STRIP_THINK": "",
+    "PYTHONHASHSEED": "",
+    "TAU2_USER_MODEL": "",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 4 prefixed env vars to ray runtime env: APPWORLD_EXPERIMENT, OPSD_STRIP_THINK, PYTHONHASHSEED, TAU2_USER_MODEL"
+    }
+   ]
+  },
+  {
+   "name": "wandb_n_generations",
+   "environ": {
+    "SKYRL_WANDB_N_GENERATIONS": "4",
+    "WANDB_RUN_ID": "synthrun02",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "WANDB_RUN_ID": "synthrun02",
+    "SKYRL_WANDB_N_GENERATIONS": "4",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun02 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_WANDB_N_GENERATIONS=4 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "upstream_tail_keys",
+   "environ": {
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600",
+    "LD_LIBRARY_PATH": "synthetic/lib",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "VLLM_USE_V1": "1",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "900",
+    "RAY_CGRAPH_get_timeout": "300",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "900",
+    "RAY_CGRAPH_get_timeout": "300",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "Exporting `VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS` to ray runtime env: 900"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `RAY_CGRAPH_get_timeout` to ray runtime env: 300"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_PG_TIMEOUT_IN_S"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `SKYRL_RAY_PG_TIMEOUT_IN_S` to ray runtime env: 600"
+    }
+   ]
+  },
+  {
+   "name": "pg_timeout_empty",
+   "environ": {
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_PG_TIMEOUT_IN_S"
+    }
+   ]
+  },
+  {
+   "name": "stale_skyrl_log_file",
+   "environ": {
+    "SKYRL_LOG_FILE": "logs/stale-infra.log",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_LOG_FILE": "logs/stale-infra.log",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_LOG_FILE"
+    }
+   ]
+  },
+  {
+   "name": "ray_address_external",
+   "environ": {
+    "RAY_ADDRESS": "192.0.2.10:6379",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "WANDB_RUN_ID": "synthrun03"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "WANDB_RUN_ID": "synthrun03",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun03 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "many_prefixed",
+   "environ": {
+    "OPSD_KNOB_00": "0",
+    "OPSD_KNOB_01": "1",
+    "OPSD_KNOB_02": "2",
+    "OPSD_KNOB_03": "3",
+    "OPSD_KNOB_04": "4",
+    "OPSD_KNOB_05": "5",
+    "OPSD_KNOB_06": "6",
+    "OPSD_KNOB_07": "7",
+    "OPSD_KNOB_08": "8",
+    "OPSD_KNOB_09": "9",
+    "OPSD_KNOB_10": "10",
+    "OPSD_KNOB_11": "11",
+    "ALFWORLD_SERVER_URLS": "http://127.0.0.1:8200,http://127.0.0.1:8201",
+    "APPWORLD_REMOTE_ENVIRONMENT_URL": "http://127.0.0.1:9200",
+    "TAU2_DOMAIN": "retail",
+    "SKYRL_EVAL_NAMESPACE": "dev"
+   },
+   "module_flags": {},
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "SKYRL_EVAL_NAMESPACE": "dev",
+    "ALFWORLD_SERVER_URLS": "http://127.0.0.1:8200,http://127.0.0.1:8201",
+    "APPWORLD_REMOTE_ENVIRONMENT_URL": "http://127.0.0.1:9200",
+    "OPSD_KNOB_00": "0",
+    "OPSD_KNOB_01": "1",
+    "OPSD_KNOB_02": "2",
+    "OPSD_KNOB_03": "3",
+    "OPSD_KNOB_04": "4",
+    "OPSD_KNOB_05": "5",
+    "OPSD_KNOB_06": "6",
+    "OPSD_KNOB_07": "7",
+    "OPSD_KNOB_08": "8",
+    "OPSD_KNOB_09": "9",
+    "OPSD_KNOB_10": "10",
+    "OPSD_KNOB_11": "11",
+    "TAU2_DOMAIN": "retail",
+    "_SKYRL_USE_NEW_INFERENCE": "1"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_NAMESPACE=dev to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 15 prefixed env vars to ray runtime env: ALFWORLD_SERVER_URLS, APPWORLD_REMOTE_ENVIRONMENT_URL, OPSD_KNOB_00, OPSD_KNOB_01, OPSD_KNOB_02, OPSD_KNOB_03, OPSD_KNOB_04, OPSD_KNOB_05, OPSD_KNOB_06, OPSD_KNOB_07, OPSD_KNOB_08, OPSD_KNOB_09, OPSD_KNOB_10, OPSD_KNOB_11, TAU2_DOMAIN"
+    }
+   ]
+  },
+  {
+   "name": "upstream_tail_keys_exports_on",
+   "environ": {
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600",
+    "LD_LIBRARY_PATH": "synthetic/lib",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "VLLM_USE_V1": "1",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "900",
+    "RAY_CGRAPH_get_timeout": "300",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "module_flags": {
+    "SKYRL_LD_LIBRARY_PATH_EXPORT": true,
+    "SKYRL_PYTHONPATH_EXPORT": true
+   },
+   "cfg": {},
+   "peer_access_supported": true,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "900",
+    "RAY_CGRAPH_get_timeout": "300",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600",
+    "_SKYRL_USE_NEW_INFERENCE": "1",
+    "LD_LIBRARY_PATH": "synthetic/lib",
+    "PYTHONPATH": "synthetic/pythonpath"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "Exporting `VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS` to ray runtime env: 900"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `RAY_CGRAPH_get_timeout` to ray runtime env: 300"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_PG_TIMEOUT_IN_S"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `LD_LIBRARY_PATH` to ray runtime env: synthetic/lib"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `PYTHONPATH` to ray runtime env: synthetic/pythonpath"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting `SKYRL_RAY_PG_TIMEOUT_IN_S` to ray runtime env: 600"
+    }
+   ]
+  },
+  {
+   "name": "megatron_no_peer_access_legacy_inference",
+   "environ": {
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "WANDB_PROJECT": "synth-project"
+   },
+   "module_flags": {
+    "_SKYRL_USE_NEW_INFERENCE": false
+   },
+   "cfg": {
+    "trainer.strategy": "megatron",
+    "trainer.flash_attn": true
+   },
+   "peer_access_supported": false,
+   "env_vars": {
+    "NCCL_CUMEM_ENABLE": "0",
+    "RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO": "0",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "1",
+    "NVTE_FUSED_ATTN": "0",
+    "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+    "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+    "VLLM_DISABLE_COMPILE_CACHE": "1",
+    "VLLM_USE_V1": "1",
+    "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+    "NCCL_P2P_DISABLE": "1",
+    "NCCL_SHM_DISABLE": "1",
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "_SKYRL_USE_NEW_INFERENCE": "0"
+   },
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Peer access is not supported on this node type, disabling NCCL P2P and SHM"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun01 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RESUME=must to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_GROUP=synth-group to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_NAMESPACE=test to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_LOG_STEP_OVERRIDE=121 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_COMPACT=1 to ray runtime env"
+    }
+   ]
+  }
+ ]
+}

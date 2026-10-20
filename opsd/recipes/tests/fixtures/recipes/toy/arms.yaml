@@ -1,0 +1,57 @@
+# synthetic arm tables (test fixture)
+seed_var: TRAINER_SEED
+keys:
+  lambda: OPSD_MIX_LAMBDA
+  beta: OPSD_DISTILL_LOSS_COEF
+  teacher:
+    var: OPSD_TEACHER
+    values:
+      h10: {OPSD_TEACHER: hard, OPSD_TEACHER_SYNC_INTERVAL: "10"}
+defaults:
+  status: done
+tables:
+  - table: main
+    students: [4bi, 4bt]
+    pis: all
+    objective: opsd
+    paper: "tab:main"
+  - table: opsd_grpo
+    students: [4bi]
+    pis: [glm_ao]
+    objective: opsd_grpo
+    extra:
+      lambda: [0.5, 0.99]
+    seeds: {1: 42, 2: 43}
+    env: {EPOCHS: "2"}
+  - table: grpo
+    students: [4bi]
+    pis: none
+    objective: grpo
+    seeds: [1, 2]
+    status: in_progress
+  - table: teacher
+    students: [4bi]
+    pis: [glm_a]
+    objective: opsd
+    extra:
+      teacher: [ema, h10]
+  - table: beta
+    students: [4bi]
+    pis: [glm_a]
+    objective: opsd
+    extra:
+      OPSD_DISTILL_LOSS_COEF: [1e-4, 5e-4, 0.50]
+    exclude: ["4bi/glm_a/beta=5e-4"]
+  - table: future
+    students: [4bi]
+    pis: [glm_a]
+    objective: opsd
+    extra:
+      lambda: [0.7]
+    status: planned
+  - table: selection
+    students: [4bi]
+    pis: [glm_a]
+    objective: opsd
+    seeds:
+      1: {TRAINER_SEED: "42", OPSD_HINTS_PATH: "${OPSD_DATA_ROOT}/toy/hints/sel/seed{seed}_{student}.json"}

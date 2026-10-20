@@ -1,0 +1,582 @@
+{
+ "name": "appworld__n1__mixed",
+ "env_class": "appworld",
+ "n_samples_per_prompt": 1,
+ "env_metrics_mode": "mixed",
+ "global_step": 3,
+ "eval_batches": [
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "appworld task 0"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "appworld",
+     "task_id": "appworld-task-0"
+    },
+    "uid": "uid-0"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "appworld task 1"
+     }
+    ],
+    "env_class": "appworld",
+    "env_extras": {
+     "data_source": "appworld_test_normal",
+     "task_id": "appworld_test_normal-task-1"
+    },
+    "uid": "uid-1"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "appworld task 2"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "appworld",
+     "task_id": "appworld-task-2"
+    },
+    "uid": "uid-2"
+   }
+  ],
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "appworld task 3"
+     }
+    ],
+    "env_class": "appworld",
+    "env_extras": {
+     "data_source": "appworld_test_normal",
+     "task_id": "appworld_test_normal-task-3"
+    },
+    "uid": "uid-3"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "appworld task 4"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "appworld",
+     "task_id": "appworld-task-4"
+    },
+    "uid": "uid-4"
+   }
+  ]
+ ],
+ "generator_outputs": [
+  {
+   "prompt_token_ids": [
+    [
+     58,
+     46,
+     18
+    ],
+    [
+     93,
+     68,
+     87,
+     66
+    ],
+    [
+     24,
+     60
+    ]
+   ],
+   "response_ids": [
+    [
+     223,
+     297,
+     961,
+     628,
+     987,
+     631
+    ],
+    [
+     477,
+     146,
+     274,
+     445,
+     377,
+     171,
+     867
+    ],
+    [
+     388
+    ]
+   ],
+   "rewards": [
+    1.0,
+    1.0,
+    0.75
+   ],
+   "loss_masks": [
+    [
+     1,
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0
+    ]
+   ],
+   "stop_reasons": [
+    "stop",
+    "stop",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "success": 1.0,
+     "partial_completion": 1.0,
+     "num_turns": 13.0,
+     "parse_errors": 2.0
+    },
+    {
+     "partial_completion": 1.0,
+     "num_turns": 6.0,
+     "parse_errors": 1.0
+    },
+    {
+     "success": 0.0,
+     "partial_completion": 0.75,
+     "num_turns": 6.0,
+     "parse_errors": 1.0
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 1,
+    "generate/max_num_tokens": 7,
+    "generate/avg_num_tokens": 4.666666666666667,
+    "generate/std_num_tokens": 2.6246692913372702,
+    "generate/avg_tokens_non_zero_rewards": 4.666666666666667,
+    "generate/avg_tokens_zero_rewards": 0.0,
+    "generate/avg_assistant_tokens": 2.3333333333333335,
+    "generate/min_assistant_tokens": 0,
+    "generate/max_assistant_tokens": 4,
+    "generate/std_assistant_tokens": 1.699673171197595,
+    "environment/success": 0.5,
+    "environment/partial_completion": 0.9166666666666666,
+    "environment/num_turns": 8.333333333333334,
+    "environment/parse_errors": 1.3333333333333333,
+    "custom/avg_turn_latency": 1.5274,
+    "custom/min_turns_seen": 10.0,
+    "custom/max_turns_seen": 28.0,
+    "custom/infra_failures": 2.0
+   }
+  },
+  {
+   "prompt_token_ids": [
+    [
+     85,
+     73
+    ],
+    [
+     97,
+     55,
+     6,
+     35
+    ]
+   ],
+   "response_ids": [
+    [
+     901,
+     689,
+     511,
+     512,
+     663,
+     930,
+     558
+    ],
+    [
+     426
+    ]
+   ],
+   "rewards": [
+    0.0,
+    1.0
+   ],
+   "loss_masks": [
+    [
+     0,
+     0,
+     1,
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0
+    ]
+   ],
+   "stop_reasons": [
+    "length",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "success": 0.0,
+     "partial_completion": 0.0,
+     "num_turns": 17.0,
+     "parse_errors": 2.0
+    },
+    {
+     "partial_completion": 1.0,
+     "num_turns": 2.0,
+     "parse_errors": 2.0
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 1,
+    "generate/max_num_tokens": 7,
+    "generate/avg_num_tokens": 4.0,
+    "generate/std_num_tokens": 3.0,
+    "generate/avg_tokens_non_zero_rewards": 1.0,
+    "generate/avg_tokens_zero_rewards": 7.0,
+    "generate/avg_assistant_tokens": 2.0,
+    "generate/min_assistant_tokens": 0,
+    "generate/max_assistant_tokens": 4,
+    "generate/std_assistant_tokens": 2.0,
+    "environment/success": 0.0,
+    "environment/partial_completion": 0.5,
+    "environment/num_turns": 9.5,
+    "environment/parse_errors": 2.0,
+    "custom/avg_turn_latency": 2.1022,
+    "custom/min_turns_seen": 2.0,
+    "custom/max_turns_seen": 28.0,
+    "custom/infra_failures": 2.0
+   }
+  }
+ ],
+ "metrics": {
+  "plain": {
+   "eval/appworld/avg_score": 0.9166666666666666,
+   "eval/appworld/pass_at_1": 1.0,
+   "eval/appworld/mean_positive_reward": 0.9166666666666666,
+   "eval/appworld/generate/min_num_tokens": 1,
+   "eval/appworld/generate/max_num_tokens": 6,
+   "eval/appworld/generate/avg_num_tokens": 2.6666666666666665,
+   "eval/appworld/generate/std_num_tokens": 2.3570226039551585,
+   "eval/appworld/generate/avg_tokens_non_zero_rewards": 2.6666666666666665,
+   "eval/appworld/generate/avg_tokens_zero_rewards": 0.0,
+   "eval/appworld/generate/avg_assistant_tokens": 1.0,
+   "eval/appworld/generate/min_assistant_tokens": 0,
+   "eval/appworld/generate/max_assistant_tokens": 3,
+   "eval/appworld/generate/std_assistant_tokens": 1.4142135623730951,
+   "eval/appworld/environment/success": 0.5,
+   "eval/appworld/environment/partial_completion": 0.9166666666666666,
+   "eval/appworld/environment/num_turns": 7.0,
+   "eval/appworld/environment/parse_errors": 1.6666666666666667,
+   "eval/appworld_test_normal/avg_score": 0.5,
+   "eval/appworld_test_normal/pass_at_1": 0.5,
+   "eval/appworld_test_normal/mean_positive_reward": 0.5,
+   "eval/appworld_test_normal/generate/min_num_tokens": 7,
+   "eval/appworld_test_normal/generate/max_num_tokens": 7,
+   "eval/appworld_test_normal/generate/avg_num_tokens": 7.0,
+   "eval/appworld_test_normal/generate/std_num_tokens": 0.0,
+   "eval/appworld_test_normal/generate/avg_tokens_non_zero_rewards": 7.0,
+   "eval/appworld_test_normal/generate/avg_tokens_zero_rewards": 7.0,
+   "eval/appworld_test_normal/generate/avg_assistant_tokens": 4.0,
+   "eval/appworld_test_normal/generate/min_assistant_tokens": 4,
+   "eval/appworld_test_normal/generate/max_assistant_tokens": 4,
+   "eval/appworld_test_normal/generate/std_assistant_tokens": 0.0,
+   "eval/appworld_test_normal/environment/partial_completion": 0.5,
+   "eval/appworld_test_normal/environment/num_turns": 11.5,
+   "eval/appworld_test_normal/environment/parse_errors": 1.5,
+   "eval/appworld_test_normal/environment/success": 0.0,
+   "eval/all/avg_score": 0.75,
+   "eval/all/pass_at_1": 0.8,
+   "eval/all/mean_positive_reward": 0.75,
+   "eval/all/generate/min_num_tokens": 1,
+   "eval/all/generate/max_num_tokens": 7,
+   "eval/all/generate/avg_num_tokens": 4.4,
+   "eval/all/generate/std_num_tokens": 2.8000000000000003,
+   "eval/all/generate/avg_tokens_non_zero_rewards": 3.75,
+   "eval/all/generate/avg_tokens_zero_rewards": 7.0,
+   "eval/all/generate/avg_assistant_tokens": 2.2,
+   "eval/all/generate/min_assistant_tokens": 0,
+   "eval/all/generate/max_assistant_tokens": 4,
+   "eval/all/generate/std_assistant_tokens": 1.8330302779823358,
+   "eval/all/environment/success": 0.3333333333333333,
+   "eval/all/environment/partial_completion": 0.75,
+   "eval/all/environment/num_turns": 8.8,
+   "eval/all/environment/parse_errors": 1.6,
+   "eval/all/custom/avg_turn_latency": 1.8148,
+   "eval/all/custom/min_turns_seen": 2.0,
+   "eval/all/custom/max_turns_seen": 28.0,
+   "eval/all/custom/infra_failures": 4.0
+  },
+  "compact": {
+   "eval/appworld/avg_score": 0.9166666666666666,
+   "eval/appworld/pass_at_1": 1.0,
+   "eval/appworld/generate/avg_num_tokens": 2.6666666666666665,
+   "eval/appworld/environment/success": 0.5,
+   "eval/appworld/environment/partial_completion": 0.9166666666666666,
+   "eval/appworld/environment/num_turns": 7.0,
+   "eval/appworld/environment/parse_errors": 1.6666666666666667,
+   "eval/appworld_test_normal/avg_score": 0.5,
+   "eval/appworld_test_normal/pass_at_1": 0.5,
+   "eval/appworld_test_normal/generate/avg_num_tokens": 7.0,
+   "eval/appworld_test_normal/environment/partial_completion": 0.5,
+   "eval/appworld_test_normal/environment/num_turns": 11.5,
+   "eval/appworld_test_normal/environment/parse_errors": 1.5,
+   "eval/appworld_test_normal/environment/success": 0.0,
+   "eval/all/avg_score": 0.75,
+   "eval/all/pass_at_1": 0.8,
+   "eval/all/generate/avg_num_tokens": 4.4,
+   "eval/all/environment/success": 0.3333333333333333,
+   "eval/all/environment/partial_completion": 0.75,
+   "eval/all/environment/num_turns": 8.8,
+   "eval/all/environment/parse_errors": 1.6
+  },
+  "namespace_test": {
+   "test/appworld/avg_score": 0.9166666666666666,
+   "test/appworld/pass_at_1": 1.0,
+   "test/appworld/mean_positive_reward": 0.9166666666666666,
+   "test/appworld/generate/min_num_tokens": 1,
+   "test/appworld/generate/max_num_tokens": 6,
+   "test/appworld/generate/avg_num_tokens": 2.6666666666666665,
+   "test/appworld/generate/std_num_tokens": 2.3570226039551585,
+   "test/appworld/generate/avg_tokens_non_zero_rewards": 2.6666666666666665,
+   "test/appworld/generate/avg_tokens_zero_rewards": 0.0,
+   "test/appworld/generate/avg_assistant_tokens": 1.0,
+   "test/appworld/generate/min_assistant_tokens": 0,
+   "test/appworld/generate/max_assistant_tokens": 3,
+   "test/appworld/generate/std_assistant_tokens": 1.4142135623730951,
+   "test/appworld/environment/success": 0.5,
+   "test/appworld/environment/partial_completion": 0.9166666666666666,
+   "test/appworld/environment/num_turns": 7.0,
+   "test/appworld/environment/parse_errors": 1.6666666666666667,
+   "test/appworld_test_normal/avg_score": 0.5,
+   "test/appworld_test_normal/pass_at_1": 0.5,
+   "test/appworld_test_normal/mean_positive_reward": 0.5,
+   "test/appworld_test_normal/generate/min_num_tokens": 7,
+   "test/appworld_test_normal/generate/max_num_tokens": 7,
+   "test/appworld_test_normal/generate/avg_num_tokens": 7.0,
+   "test/appworld_test_normal/generate/std_num_tokens": 0.0,
+   "test/appworld_test_normal/generate/avg_tokens_non_zero_rewards": 7.0,
+   "test/appworld_test_normal/generate/avg_tokens_zero_rewards": 7.0,
+   "test/appworld_test_normal/generate/avg_assistant_tokens": 4.0,
+   "test/appworld_test_normal/generate/min_assistant_tokens": 4,
+   "test/appworld_test_normal/generate/max_assistant_tokens": 4,
+   "test/appworld_test_normal/generate/std_assistant_tokens": 0.0,
+   "test/appworld_test_normal/environment/partial_completion": 0.5,
+   "test/appworld_test_normal/environment/num_turns": 11.5,
+   "test/appworld_test_normal/environment/parse_errors": 1.5,
+   "test/appworld_test_normal/environment/success": 0.0,
+   "test/all/avg_score": 0.75,
+   "test/all/pass_at_1": 0.8,
+   "test/all/mean_positive_reward": 0.75,
+   "test/all/generate/min_num_tokens": 1,
+   "test/all/generate/max_num_tokens": 7,
+   "test/all/generate/avg_num_tokens": 4.4,
+   "test/all/generate/std_num_tokens": 2.8000000000000003,
+   "test/all/generate/avg_tokens_non_zero_rewards": 3.75,
+   "test/all/generate/avg_tokens_zero_rewards": 7.0,
+   "test/all/generate/avg_assistant_tokens": 2.2,
+   "test/all/generate/min_assistant_tokens": 0,
+   "test/all/generate/max_assistant_tokens": 4,
+   "test/all/generate/std_assistant_tokens": 1.8330302779823358,
+   "test/all/environment/success": 0.3333333333333333,
+   "test/all/environment/partial_completion": 0.75,
+   "test/all/environment/num_turns": 8.8,
+   "test/all/environment/parse_errors": 1.6,
+   "test/all/custom/avg_turn_latency": 1.8148,
+   "test/all/custom/min_turns_seen": 2.0,
+   "test/all/custom/max_turns_seen": 28.0,
+   "test/all/custom/infra_failures": 4.0
+  },
+  "compact_namespace_test": {
+   "test/appworld/avg_score": 0.9166666666666666,
+   "test/appworld/pass_at_1": 1.0,
+   "test/appworld/generate/avg_num_tokens": 2.6666666666666665,
+   "test/appworld/environment/success": 0.5,
+   "test/appworld/environment/partial_completion": 0.9166666666666666,
+   "test/appworld/environment/num_turns": 7.0,
+   "test/appworld/environment/parse_errors": 1.6666666666666667,
+   "test/appworld_test_normal/avg_score": 0.5,
+   "test/appworld_test_normal/pass_at_1": 0.5,
+   "test/appworld_test_normal/generate/avg_num_tokens": 7.0,
+   "test/appworld_test_normal/environment/partial_completion": 0.5,
+   "test/appworld_test_normal/environment/num_turns": 11.5,
+   "test/appworld_test_normal/environment/parse_errors": 1.5,
+   "test/appworld_test_normal/environment/success": 0.0,
+   "test/all/avg_score": 0.75,
+   "test/all/pass_at_1": 0.8,
+   "test/all/generate/avg_num_tokens": 4.4,
+   "test/all/environment/success": 0.3333333333333333,
+   "test/all/environment/partial_completion": 0.75,
+   "test/all/environment/num_turns": 8.8,
+   "test/all/environment/parse_errors": 1.6
+  }
+ },
+ "generator_inputs": [
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "appworld task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "appworld task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "appworld task 2"
+     }
+    ]
+   ],
+   "env_classes": [
+    "appworld",
+    "appworld",
+    "appworld"
+   ],
+   "env_extras": [
+    {
+     "data_source": "appworld",
+     "task_id": "appworld-task-0"
+    },
+    {
+     "data_source": "appworld_test_normal",
+     "task_id": "appworld_test_normal-task-1"
+    },
+    {
+     "data_source": "appworld",
+     "task_id": "appworld-task-2"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-0",
+     0
+    ],
+    [
+     "uid-1",
+     0
+    ],
+    [
+     "uid-2",
+     0
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  },
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "appworld task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "appworld task 4"
+     }
+    ]
+   ],
+   "env_classes": [
+    "appworld",
+    "appworld"
+   ],
+   "env_extras": [
+    {
+     "data_source": "appworld_test_normal",
+     "task_id": "appworld_test_normal-task-3"
+    },
+    {
+     "data_source": "appworld",
+     "task_id": "appworld-task-4"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-3",
+     0
+    ],
+    [
+     "uid-4",
+     0
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  }
+ ],
+ "dumps": {
+  "dumped_evals/global_step_3_evals/aggregated_results.jsonl": "{\"eval/appworld/avg_score\": 0.9166666666666666, \"eval/appworld/pass_at_1\": 1.0, \"eval/appworld/mean_positive_reward\": 0.9166666666666666, \"eval/appworld/generate/min_num_tokens\": 1, \"eval/appworld/generate/max_num_tokens\": 6, \"eval/appworld/generate/avg_num_tokens\": 2.6666666666666665, \"eval/appworld/generate/std_num_tokens\": 2.3570226039551585, \"eval/appworld/generate/avg_tokens_non_zero_rewards\": 2.6666666666666665, \"eval/appworld/generate/avg_tokens_zero_rewards\": 0.0, \"eval/appworld/generate/avg_assistant_tokens\": 1.0, \"eval/appworld/generate/min_assistant_tokens\": 0, \"eval/appworld/generate/max_assistant_tokens\": 3, \"eval/appworld/generate/std_assistant_tokens\": 1.4142135623730951, \"eval/appworld/environment/success\": 0.5, \"eval/appworld/environment/partial_completion\": 0.9166666666666666, \"eval/appworld/environment/num_turns\": 7.0, \"eval/appworld/environment/parse_errors\": 1.6666666666666667, \"eval/appworld_test_normal/avg_score\": 0.5, \"eval/appworld_test_normal/pass_at_1\": 0.5, \"eval/appworld_test_normal/mean_positive_reward\": 0.5, \"eval/appworld_test_normal/generate/min_num_tokens\": 7, \"eval/appworld_test_normal/generate/max_num_tokens\": 7, \"eval/appworld_test_normal/generate/avg_num_tokens\": 7.0, \"eval/appworld_test_normal/generate/std_num_tokens\": 0.0, \"eval/appworld_test_normal/generate/avg_tokens_non_zero_rewards\": 7.0, \"eval/appworld_test_normal/generate/avg_tokens_zero_rewards\": 7.0, \"eval/appworld_test_normal/generate/avg_assistant_tokens\": 4.0, \"eval/appworld_test_normal/generate/min_assistant_tokens\": 4, \"eval/appworld_test_normal/generate/max_assistant_tokens\": 4, \"eval/appworld_test_normal/generate/std_assistant_tokens\": 0.0, \"eval/appworld_test_normal/environment/partial_completion\": 0.5, \"eval/appworld_test_normal/environment/num_turns\": 11.5, \"eval/appworld_test_normal/environment/parse_errors\": 1.5, \"eval/appworld_test_normal/environment/success\": 0.0, \"eval/all/avg_score\": 0.75, \"eval/all/pass_at_1\": 0.8, \"eval/all/mean_positive_reward\": 0.75, \"eval/all/generate/min_num_tokens\": 1, \"eval/all/generate/max_num_tokens\": 7, \"eval/all/generate/avg_num_tokens\": 4.4, \"eval/all/generate/std_num_tokens\": 2.8000000000000003, \"eval/all/generate/avg_tokens_non_zero_rewards\": 3.75, \"eval/all/generate/avg_tokens_zero_rewards\": 7.0, \"eval/all/generate/avg_assistant_tokens\": 2.2, \"eval/all/generate/min_assistant_tokens\": 0, \"eval/all/generate/max_assistant_tokens\": 4, \"eval/all/generate/std_assistant_tokens\": 1.8330302779823358, \"eval/all/environment/success\": 0.3333333333333333, \"eval/all/environment/partial_completion\": 0.75, \"eval/all/environment/num_turns\": 8.8, \"eval/all/environment/parse_errors\": 1.6, \"eval/all/custom/avg_turn_latency\": 1.8148, \"eval/all/custom/min_turns_seen\": 2.0, \"eval/all/custom/max_turns_seen\": 28.0, \"eval/all/custom/infra_failures\": 4.0}\n",
+  "dumped_evals/global_step_3_evals/appworld.jsonl": "{\"input_prompt\": \"<58><46><18>\", \"output_response\": \"<223><297><961><628><987><631>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"appworld\", \"env_extras\": {\"data_source\": \"appworld\", \"task_id\": \"appworld-task-0\"}, \"env_metrics\": {\"success\": 1.0, \"partial_completion\": 1.0, \"num_turns\": 13.0, \"parse_errors\": 2.0}, \"data_source\": \"appworld\"}\n{\"input_prompt\": \"<24><60>\", \"output_response\": \"<388>\", \"score\": 0.75, \"stop_reason\": \"stop\", \"env_class\": \"appworld\", \"env_extras\": {\"data_source\": \"appworld\", \"task_id\": \"appworld-task-2\"}, \"env_metrics\": {\"success\": 0.0, \"partial_completion\": 0.75, \"num_turns\": 6.0, \"parse_errors\": 1.0}, \"data_source\": \"appworld\"}\n{\"input_prompt\": \"<97><55><6><35>\", \"output_response\": \"<426>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"appworld\", \"env_extras\": {\"data_source\": \"appworld\", \"task_id\": \"appworld-task-4\"}, \"env_metrics\": {\"partial_completion\": 1.0, \"num_turns\": 2.0, \"parse_errors\": 2.0}, \"data_source\": \"appworld\"}\n",
+  "dumped_evals/global_step_3_evals/appworld_test_normal.jsonl": "{\"input_prompt\": \"<93><68><87><66>\", \"output_response\": \"<477><146><274><445><377><171><867>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"appworld\", \"env_extras\": {\"data_source\": \"appworld_test_normal\", \"task_id\": \"appworld_test_normal-task-1\"}, \"env_metrics\": {\"partial_completion\": 1.0, \"num_turns\": 6.0, \"parse_errors\": 1.0}, \"data_source\": \"appworld_test_normal\"}\n{\"input_prompt\": \"<85><73>\", \"output_response\": \"<901><689><511><512><663><930><558>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"appworld\", \"env_extras\": {\"data_source\": \"appworld_test_normal\", \"task_id\": \"appworld_test_normal-task-3\"}, \"env_metrics\": {\"success\": 0.0, \"partial_completion\": 0.0, \"num_turns\": 17.0, \"parse_errors\": 2.0}, \"data_source\": \"appworld_test_normal\"}\n"
+ }
+}

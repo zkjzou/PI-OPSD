@@ -1,0 +1,188 @@
+{
+  "about": "tau2 RLSD golden advantages (default schedule: lambda 0.5 -> 0 over 50 steps, clip 0.2). Recorded by running the PRE-INTEGRATION tau2 OPSD trainer -- its own compute_advantages_and_returns / apply_reward_kl_penalty / pi_utility overrides on its pre-merge SelfDistillationTrainer base -- with the real RayPPOTrainer GRPO estimator (grpo_norm_by_std=true) on the fixed inputs below. The merged trainer must reproduce these exactly; regenerate only from that historical code, never from the code under test.",
+  "inputs": {
+    "uids": ["a", "a", "a", "b", "b", "b"],
+    "response_mask": [
+      [1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0]
+    ],
+    "loss_mask": [
+      [1, 1, 0, 1, 1, 1],
+      [1, 1, 0, 1, 0, 0],
+      [1, 0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 0, 0],
+      [1, 1, 0, 0, 1, 1],
+      [1, 1, 0, 0, 0, 0]
+    ],
+    "success": [1, 0, 0, 1, 1, 0],
+    "num_turns": [3.0, 5.0, 4.0, 2.0, 6.0, 2.0],
+    "student_lp": [
+      [-0.25, -1.5, -0.7, -2.1, -0.05, -0.9],
+      [-1.2, -0.3, -3.0, -0.8, 0.0, 0.0],
+      [-0.6, -2.2, -0.4, -1.1, -0.35, 0.0],
+      [-0.9, -0.15, -1.75, 0.0, 0.0, 0.0],
+      [-2.5, -0.45, -0.2, -1.3, -0.6, -1.0],
+      [-0.1, -1.6, 0.0, 0.0, 0.0, 0.0]
+    ],
+    "teacher_lp": [
+      [-0.1, -2.4, -0.7, -0.6, -0.3, -0.85],
+      [-2.0, -0.25, -0.5, -1.9, 0.0, 0.0],
+      [-0.55, -0.4, -1.4, -26.0, -0.2, 0.0],
+      [-0.3, -0.9, -1.0, 0.0, 0.0, 0.0],
+      [-1.1, -0.5, -3.2, -0.7, -1.6, -0.2],
+      [-0.4, -0.35, 0.0, 0.0, 0.0, 0.0]
+    ]
+  },
+  "common_env": {
+    "OPSD_TEACHER": "frozen",
+    "OPSD_TOKEN_CLIP": "0",
+    "OPSD_KL_LOG_INTERVAL": "0"
+  },
+  "cases": {
+    "rlsd_s0": {
+      "kind": "adv",
+      "step": 0,
+      "env": {
+        "OPSD_RLSD": "1",
+        "OPSD_RLSD_LAMBDA": "0.5",
+        "OPSD_RLSD_LAMBDA_FINAL": "0.0",
+        "OPSD_RLSD_DECAY_STEPS": "50",
+        "OPSD_RLSD_CLIP": "0.2"
+      },
+      "advantages": [
+        [1.2481334209442139, 1.0392285585403442, 1.1546984910964966, 1.270168423652649, 1.0392285585403442, 1.1842997074127197],
+        [-0.6350842714309692, -0.5632704496383667, -0.5773493051528931, -0.6350842714309692, -0.0, -0.0],
+        [-0.5632704496383667, -0.5773493051528931, -0.6350842714309692, -0.6350842714309692, -0.5371392369270325, -0.0],
+        [0.6350842118263245, 0.5196142792701721, 0.6350842118263245, 0.0, 0.0, 0.0],
+        [0.6350842118263245, 0.5632703900337219, 0.5773492455482483, 0.5773492455482483, 0.5196142792701721, 0.6350842118263245],
+        [-1.2701685428619385, -1.0392286777496338, -0.0, -0.0, -0.0, -0.0]
+      ],
+      "metrics": {
+        "pi_utility/auc_task_d": 0.25,
+        "pi_utility/auc_task_d_minus": 0.5,
+        "pi_utility/auc_task_neg_nstep": 0.625,
+        "pi_utility/d": 1.4679166078567505,
+        "pi_utility/d_minus": 1.1293054819107056,
+        "pi_utility/d_plus": 0.33861109614372253,
+        "pi_utility/d_signed": 0.7906944751739502,
+        "pi_utility/identity_err": 5.960464477539063e-08,
+        "pi_utility/ndcg_at_4_d": 0.7098603945740938,
+        "pi_utility/ndcg_at_4_d_minus": 0.75,
+        "pi_utility/ndcg_at_4_neg_nstep": 0.9598603945740938,
+        "pi_utility/ndcg_at_4_random": 0.7906794910561528,
+        "pi_utility/ndcg_both_class_tasks": 2.0,
+        "pi_utility/win_rate": 0.5,
+        "pi_utility/win_rate_both_class": 0.5,
+        "rlsd/a_grpo_abs": 0.7549952268600464,
+        "rlsd/advantage_abs": 0.7654386162757874,
+        "rlsd/clip_high_ratio": 0.47619047619047616,
+        "rlsd/clip_low_ratio": 0.23809523809523808,
+        "rlsd/delta_abs_mean": 1.566666603088379,
+        "rlsd/eps_w": 0.2,
+        "rlsd/lambda": 0.5,
+        "rlsd/sign_preserved": 1.0,
+        "rlsd/w_max": 1.2000000476837158,
+        "rlsd/w_mean": 1.0441668033599854,
+        "rlsd/w_min": 0.800000011920929
+      }
+    },
+    "rlsd_s25": {
+      "kind": "adv",
+      "step": 25,
+      "env": {
+        "OPSD_RLSD": "1",
+        "OPSD_RLSD_LAMBDA": "0.5",
+        "OPSD_RLSD_LAMBDA_FINAL": "0.0",
+        "OPSD_RLSD_DECAY_STEPS": "50",
+        "OPSD_RLSD_CLIP": "0.2"
+      },
+      "advantages": [
+        [1.2014158964157104, 1.0969635248184204, 1.1546984910964966, 1.2124333381652832, 1.0969635248184204, 1.169499158859253],
+        [-0.6062167286872864, -0.5703098773956299, -0.5773493051528931, -0.6062167286872864, -0.0, -0.0],
+        [-0.5703098773956299, -0.5773493051528931, -0.6062167286872864, -0.6062167286872864, -0.5572442412376404, -0.0],
+        [0.6062166690826416, 0.5484817624092102, 0.6062166690826416, 0.0, 0.0, 0.0],
+        [0.6062166690826416, 0.5703098177909851, 0.5773492455482483, 0.5773492455482483, 0.5484817624092102, 0.6062166690826416],
+        [-1.2124334573745728, -1.09696364402771, -0.0, -0.0, -0.0, -0.0]
+      ],
+      "metrics": {
+        "pi_utility/auc_task_d": 0.25,
+        "pi_utility/auc_task_d_minus": 0.5,
+        "pi_utility/auc_task_neg_nstep": 0.625,
+        "pi_utility/d": 1.4679166078567505,
+        "pi_utility/d_minus": 1.1293054819107056,
+        "pi_utility/d_plus": 0.33861109614372253,
+        "pi_utility/d_signed": 0.7906944751739502,
+        "pi_utility/identity_err": 5.960464477539063e-08,
+        "pi_utility/ndcg_at_4_d": 0.7098603945740938,
+        "pi_utility/ndcg_at_4_d_minus": 0.75,
+        "pi_utility/ndcg_at_4_neg_nstep": 0.9598603945740938,
+        "pi_utility/ndcg_at_4_random": 0.7906794910561528,
+        "pi_utility/ndcg_both_class_tasks": 2.0,
+        "pi_utility/win_rate": 0.5,
+        "pi_utility/win_rate_both_class": 0.5,
+        "rlsd/a_grpo_abs": 0.7549952268600464,
+        "rlsd/advantage_abs": 0.7602168321609497,
+        "rlsd/clip_high_ratio": 0.47619047619047616,
+        "rlsd/clip_low_ratio": 0.23809523809523808,
+        "rlsd/delta_abs_mean": 1.566666603088379,
+        "rlsd/eps_w": 0.2,
+        "rlsd/lambda": 0.25,
+        "rlsd/sign_preserved": 1.0,
+        "rlsd/w_max": 1.2000000476837158,
+        "rlsd/w_mean": 1.0441668033599854,
+        "rlsd/w_min": 0.800000011920929
+      }
+    },
+    "rlsd_s60": {
+      "kind": "adv",
+      "step": 60,
+      "env": {
+        "OPSD_RLSD": "1",
+        "OPSD_RLSD_LAMBDA": "0.5",
+        "OPSD_RLSD_LAMBDA_FINAL": "0.0",
+        "OPSD_RLSD_DECAY_STEPS": "50",
+        "OPSD_RLSD_CLIP": "0.2"
+      },
+      "advantages": [
+        [1.1546984910964966, 1.1546984910964966, 1.1546984910964966, 1.1546984910964966, 1.1546984910964966, 1.1546984910964966],
+        [-0.5773493051528931, -0.5773493051528931, -0.5773493051528931, -0.5773493051528931, -0.0, -0.0],
+        [-0.5773493051528931, -0.5773493051528931, -0.5773493051528931, -0.5773493051528931, -0.5773493051528931, -0.0],
+        [0.5773492455482483, 0.5773492455482483, 0.5773492455482483, 0.0, 0.0, 0.0],
+        [0.5773492455482483, 0.5773492455482483, 0.5773492455482483, 0.5773492455482483, 0.5773492455482483, 0.5773492455482483],
+        [-1.1546986103057861, -1.1546986103057861, -0.0, -0.0, -0.0, -0.0]
+      ],
+      "metrics": {
+        "pi_utility/auc_task_d": 0.25,
+        "pi_utility/auc_task_d_minus": 0.5,
+        "pi_utility/auc_task_neg_nstep": 0.625,
+        "pi_utility/d": 1.4679166078567505,
+        "pi_utility/d_minus": 1.1293054819107056,
+        "pi_utility/d_plus": 0.33861109614372253,
+        "pi_utility/d_signed": 0.7906944751739502,
+        "pi_utility/identity_err": 5.960464477539063e-08,
+        "pi_utility/ndcg_at_4_d": 0.7098603945740938,
+        "pi_utility/ndcg_at_4_d_minus": 0.75,
+        "pi_utility/ndcg_at_4_neg_nstep": 0.9598603945740938,
+        "pi_utility/ndcg_at_4_random": 0.7906794910561528,
+        "pi_utility/ndcg_both_class_tasks": 2.0,
+        "pi_utility/win_rate": 0.5,
+        "pi_utility/win_rate_both_class": 0.5,
+        "rlsd/a_grpo_abs": 0.7549952268600464,
+        "rlsd/advantage_abs": 0.7549952268600464,
+        "rlsd/clip_high_ratio": 0.47619047619047616,
+        "rlsd/clip_low_ratio": 0.23809523809523808,
+        "rlsd/delta_abs_mean": 1.566666603088379,
+        "rlsd/eps_w": 0.2,
+        "rlsd/lambda": 0.0,
+        "rlsd/sign_preserved": 1.0,
+        "rlsd/w_max": 1.2000000476837158,
+        "rlsd/w_mean": 1.0441668033599854,
+        "rlsd/w_min": 0.800000011920929
+      }
+    }
+  }
+}

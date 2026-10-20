@@ -1,0 +1,72 @@
+OPSD: on-policy self-distillation with privileged information for long-horizon agents
+Copyright 2026 the OPSD contributors
+
+This project is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+
+SkyRL
+=====
+
+This project is built on SkyRL (https://github.com/NovaSky-AI/SkyRL), licensed under the Apache License,
+Version 2.0. SkyRL is an external dependency, used unmodified and import-only; it is not part of this
+repository. pyproject.toml installs a checkout of NovaSky-AI/SkyRL at commit
+ecdaa9460e281774638a9170d6724456f46c8356, expected next to this repository at ../SkyRL-ecdaa946, through
+[tool.uv.sources] (the skyrl and skyrl-gym packages, editable). No SkyRL file is modified.
+
+Files under opsd/skyrl_ext/ that adapt SkyRL source code carry an "Adapted from SkyRL" header that names the
+upstream file and what was changed. They are listed, together with the tests that hold them to the upstream
+source, in ADAPTED_FROM_SKYRL.md.
+
+
+Third-party material
+====================
+
+This repository builds on, adapts, or interoperates with the following third-party work. Benchmark data and
+simulators are not redistributed here; they are fetched at setup time from their official sources.
+
+verl-agent (https://github.com/langfengQ/verl-agent) -- Apache-2.0
+    The ALFWorld environment semantics and prompt templates (as used by SDAR) in opsd/envs/alfworld/: the
+    prompt templates are reproduced verbatim, the reward and validity semantics are ported.
+
+ALFWorld (https://github.com/alfworld/alfworld) and TextWorld (https://github.com/microsoft/TextWorld) -- MIT
+    Installed into a separate simulator virtual environment by scripts/setup/setup_alfworld.sh; the game data
+    is downloaded with alfworld-download.
+
+AppWorld (https://github.com/StonyBrookNLP/appworld) -- Apache-2.0
+    The simulator is installed into a separate virtual environment by scripts/setup/setup_appworld.sh.
+    opsd/appworld/official_react_instructions.txt is the official ReAct prompt (byte-identical to
+    experiments/prompts/react_code_agent/instructions.txt). AppWorld data and derivatives may only be
+    redistributed in encrypted form: this project's AppWorld-derived artifacts ship only inside an encrypted
+    bundle.
+
+tau2-bench (https://github.com/sierra-research/tau2-bench) @ 1d244f5dca42944b67a379b44bfeb9f5748f189d -- MIT
+    Cloned at setup time and imported from that checkout (opsd/tau2_bench/source.py); never pip-installed.
+    The task-id manifests are in opsd/tau2_bench/data/.
+
+AReaL-tau2-data (https://huggingface.co/datasets/inclusionAI/AReaL-tau2-data) -- Apache-2.0
+    The retail RL task pool, downloaded from the Hugging Face Hub at a pinned revision
+    (opsd/tau2_bench/areal.py).
+
+Qwen3 chat templates -- Apache-2.0
+    opsd/alfworld/qwen3thinking_preserve.jinja2 is derived from the Qwen3-4B-Thinking-2507 chat template.
+
+RLSD (arXiv:2604.03128) -- method citation
+    The sign-preserving multiplicative self-distillation arm (opsd/trainer/rlsd.py) implements the published
+    method.
+
+SDAR (arXiv:2605.15155) -- method citation
+    The gated loss-side distillation term (opsd/algorithms/distill_loss.py, applied in
+    opsd/skyrl_ext/policy_worker.py) implements the published method.
+
+SDPO (arXiv:2601.20802) -- method citation
+    The ema and trust-region hinted-teacher modes (opsd/trainer/teacher_regularization.py, wired in
+    opsd/trainer/main_opsd_alfworld.py) implement the published teacher-regularization constructions.
+
+
+Model outputs
+=============
+
+The privileged-information artifacts (reference trajectories and hints) distributed alongside this code
+were generated with third-party models (GLM, Qwen, DeepSeek, Kimi, MiniMax, and OpenAI models used as the
+tau2-bench user simulator and judge). Users are responsible for complying with the respective providers'
+terms when using those artifacts.

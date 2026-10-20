@@ -1,0 +1,1106 @@
+{
+ "meta": {
+  "source": "OLD tree (SkyRL fork) skyrl/train/utils/utils.py + skyrl/train/utils/tracking.py",
+  "upstream_base": "ecdaa946",
+  "fixed_now": [
+   2026,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "default_module_flags": {
+   "_SKYRL_USE_NEW_INFERENCE": true,
+   "SKYRL_LD_LIBRARY_PATH_EXPORT": false,
+   "SKYRL_PYTHONPATH_EXPORT": false
+  }
+ },
+ "cases": [
+  {
+   "name": "cpus_unset_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "cpus_16_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "16"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": "16",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 16
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 16 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "cpus_padded_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": " 8 "
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": " 8 ",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 8
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 8 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "cpus_plus_sign_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "+4"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": "+4",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 4
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 4 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "cpus_underscore_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "1_6"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": "1_6",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 16
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 16 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "cpus_empty_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": ""
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": "",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "cpus_zero_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "0"
+   },
+   "verbose": true,
+   "ray_init_calls": [],
+   "error": {
+    "type": "ValueError",
+    "message": "SKYRL_RAY_NUM_CPUS must be greater than zero",
+    "cause": null
+   },
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 0,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "cpus_negative_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "-1"
+   },
+   "verbose": true,
+   "ray_init_calls": [],
+   "error": {
+    "type": "ValueError",
+    "message": "SKYRL_RAY_NUM_CPUS must be greater than zero",
+    "cause": null
+   },
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 0,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "cpus_not_an_integer_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "not-an-integer"
+   },
+   "verbose": true,
+   "ray_init_calls": [],
+   "error": {
+    "type": "ValueError",
+    "message": "SKYRL_RAY_NUM_CPUS must be an integer, got 'not-an-integer'",
+    "cause": "ValueError"
+   },
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 0,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "cpus_float_verbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "RAY_ADDRESS": "local",
+    "SKYRL_RAY_NUM_CPUS": "8.0"
+   },
+   "verbose": true,
+   "ray_init_calls": [],
+   "error": {
+    "type": "ValueError",
+    "message": "SKYRL_RAY_NUM_CPUS must be an integer, got '8.0'",
+    "cause": "ValueError"
+   },
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 0,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "cpus_unset_nonverbose",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "ALFWORLD_BASE_PORT": "8200",
+    "APPWORLD_ROOT": "data/appworld",
+    "TAU2_REVISION": "rev-synthetic",
+    "SKYRL_EVAL_COMPACT": "1",
+    "PYTHONHASHSEED": "0",
+    "HOME": "/nonexistent/home",
+    "PATH": "/nonexistent/bin",
+    "XOPSD_FOO": "1",
+    "opsd_lower": "1",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "RAY_ADDRESS": "local"
+   },
+   "verbose": false,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "SKYRL_EVAL_COMPACT": "1",
+       "ALFWORLD_BASE_PORT": "8200",
+       "APPWORLD_ROOT": "data/appworld",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "PYTHONHASHSEED": "0",
+       "TAU2_REVISION": "rev-synthetic",
+       "_SKYRL_USE_NEW_INFERENCE": "1",
+       "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_COMPACT=1 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 5 prefixed env vars to ray runtime env: ALFWORLD_BASE_PORT, APPWORLD_ROOT, OPSD_HINTS_PATH, PYTHONHASHSEED, TAU2_REVISION"
+    },
+    {
+     "level": "INFO",
+     "message": "Infrastructure logs will be written to: <LOG_PATH>/infra-260102_030405.log"
+    }
+   ]
+  },
+  {
+   "name": "cpus_16_nonverbose",
+   "environ": {
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "WANDB_PROJECT": "synth-project",
+    "SKYRL_RAY_NUM_CPUS": "16",
+    "RAY_ADDRESS": "local"
+   },
+   "verbose": false,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_RUN_ID": "synthrun01",
+       "WANDB_RESUME": "must",
+       "WANDB_RUN_GROUP": "synth-group",
+       "SKYRL_EVAL_NAMESPACE": "test",
+       "SKYRL_LOG_STEP_OVERRIDE": "121",
+       "SKYRL_EVAL_COMPACT": "1",
+       "SKYRL_RAY_NUM_CPUS": "16",
+       "_SKYRL_USE_NEW_INFERENCE": "1",
+       "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 16
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun01 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RESUME=must to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_GROUP=synth-group to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_NAMESPACE=test to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_LOG_STEP_OVERRIDE=121 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_EVAL_COMPACT=1 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 16 CPUs"
+    },
+    {
+     "level": "INFO",
+     "message": "Infrastructure logs will be written to: <LOG_PATH>/infra-260102_030405.log"
+    }
+   ]
+  },
+  {
+   "name": "cpus_invalid_nonverbose",
+   "environ": {
+    "SKYRL_RAY_NUM_CPUS": "0",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": false,
+   "ray_init_calls": [],
+   "error": {
+    "type": "ValueError",
+    "message": "SKYRL_RAY_NUM_CPUS must be greater than zero",
+    "cause": null
+   },
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 0,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    }
+   ]
+  },
+  {
+   "name": "ray_address_external_verbose",
+   "environ": {
+    "RAY_ADDRESS": "192.0.2.10:6379",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "WANDB_RUN_ID": "synthrun03"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_RUN_ID": "synthrun03",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun03 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "ray_address_external_nonverbose",
+   "environ": {
+    "RAY_ADDRESS": "192.0.2.10:6379",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "WANDB_RUN_ID": "synthrun03"
+   },
+   "verbose": false,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_RUN_ID": "synthrun03",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1",
+       "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun03 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    },
+    {
+     "level": "INFO",
+     "message": "Infrastructure logs will be written to: <LOG_PATH>/infra-260102_030405.log"
+    }
+   ]
+  },
+  {
+   "name": "ray_address_external_with_cpus",
+   "environ": {
+    "RAY_ADDRESS": "192.0.2.10:6379",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "WANDB_RUN_ID": "synthrun03",
+    "SKYRL_RAY_NUM_CPUS": "16"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_RUN_ID": "synthrun03",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_RAY_NUM_CPUS": "16",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 16
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun03 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 16 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "ray_address_unset_with_cpus",
+   "environ": {
+    "SKYRL_RAY_NUM_CPUS": "12"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "SKYRL_RAY_NUM_CPUS": "12",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true,
+     "num_cpus": 12
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: SKYRL_RAY_NUM_CPUS"
+    },
+    {
+     "level": "INFO",
+     "message": "Limiting the local Ray runtime to 12 CPUs"
+    }
+   ]
+  },
+  {
+   "name": "stale_skyrl_log_file_verbose",
+   "environ": {
+    "SKYRL_LOG_FILE": "logs/stale-infra.log",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_LOG_FILE": "logs/stale-infra.log",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_LOG_FILE"
+    }
+   ]
+  },
+  {
+   "name": "stale_skyrl_log_file_nonverbose",
+   "environ": {
+    "SKYRL_LOG_FILE": "logs/stale-infra.log",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": false,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_HINTS_PATH, SKYRL_LOG_FILE"
+    },
+    {
+     "level": "INFO",
+     "message": "Infrastructure logs will be written to: <LOG_PATH>/infra-260102_030405.log"
+    }
+   ]
+  },
+  {
+   "name": "credential_names_nonverbose",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY": "not-a-real-key-1",
+    "OPSD_ONLINE_HINTS_ANALYZER_API_KEY": "not-a-real-key-2",
+    "TAU2_JUDGE_TOKEN": "not-a-real-key-3",
+    "APPWORLD_SECRET": "not-a-real-key-4",
+    "ALFWORLD_PASSWORD": "not-a-real-key-5",
+    "ALFWORLD_PASSWD": "not-a-real-key-6",
+    "SKYRL_DATABASE_URL": "not-a-real-url",
+    "OPSD_AWS_CREDENTIALS": "not-a-real-key-7",
+    "OPSD_TOKEN": "not-a-real-key-8",
+    "OPSD_TOKEN_CLIP_API_KEY": "not-a-real-key-9",
+    "opsd_api_key": "not-a-real-key-10",
+    "TAU2_api_key": "not-a-real-key-11",
+    "OPENAI_API_KEY": "not-a-real-key-12",
+    "WANDB_API_KEY": "not-a-real-wandb-key",
+    "MLFLOW_TRACKING_URI": "http://mlflow.invalid",
+    "MLFLOW_TRACKING_TOKEN": "not-a-real-mlflow-token",
+    "DAYTONA_API_KEY": "not-a-real-daytona-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": false,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_API_KEY": "not-a-real-wandb-key",
+       "MLFLOW_TRACKING_URI": "http://mlflow.invalid",
+       "MLFLOW_TRACKING_TOKEN": "not-a-real-mlflow-token",
+       "DAYTONA_API_KEY": "not-a-real-daytona-key",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1",
+       "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {
+     "RAY_BACKEND_LOG_LEVEL": "fatal",
+     "SKYRL_LOG_FILE": "<LOG_PATH>/infra-260102_030405.log"
+    },
+    "removed": []
+   },
+   "log_dir_created": true,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting wandb api key to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting mlflow tracking uri to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting mlflow tracking token to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting DAYTONA_API_KEY to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    },
+    {
+     "level": "INFO",
+     "message": "Infrastructure logs will be written to: <LOG_PATH>/infra-260102_030405.log"
+    }
+   ]
+  },
+  {
+   "name": "key_pointer_invalid_value_verbose",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "sk-not-a-real-key",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "OPSD_ANALYZER_AUTH": "not-a-real-key",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "WARNING",
+     "message": "Not exporting OPSD_PI_ANALYZER_API_KEY_ENV to the ray runtime env: its value is not a valid env-var name (value not shown). Set it to the NAME of the variable that holds the key."
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 2 prefixed env vars to ray runtime env: OPSD_ANALYZER_AUTH, OPSD_HINTS_PATH"
+    }
+   ]
+  },
+  {
+   "name": "wandb_n_generations_verbose",
+   "environ": {
+    "SKYRL_WANDB_N_GENERATIONS": "4",
+    "WANDB_RUN_ID": "synthrun02",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "verbose": true,
+   "ray_init_calls": [
+    {
+     "runtime_env": {
+      "env_vars": {
+       "NCCL_CUMEM_ENABLE": "0",
+       "VLLM_ALLOW_RUNTIME_LORA_UPDATING": "true",
+       "VLLM_ALLOW_INSECURE_SERIALIZATION": "1",
+       "VLLM_DISABLE_COMPILE_CACHE": "1",
+       "VLLM_USE_V1": "1",
+       "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+       "WANDB_RUN_ID": "synthrun02",
+       "SKYRL_WANDB_N_GENERATIONS": "4",
+       "OPSD_HINTS_PATH": "hints/pi_hints.json",
+       "_SKYRL_USE_NEW_INFERENCE": "1"
+      }
+     },
+     "log_to_driver": true
+    }
+   ],
+   "error": null,
+   "environ_changes": {
+    "set": {},
+    "removed": []
+   },
+   "log_dir_created": false,
+   "sync_registries_calls": 1,
+   "logs": [
+    {
+     "level": "INFO",
+     "message": "`VLLM_USE_V1` is not specified, setting `VLLM_USE_V1` to 1. To override, set `VLLM_USE_V1` explicitly"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting WANDB_RUN_ID=synthrun02 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting SKYRL_WANDB_N_GENERATIONS=4 to ray runtime env"
+    },
+    {
+     "level": "INFO",
+     "message": "Exporting 1 prefixed env vars to ray runtime env: OPSD_HINTS_PATH"
+    }
+   ]
+  }
+ ]
+}

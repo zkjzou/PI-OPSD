@@ -1,0 +1,353 @@
+# ALFWorld privileged-information (PI) registry: pi_id -> per-student hint file under $OPSD_DATA_ROOT.
+#
+# Naming: <author>_<form>. Authors: glm = GLM-5.2, qwen = Qwen3.7-Plus (reference-trajectory authors),
+# self = the student itself writes the hint from the GLM reference trajectory. Forms: a = Action,
+# ao = Action+Obs., aot = Action+Obs.+Thou., aat = Action+Thou., skill = on-policy skill, summ = summarised
+# reference, chk = checklist. The trajectory renders are capped at 24k characters (`_cap24k`), and the
+# teacher's reference sequence cap is raised to 65536 tokens for every PI except the short action lists.
+# Student-dependent files: the thinking student (4bt) reads the reference thoughts from the <think> render
+# (`withthink` / `actthink`) instead of the THOUGHTS: render; checklists and self-written PIs are built per
+# student.
+#
+# content_sha256 = sha256 of the canonical {task_id: task hint} JSON the trainer reads (the data-bundle
+# manifest value); the launcher's preflight refuses a hint file whose content does not match.
+#
+# Caveat for every reference-trajectory PI (a/ao/aot/aat and everything derived from them): the reference
+# runs showed the admissible-action list after an invalid action, and that list appears inside ~45% of the
+# raw renders.
+
+# ------------------------------------------------------------------------------ reference trajectories
+glm_a:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action
+  default:
+    hint: alfworld/hints/glm-5.2/hints_actions.json
+    content_sha256: 677f4d9c851b359f81d0181edd7d1f0a70cd0b8e82af13551f06d2bc32a01df6
+glm_ao:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action+Obs.
+  default:
+    hint: alfworld/hints/glm-5.2/hints_traj_nothink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 66a3d8d925394c9b0bee986627b2aaf6244784173f831bb55e02c7fd9ac6669c
+glm_aot:
+  author: glm-5.2
+  analyzer: null
+  paper_row: Action+Obs.+Thou.
+  4bi:
+    hint: alfworld/hints/glm-5.2/hints_traj_thoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 5a4dfeef9faea41fde26ea0eabecf1c1162cfe4c6d736e4eeab73143d72d8dd7
+  4bt:
+    hint: alfworld/hints/glm-5.2/hints_traj_withthink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: d92b307477ce3d4d4085fddf040d98f53389b8426f2b188248d21827ae7bf9ec
+  30bi:
+    hint: alfworld/hints/glm-5.2/hints_traj_thoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 5a4dfeef9faea41fde26ea0eabecf1c1162cfe4c6d736e4eeab73143d72d8dd7
+# Action+Thoughts (aat): one of the two PIs the 16-PI main table adds to the paper's 14 rows (paper_row: null);
+# its numbers come from the arms' own training runs.
+glm_aat:
+  author: glm-5.2
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/hints/glm-5.2/hints_traj_actthoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: f5b4c3cf1f8ce17e12d632f86f74071eaf128b90ddafe46a2d60b6bde8b66042
+  4bt:
+    hint: alfworld/hints/glm-5.2/hints_traj_actthink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 28aaa5e46d2d5aa526b8c6ecc293767e2dbde290e5864764a03930e006ddf838
+  30bi:
+    hint: alfworld/hints/glm-5.2/hints_traj_actthoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: f5b4c3cf1f8ce17e12d632f86f74071eaf128b90ddafe46a2d60b6bde8b66042
+qwen_a:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action
+  default:
+    hint: alfworld/hints/qwen3.7-plus/hints_actions.json
+    content_sha256: bc5f36ac0cf93447fc54e9149078f7fb3f4aac258cf3738d7b94f9d97651131e
+qwen_ao:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action+Obs.
+  default:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_nothink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: f99bfe8edabbf6854c904c2bb6ecd52c4604435c3625b25585e90c5e8e2c0726
+qwen_aot:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: Action+Obs.+Thou.
+  4bi:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_thoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 654dfca6e174eabe6b8495a13503628424872201beda7cc406b8bb64986cc7eb
+  4bt:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_withthink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 92bf157adc7675b70890a42a30282190850032f58697a2480ff82660963ecad3
+  30bi:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_thoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 654dfca6e174eabe6b8495a13503628424872201beda7cc406b8bb64986cc7eb
+qwen_aat:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_actthoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: a232dd8afd86047d7b85377f45d2eaed154593b8f54f326765e8a26bf1756e4c
+  4bt:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_actthink_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: 3fdad8de5dbb0e9e575dd9d31421cb603a8e696b2393449933598cf397b53f85
+  30bi:
+    hint: alfworld/hints/qwen3.7-plus/hints_traj_actthoughts_cap24k.json
+    ref_seq_cap: 65536
+    content_sha256: a232dd8afd86047d7b85377f45d2eaed154593b8f54f326765e8a26bf1756e4c
+
+# ------------------------------------------------------------------- analyzer-written PIs (GLM trajectories)
+glm_skill:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: On-policy skill
+  default:
+    hint: alfworld/hints/derived/onpolicy_skill/glm52_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 329e275a06ee2ec9566fbc2000a2fee000398d9afee4f8ef4df5195f0126746c
+qwen_skill:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: On-policy skill
+  default:
+    hint: alfworld/hints/derived/onpolicy_skill/qwen37_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 63d490492e9c6ecacc3e37916e5cd44507e3c15b30dddc12840b2dd67b04306f
+self_skill:
+  author: glm-5.2
+  analyzer: student
+  paper_row: On-policy skill
+  4bi:
+    hint: alfworld/hints/derived/onpolicy_skill/4bi_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 626049592fc723018b8bd5b659926625bf8ae8f6089790c241c44f2f638ed41a
+  4bt:
+    hint: alfworld/hints/derived/onpolicy_skill/4bt_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 8feb913cc8a5425f8197ca234632e728316db43875c26306263b9f0d0f4989b3
+  30bi:
+    hint: alfworld/hints/derived/onpolicy_skill/30bi_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 8baf851ef589265108bd5e9be26f1db952c4d92833d1afce41417808c09ecbce
+glm_summ:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: Summarised reference
+  default:
+    hint: alfworld/hints/derived/summary/glm52_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: f18e402848b3a71c2543e9f79021db9ba38ff84f9443b4df4a2e835056ae3569
+qwen_summ:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: Summarised reference
+  default:
+    hint: alfworld/hints/derived/summary/qwen37_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 8f87e379ed0629fafbdee74c21c5e42462232853376e79251441f4697ad5e731
+self_summ:
+  author: glm-5.2
+  analyzer: student
+  paper_row: Summarised reference
+  4bi:
+    hint: alfworld/hints/derived/summary/4bi_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 2d25f7beb536c4b72df3be56aa18fc3d97de940aa8317dd37c79d667aea16dc6
+  4bt:
+    hint: alfworld/hints/derived/summary/4bt_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 71c70eeab153b5ae9460cbdcc05476ee6bbe8d416c42648226b547de00256ef7
+  30bi:
+    hint: alfworld/hints/derived/summary/30bi_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: b3e287d38dda4d9b18207bb68279286abf44489b26d4dcb8a723ffed2ac49f71
+# Checklists contrast the GLM-5.2 reference win with one of the student's own rollouts on the same task (a
+# win or a loss), so there is one file per student; the analyzer that writes the checklist is GLM-5.2 (glm)
+# or Qwen3.7-Plus (qwen).
+glm_chk:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: Checklist
+  4bi:
+    hint: alfworld/hints/derived/checklist/checklist_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: fec2be2408fc39a4fcf6717df2b9d5d9a8293e1b769e6fae3e15e530eda986ff
+  4bt:
+    hint: alfworld/hints/derived/checklist/checklist_4bt_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 7b9a327b1b8fb882c4f6f8c34145e3260f942c0850b1234ec98f0f18b7ceeb71
+  30bi:
+    hint: alfworld/hints/derived/checklist/checklist_30bi_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 7bfdc15fa1dee5599535a478e898293cdb6c4a7416b75b931afc2d783fad4b0a
+qwen_chk:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: Checklist
+  4bi:
+    hint: alfworld/hints/derived/checklist/checklist_from_q7.json
+    ref_seq_cap: 65536
+    content_sha256: de2e5d2e8e309fdfd2abdffce7542257f371e6d28c96a7f17e6a1c0741be6f37
+  4bt:
+    hint: alfworld/hints/derived/checklist/checklist_4bt_from_q7.json
+    ref_seq_cap: 65536
+    content_sha256: 5120aedc34ad5e6e15108e35df278cf9275822469591a42639bbca2e0a42e7a5
+  30bi:
+    hint: alfworld/hints/derived/checklist/checklist_30bi_from_q7.json
+    ref_seq_cap: 65536
+    content_sha256: 7b59b9c967f0e94111a7dd0a936316e4972dcc376ac65025fd37dc425aa3d46b
+
+# ------------------------------------------------------------------------------------------- null PIs
+null_task:
+  author: glm-5.2
+  analyzer: null
+  paper_row: null
+  # A+O+T hints re-assigned to OTHER train tasks (task correspondence destroyed, form and length kept).
+  # Built by scripts/analysis/build_pi_null_tiers.py --tiers n3 --seed 0 (see its docstring).
+  4bi:
+    hint: alfworld/hints/nulls/glt_n3_from_glm.json
+    ref_seq_cap: 65536
+    content_sha256: 82e415594b4106dc355f0a6efa375cc800d30751053d5f0ba250346646747d85
+null_xdomain:
+  author: mixed
+  analyzer: null
+  paper_row: null
+  # Cross-domain null: each of the 1,600 ALFWorld train tasks gets a GLM-5.2 reference trajectory of an AppWorld
+  # test_normal task (466 entries, 156 donors) or of a tau2 training-pool retail task (1,134 entries, 382
+  # donors), the donor nearest in length to the task's own A+O+T hint (`<think>` surface kept, about 2.7x the
+  # length of the glt hint it replaces). The file is AppWorld-derived, so it ships only ENCRYPTED, in the
+  # dataset's appworld/appworld_opsd_xdnull.bundle (batch 3b); scripts/setup/setup_appworld.sh decrypts it to
+  # the path below (fetch the bundle first: python -m opsd.data.fetch ... --bench appworld --include
+  # appworld/appworld_opsd_xdnull.bundle). Built by scripts/analysis/build_pi_crossdomain_hints.py with pooled
+  # tau2 + AppWorld donors (see its docstring).
+  # EVALUATION-SPLIT MATERIAL: the keys are ALFWorld train tasks, but the AppWorld donor text is the reference
+  # solution of AppWorld test_normal tasks. A model trained on this arm has seen AppWorld test_normal solutions
+  # through its teacher: never evaluate it (or use this file as a hint source for a model you evaluate) on
+  # AppWorld test_normal. The arm reproduces the paper's control.
+  4bi:
+    hint: appworld/plain/opsd_appworld_xdnull/alfworld/glt_xdmix_tau2_appworld.json
+    ref_seq_cap: 65536
+    content_sha256: e6a41b2d732fc4b1d0f5f04525b08a4536d7f6241f6268403445a01e4b409f3e
+
+# ------------------------------------------------------------------------------------- ALFWorld-Passcode
+# Hints for the cheatable-verifier variant (ALFWORLD_PASSCODE=true), built by replaying the reference
+# trajectory: pc_key = the key reveal and submit only (no procedure); pc_rawkey = this task's trajectory +
+# its key; pc_rawwrong = this task's trajectory + a DECOY key; pc_wrongraw = a same-type task's trajectory +
+# this task's key.
+pc_key:
+  author: oracle
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/passcode/hints_v1/hints_pc_key.json
+    ref_seq_cap: 65536
+    content_sha256: ae81e6509e3192329cf67a7b207168480c5f3b57f2d30b397f15625641417394
+pc_rawkey:
+  author: oracle
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/passcode/hints_v1/hints_pc_rawkey.json
+    ref_seq_cap: 65536
+    content_sha256: f2046a7dfaa9bf580f2391bf4dec828697a248ee84af333cd7dcaa0f8763c9be
+pc_rawwrong:
+  author: oracle
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/passcode/hints_v1/hints_pc_rawwrong.json
+    ref_seq_cap: 65536
+    content_sha256: 210f553a2ba208d29823d71260bc19e6824feccd89a74d8a205094b1bd76b7ed
+pc_wrongraw:
+  author: oracle
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/passcode/hints_v1/hints_pc_wrongraw.json
+    ref_seq_cap: 65536
+    content_sha256: 46845e6717f4b9ea81298a1de46e9dad39c6bc67ec1240409aa0cf3d162561bb
+
+# ----------------------------------------------------------------------------- per-task PI selection
+# One hint per task, picked from a pool of candidate hints by a selection rule (rand = at random, top3d /
+# top3e = at random among the 3 best candidates by the offline PI metric d / d_err). Each replicate uses its
+# own pool draw; the hint file below is draw 0 (replicate seed=1) and the selection tables override it per
+# replicate. mix_*: up to 8 candidates per task, one reference trajectory from each of 8 authors.
+mix_rand8:
+  author: multi
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_mix/hints_mix_random8.json
+    ref_seq_cap: 65536
+    content_sha256: 0b248f298d7f9c866652c34879325cf74f87507aa77ce0667766557f6a6a7720
+mix_top3d:
+  author: multi
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_mix/hints_mix_top3_d.json
+    ref_seq_cap: 65536
+    content_sha256: 47dadbbd8c3901d0e59da720451f9c8e609b7495ccc82ce2a2d0cce4750c2921
+mix_top3e:
+  author: multi
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_mix/hints_mix_top3_derr.json
+    ref_seq_cap: 65536
+    content_sha256: bc9c74826bbfbe17e62553c19682d169829c030f2b00a06df890903f5ddd935e
+# Self pools on the 483 train tasks with >= 8 wins of the student itself: sw8 = 8 of its winning
+# trajectories per task, sa16 = 16 of its attempts per task (wins and losses). {select} is the arm's
+# select=<rule>. One file per rule (and per replicate), so the content hashes live with the replicates in
+# arms.yaml (selection tables).
+sw8:
+  author: self
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_self16/hints_sw8_{select}.json
+    ref_seq_cap: 65536
+sa16:
+  author: self
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_self16/hints_sa16_{select}.json
+    ref_seq_cap: 65536
+# Same-source pool: up to 8 winning trajectories per task from one author (GLM-5.3-flash; 1,593 tasks have at
+# least one). The hint file below is draw 0 (replicate seed=1); the selection tables override it per replicate
+# and pin each file's content hash in arms.yaml.
+f8:
+  author: glm-5.3-flash
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_flash8/hints_mix_random8.json
+    ref_seq_cap: 65536
+# The student's own FAILED trajectory as the hint (raw render, 1586 tasks); tasks without one get no hint.
+self_aot:
+  author: self
+  analyzer: null
+  paper_row: null
+  4bi:
+    hint: alfworld/selection/hints_selfwrong/hints_selfwrong_raw.json
+    ref_seq_cap: 65536
+    content_sha256: 9fea583aa187c7a6a1e25f27e0205601cbfdcc198f0be495d84243cdc3dbd5d9

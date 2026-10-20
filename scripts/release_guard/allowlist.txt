@@ -1,0 +1,9 @@
+# path-glob | rule-id prefix (or *) | justification
+# Globs are fnmatch patterns on repository-root paths ("*" also matches "/"). A glob containing "@" matches only
+# the path@sha labels of history mode, i.e. blobs of older commits. U.* (layout: SkyRL stays outside the
+# repository) findings are never allowlisted.
+scripts/release_guard/* | * | the guard's own pattern definitions
+opsd/tools/release_guard/*@* | * | the guard's earlier location, in the submodule-layout commits this branch is built on
+.gitleaks.toml | * | scanner configuration
+.gitignore | S2 | ignore rules that keep secret files OUT of the repo
+uv.lock | S4.private_ip | generated lockfile: package versions such as 10.3.9.90 read as private IPs

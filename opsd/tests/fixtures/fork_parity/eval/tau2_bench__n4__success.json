@@ -1,0 +1,1376 @@
+{
+ "name": "tau2_bench__n4__success",
+ "env_class": "tau2_bench",
+ "n_samples_per_prompt": 4,
+ "env_metrics_mode": "success",
+ "global_step": 3,
+ "eval_batches": [
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "tau2_bench task 0"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "retail",
+     "task_id": "retail-task-0"
+    },
+    "uid": "uid-0"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "tau2_bench task 1"
+     }
+    ],
+    "env_class": "tau2_bench",
+    "env_extras": {
+     "data_source": "airline",
+     "task_id": "airline-task-1"
+    },
+    "uid": "uid-1"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "tau2_bench task 2"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "retail",
+     "task_id": "retail-task-2"
+    },
+    "uid": "uid-2"
+   }
+  ],
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "tau2_bench task 3"
+     }
+    ],
+    "env_class": "tau2_bench",
+    "env_extras": {
+     "data_source": "airline",
+     "task_id": "airline-task-3"
+    },
+    "uid": "uid-3"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "tau2_bench task 4"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "retail",
+     "task_id": "retail-task-4"
+    },
+    "uid": "uid-4"
+   }
+  ]
+ ],
+ "generator_outputs": [
+  {
+   "prompt_token_ids": [
+    [
+     21,
+     46,
+     36,
+     15
+    ],
+    [
+     21,
+     46,
+     36,
+     15
+    ],
+    [
+     21,
+     46,
+     36,
+     15
+    ],
+    [
+     21,
+     46,
+     36,
+     15
+    ],
+    [
+     23,
+     61,
+     21
+    ],
+    [
+     23,
+     61,
+     21
+    ],
+    [
+     23,
+     61,
+     21
+    ],
+    [
+     23,
+     61,
+     21
+    ],
+    [
+     24,
+     1,
+     31,
+     52
+    ],
+    [
+     24,
+     1,
+     31,
+     52
+    ],
+    [
+     24,
+     1,
+     31,
+     52
+    ],
+    [
+     24,
+     1,
+     31,
+     52
+    ]
+   ],
+   "response_ids": [
+    [
+     357,
+     708,
+     454,
+     116,
+     693,
+     806
+    ],
+    [
+     646,
+     510,
+     174,
+     498,
+     336
+    ],
+    [
+     353,
+     254,
+     420,
+     621,
+     315
+    ],
+    [
+     517,
+     419
+    ],
+    [
+     180,
+     549,
+     724
+    ],
+    [
+     251,
+     785,
+     851,
+     926
+    ],
+    [
+     389
+    ],
+    [
+     741,
+     176,
+     435,
+     782
+    ],
+    [
+     390,
+     886,
+     825,
+     201,
+     984,
+     221
+    ],
+    [
+     521,
+     319,
+     490,
+     803,
+     638
+    ],
+    [
+     395
+    ],
+    [
+     312,
+     464,
+     399,
+     163,
+     390,
+     120,
+     306
+    ]
+   ],
+   "rewards": [
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "loss_masks": [
+    [
+     1,
+     0,
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     1,
+     1
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1
+    ],
+    [
+     1,
+     0,
+     1,
+     0,
+     0,
+     0,
+     1
+    ]
+   ],
+   "stop_reasons": [
+    "length",
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "length",
+    "stop",
+    "length",
+    "stop",
+    "length",
+    "stop",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "domain": "retail",
+     "task_id": "retail-task-0",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 7,
+     "tool_errors": 0
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-0",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "completed",
+     "num_turns": 4,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-0",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "completed",
+     "num_turns": 3,
+     "tool_errors": 0
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-0",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "completed",
+     "num_turns": 11,
+     "tool_errors": 0
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-1",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "max_steps",
+     "num_turns": 8,
+     "tool_errors": 2
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-1",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 2,
+     "tool_errors": 0
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-1",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "completed",
+     "num_turns": 3,
+     "tool_errors": 0
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-1",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "completed",
+     "num_turns": 10,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-2",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "completed",
+     "num_turns": 1,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-2",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "completed",
+     "num_turns": 9,
+     "tool_errors": 0
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-2",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 5,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-2",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 9,
+     "tool_errors": 2
+    }
+   ],
+   "trajectory_ids": [
+    {
+     "instance_id": "uid-0",
+     "repetition_id": 0
+    },
+    {
+     "instance_id": "uid-0",
+     "repetition_id": 1
+    },
+    {
+     "instance_id": "uid-0",
+     "repetition_id": 2
+    },
+    {
+     "instance_id": "uid-0",
+     "repetition_id": 3
+    },
+    {
+     "instance_id": "uid-1",
+     "repetition_id": 0
+    },
+    {
+     "instance_id": "uid-1",
+     "repetition_id": 1
+    },
+    {
+     "instance_id": "uid-1",
+     "repetition_id": 2
+    },
+    {
+     "instance_id": "uid-1",
+     "repetition_id": 3
+    },
+    {
+     "instance_id": "uid-2",
+     "repetition_id": 0
+    },
+    {
+     "instance_id": "uid-2",
+     "repetition_id": 1
+    },
+    {
+     "instance_id": "uid-2",
+     "repetition_id": 2
+    },
+    {
+     "instance_id": "uid-2",
+     "repetition_id": 3
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 1,
+    "generate/max_num_tokens": 7,
+    "generate/avg_num_tokens": 4.083333333333333,
+    "generate/std_num_tokens": 1.8911342863183696,
+    "generate/avg_tokens_non_zero_rewards": 4.666666666666667,
+    "generate/avg_tokens_zero_rewards": 3.888888888888889,
+    "generate/avg_assistant_tokens": 2.4166666666666665,
+    "generate/min_assistant_tokens": 0,
+    "generate/max_assistant_tokens": 4,
+    "generate/std_assistant_tokens": 1.1149240133549712,
+    "environment/raw_reward": 0.3333333333333333,
+    "environment/success": 0.3333333333333333,
+    "environment/num_turns": 6.0,
+    "environment/tool_errors": 0.6666666666666666,
+    "custom/avg_turn_latency": 1.4831,
+    "custom/min_turns_seen": 2.0,
+    "custom/max_turns_seen": 28.0,
+    "custom/infra_failures": 2.0
+   }
+  },
+  {
+   "prompt_token_ids": [
+    [
+     67,
+     65,
+     61
+    ],
+    [
+     67,
+     65,
+     61
+    ],
+    [
+     67,
+     65,
+     61
+    ],
+    [
+     67,
+     65,
+     61
+    ],
+    [
+     61,
+     22,
+     93,
+     51
+    ],
+    [
+     61,
+     22,
+     93,
+     51
+    ],
+    [
+     61,
+     22,
+     93,
+     51
+    ],
+    [
+     61,
+     22,
+     93,
+     51
+    ]
+   ],
+   "response_ids": [
+    [
+     542,
+     704,
+     546,
+     690,
+     222,
+     647
+    ],
+    [
+     355,
+     905,
+     385,
+     956,
+     549,
+     442,
+     172
+    ],
+    [
+     564,
+     402,
+     706,
+     401
+    ],
+    [
+     138,
+     559,
+     101,
+     336,
+     110,
+     101
+    ],
+    [
+     686,
+     133,
+     891,
+     840
+    ],
+    [
+     800,
+     717,
+     481,
+     587,
+     732,
+     369
+    ],
+    [
+     784,
+     928,
+     983,
+     564,
+     295,
+     280,
+     507
+    ],
+    [
+     586,
+     636,
+     554,
+     506,
+     980
+    ]
+   ],
+   "rewards": [
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "loss_masks": [
+    [
+     0,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     0,
+     1,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1,
+     1,
+     1
+    ]
+   ],
+   "stop_reasons": [
+    "stop",
+    "stop",
+    "stop",
+    "length",
+    "length",
+    "stop",
+    "length",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "domain": "airline",
+     "task_id": "airline-task-3",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "completed",
+     "num_turns": 3,
+     "tool_errors": 0
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-3",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 9,
+     "tool_errors": 2
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-3",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "max_steps",
+     "num_turns": 8,
+     "tool_errors": 2
+    },
+    {
+     "domain": "airline",
+     "task_id": "airline-task-3",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "completed",
+     "num_turns": 1,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-4",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 11,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-4",
+     "raw_reward": 0.0,
+     "success": false,
+     "status": "max_steps",
+     "num_turns": 8,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-4",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "completed",
+     "num_turns": 2,
+     "tool_errors": 1
+    },
+    {
+     "domain": "retail",
+     "task_id": "retail-task-4",
+     "raw_reward": 1.0,
+     "success": true,
+     "status": "max_steps",
+     "num_turns": 6,
+     "tool_errors": 2
+    }
+   ],
+   "trajectory_ids": [
+    {
+     "instance_id": "uid-3",
+     "repetition_id": 0
+    },
+    {
+     "instance_id": "uid-3",
+     "repetition_id": 1
+    },
+    {
+     "instance_id": "uid-3",
+     "repetition_id": 2
+    },
+    {
+     "instance_id": "uid-3",
+     "repetition_id": 3
+    },
+    {
+     "instance_id": "uid-4",
+     "repetition_id": 0
+    },
+    {
+     "instance_id": "uid-4",
+     "repetition_id": 1
+    },
+    {
+     "instance_id": "uid-4",
+     "repetition_id": 2
+    },
+    {
+     "instance_id": "uid-4",
+     "repetition_id": 3
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 4,
+    "generate/max_num_tokens": 7,
+    "generate/avg_num_tokens": 5.625,
+    "generate/std_num_tokens": 1.1110243021644486,
+    "generate/avg_tokens_non_zero_rewards": 5.5,
+    "generate/avg_tokens_zero_rewards": 5.75,
+    "generate/avg_assistant_tokens": 2.625,
+    "generate/min_assistant_tokens": 2,
+    "generate/max_assistant_tokens": 4,
+    "generate/std_assistant_tokens": 0.6959705453537527,
+    "environment/raw_reward": 0.5,
+    "environment/success": 0.5,
+    "environment/num_turns": 6.0,
+    "environment/tool_errors": 1.25,
+    "custom/avg_turn_latency": 0.8517,
+    "custom/min_turns_seen": 2.0,
+    "custom/max_turns_seen": 26.0,
+    "custom/infra_failures": 0.0
+   }
+  }
+ ],
+ "metrics": {
+  "plain": {
+   "eval/retail/avg_score": 0.3333333333333333,
+   "eval/retail/pass_at_4": 0.6666666666666666,
+   "eval/retail/pass_at_1": 0.3333333333333333,
+   "eval/retail/mean_positive_reward": 0.3333333333333333,
+   "eval/retail/generate/min_num_tokens": 1,
+   "eval/retail/generate/max_num_tokens": 7,
+   "eval/retail/generate/avg_num_tokens": 4.916666666666667,
+   "eval/retail/generate/std_num_tokens": 1.7539637649874324,
+   "eval/retail/generate/avg_tokens_non_zero_rewards": 5.5,
+   "eval/retail/generate/avg_tokens_zero_rewards": 4.625,
+   "eval/retail/generate/avg_assistant_tokens": 2.6666666666666665,
+   "eval/retail/generate/min_assistant_tokens": 1,
+   "eval/retail/generate/max_assistant_tokens": 4,
+   "eval/retail/generate/std_assistant_tokens": 0.9428090415820634,
+   "eval/retail/environment/raw_reward": 0.3333333333333333,
+   "eval/retail/environment/success": 0.3333333333333333,
+   "eval/retail/environment/num_turns": 6.333333333333333,
+   "eval/retail/environment/tool_errors": 0.8333333333333334,
+   "eval/airline/avg_score": 0.375,
+   "eval/airline/pass_at_4": 1.0,
+   "eval/airline/pass_at_1": 0.5,
+   "eval/airline/mean_positive_reward": 0.375,
+   "eval/airline/generate/min_num_tokens": 1,
+   "eval/airline/generate/max_num_tokens": 7,
+   "eval/airline/generate/avg_num_tokens": 4.375,
+   "eval/airline/generate/std_num_tokens": 1.79843682124227,
+   "eval/airline/generate/avg_tokens_non_zero_rewards": 4.666666666666667,
+   "eval/airline/generate/avg_tokens_zero_rewards": 4.2,
+   "eval/airline/generate/avg_assistant_tokens": 2.25,
+   "eval/airline/generate/min_assistant_tokens": 0,
+   "eval/airline/generate/max_assistant_tokens": 3,
+   "eval/airline/generate/std_assistant_tokens": 0.9682458365518543,
+   "eval/airline/environment/raw_reward": 0.5,
+   "eval/airline/environment/success": 0.5,
+   "eval/airline/environment/num_turns": 5.5,
+   "eval/airline/environment/tool_errors": 1.0,
+   "eval/all/avg_score": 0.35,
+   "eval/all/pass_at_4": 0.8,
+   "eval/all/mean_positive_reward": 0.35,
+   "eval/all/pass_at_1": 0.4,
+   "eval/all/generate/min_num_tokens": 1,
+   "eval/all/generate/max_num_tokens": 7,
+   "eval/all/generate/avg_num_tokens": 4.7,
+   "eval/all/generate/std_num_tokens": 1.7916472867168918,
+   "eval/all/generate/avg_tokens_non_zero_rewards": 5.142857142857143,
+   "eval/all/generate/avg_tokens_zero_rewards": 4.461538461538462,
+   "eval/all/generate/avg_assistant_tokens": 2.5,
+   "eval/all/generate/min_assistant_tokens": 0,
+   "eval/all/generate/max_assistant_tokens": 4,
+   "eval/all/generate/std_assistant_tokens": 0.9746794344808963,
+   "eval/all/environment/raw_reward": 0.4,
+   "eval/all/environment/success": 0.4,
+   "eval/all/environment/num_turns": 6.0,
+   "eval/all/environment/tool_errors": 0.9,
+   "eval/all/custom/avg_turn_latency": 1.1674,
+   "eval/all/custom/min_turns_seen": 2.0,
+   "eval/all/custom/max_turns_seen": 28.0,
+   "eval/all/custom/infra_failures": 2.0
+  },
+  "compact": {
+   "eval/retail/avg_score": 0.3333333333333333,
+   "eval/retail/pass_at_4": 0.6666666666666666,
+   "eval/retail/pass_at_1": 0.3333333333333333,
+   "eval/retail/generate/avg_num_tokens": 4.916666666666667,
+   "eval/retail/environment/raw_reward": 0.3333333333333333,
+   "eval/retail/environment/success": 0.3333333333333333,
+   "eval/retail/environment/num_turns": 6.333333333333333,
+   "eval/retail/environment/tool_errors": 0.8333333333333334,
+   "eval/airline/avg_score": 0.375,
+   "eval/airline/pass_at_4": 1.0,
+   "eval/airline/pass_at_1": 0.5,
+   "eval/airline/generate/avg_num_tokens": 4.375,
+   "eval/airline/environment/raw_reward": 0.5,
+   "eval/airline/environment/success": 0.5,
+   "eval/airline/environment/num_turns": 5.5,
+   "eval/airline/environment/tool_errors": 1.0,
+   "eval/all/avg_score": 0.35,
+   "eval/all/pass_at_4": 0.8,
+   "eval/all/pass_at_1": 0.4,
+   "eval/all/generate/avg_num_tokens": 4.7,
+   "eval/all/environment/raw_reward": 0.4,
+   "eval/all/environment/success": 0.4,
+   "eval/all/environment/num_turns": 6.0,
+   "eval/all/environment/tool_errors": 0.9
+  },
+  "namespace_test": {
+   "test/retail/avg_score": 0.3333333333333333,
+   "test/retail/pass_at_4": 0.6666666666666666,
+   "test/retail/pass_at_1": 0.3333333333333333,
+   "test/retail/mean_positive_reward": 0.3333333333333333,
+   "test/retail/generate/min_num_tokens": 1,
+   "test/retail/generate/max_num_tokens": 7,
+   "test/retail/generate/avg_num_tokens": 4.916666666666667,
+   "test/retail/generate/std_num_tokens": 1.7539637649874324,
+   "test/retail/generate/avg_tokens_non_zero_rewards": 5.5,
+   "test/retail/generate/avg_tokens_zero_rewards": 4.625,
+   "test/retail/generate/avg_assistant_tokens": 2.6666666666666665,
+   "test/retail/generate/min_assistant_tokens": 1,
+   "test/retail/generate/max_assistant_tokens": 4,
+   "test/retail/generate/std_assistant_tokens": 0.9428090415820634,
+   "test/retail/environment/raw_reward": 0.3333333333333333,
+   "test/retail/environment/success": 0.3333333333333333,
+   "test/retail/environment/num_turns": 6.333333333333333,
+   "test/retail/environment/tool_errors": 0.8333333333333334,
+   "test/airline/avg_score": 0.375,
+   "test/airline/pass_at_4": 1.0,
+   "test/airline/pass_at_1": 0.5,
+   "test/airline/mean_positive_reward": 0.375,
+   "test/airline/generate/min_num_tokens": 1,
+   "test/airline/generate/max_num_tokens": 7,
+   "test/airline/generate/avg_num_tokens": 4.375,
+   "test/airline/generate/std_num_tokens": 1.79843682124227,
+   "test/airline/generate/avg_tokens_non_zero_rewards": 4.666666666666667,
+   "test/airline/generate/avg_tokens_zero_rewards": 4.2,
+   "test/airline/generate/avg_assistant_tokens": 2.25,
+   "test/airline/generate/min_assistant_tokens": 0,
+   "test/airline/generate/max_assistant_tokens": 3,
+   "test/airline/generate/std_assistant_tokens": 0.9682458365518543,
+   "test/airline/environment/raw_reward": 0.5,
+   "test/airline/environment/success": 0.5,
+   "test/airline/environment/num_turns": 5.5,
+   "test/airline/environment/tool_errors": 1.0,
+   "test/all/avg_score": 0.35,
+   "test/all/pass_at_4": 0.8,
+   "test/all/mean_positive_reward": 0.35,
+   "test/all/pass_at_1": 0.4,
+   "test/all/generate/min_num_tokens": 1,
+   "test/all/generate/max_num_tokens": 7,
+   "test/all/generate/avg_num_tokens": 4.7,
+   "test/all/generate/std_num_tokens": 1.7916472867168918,
+   "test/all/generate/avg_tokens_non_zero_rewards": 5.142857142857143,
+   "test/all/generate/avg_tokens_zero_rewards": 4.461538461538462,
+   "test/all/generate/avg_assistant_tokens": 2.5,
+   "test/all/generate/min_assistant_tokens": 0,
+   "test/all/generate/max_assistant_tokens": 4,
+   "test/all/generate/std_assistant_tokens": 0.9746794344808963,
+   "test/all/environment/raw_reward": 0.4,
+   "test/all/environment/success": 0.4,
+   "test/all/environment/num_turns": 6.0,
+   "test/all/environment/tool_errors": 0.9,
+   "test/all/custom/avg_turn_latency": 1.1674,
+   "test/all/custom/min_turns_seen": 2.0,
+   "test/all/custom/max_turns_seen": 28.0,
+   "test/all/custom/infra_failures": 2.0
+  },
+  "compact_namespace_test": {
+   "test/retail/avg_score": 0.3333333333333333,
+   "test/retail/pass_at_4": 0.6666666666666666,
+   "test/retail/pass_at_1": 0.3333333333333333,
+   "test/retail/generate/avg_num_tokens": 4.916666666666667,
+   "test/retail/environment/raw_reward": 0.3333333333333333,
+   "test/retail/environment/success": 0.3333333333333333,
+   "test/retail/environment/num_turns": 6.333333333333333,
+   "test/retail/environment/tool_errors": 0.8333333333333334,
+   "test/airline/avg_score": 0.375,
+   "test/airline/pass_at_4": 1.0,
+   "test/airline/pass_at_1": 0.5,
+   "test/airline/generate/avg_num_tokens": 4.375,
+   "test/airline/environment/raw_reward": 0.5,
+   "test/airline/environment/success": 0.5,
+   "test/airline/environment/num_turns": 5.5,
+   "test/airline/environment/tool_errors": 1.0,
+   "test/all/avg_score": 0.35,
+   "test/all/pass_at_4": 0.8,
+   "test/all/pass_at_1": 0.4,
+   "test/all/generate/avg_num_tokens": 4.7,
+   "test/all/environment/raw_reward": 0.4,
+   "test/all/environment/success": 0.4,
+   "test/all/environment/num_turns": 6.0,
+   "test/all/environment/tool_errors": 0.9
+  }
+ },
+ "generator_inputs": [
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 2"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 2"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 2"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 2"
+     }
+    ]
+   ],
+   "env_classes": [
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench"
+   ],
+   "env_extras": [
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-0"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-0"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-0"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-0"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-1"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-1"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-1"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-1"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-2"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-2"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-2"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-2"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-0",
+     0
+    ],
+    [
+     "uid-0",
+     1
+    ],
+    [
+     "uid-0",
+     2
+    ],
+    [
+     "uid-0",
+     3
+    ],
+    [
+     "uid-1",
+     0
+    ],
+    [
+     "uid-1",
+     1
+    ],
+    [
+     "uid-1",
+     2
+    ],
+    [
+     "uid-1",
+     3
+    ],
+    [
+     "uid-2",
+     0
+    ],
+    [
+     "uid-2",
+     1
+    ],
+    [
+     "uid-2",
+     2
+    ],
+    [
+     "uid-2",
+     3
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  },
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 4"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 4"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 4"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "tau2_bench task 4"
+     }
+    ]
+   ],
+   "env_classes": [
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench",
+    "tau2_bench"
+   ],
+   "env_extras": [
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-3"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-3"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-3"
+    },
+    {
+     "data_source": "airline",
+     "task_id": "airline-task-3"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-4"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-4"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-4"
+    },
+    {
+     "data_source": "retail",
+     "task_id": "retail-task-4"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-3",
+     0
+    ],
+    [
+     "uid-3",
+     1
+    ],
+    [
+     "uid-3",
+     2
+    ],
+    [
+     "uid-3",
+     3
+    ],
+    [
+     "uid-4",
+     0
+    ],
+    [
+     "uid-4",
+     1
+    ],
+    [
+     "uid-4",
+     2
+    ],
+    [
+     "uid-4",
+     3
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  }
+ ],
+ "dumps": {
+  "dumped_evals/global_step_3_evals/aggregated_results.jsonl": "{\"eval/retail/avg_score\": 0.3333333333333333, \"eval/retail/pass_at_4\": 0.6666666666666666, \"eval/retail/pass_at_1\": 0.3333333333333333, \"eval/retail/mean_positive_reward\": 0.3333333333333333, \"eval/retail/generate/min_num_tokens\": 1, \"eval/retail/generate/max_num_tokens\": 7, \"eval/retail/generate/avg_num_tokens\": 4.916666666666667, \"eval/retail/generate/std_num_tokens\": 1.7539637649874324, \"eval/retail/generate/avg_tokens_non_zero_rewards\": 5.5, \"eval/retail/generate/avg_tokens_zero_rewards\": 4.625, \"eval/retail/generate/avg_assistant_tokens\": 2.6666666666666665, \"eval/retail/generate/min_assistant_tokens\": 1, \"eval/retail/generate/max_assistant_tokens\": 4, \"eval/retail/generate/std_assistant_tokens\": 0.9428090415820634, \"eval/retail/environment/raw_reward\": 0.3333333333333333, \"eval/retail/environment/success\": 0.3333333333333333, \"eval/retail/environment/num_turns\": 6.333333333333333, \"eval/retail/environment/tool_errors\": 0.8333333333333334, \"eval/airline/avg_score\": 0.375, \"eval/airline/pass_at_4\": 1.0, \"eval/airline/pass_at_1\": 0.5, \"eval/airline/mean_positive_reward\": 0.375, \"eval/airline/generate/min_num_tokens\": 1, \"eval/airline/generate/max_num_tokens\": 7, \"eval/airline/generate/avg_num_tokens\": 4.375, \"eval/airline/generate/std_num_tokens\": 1.79843682124227, \"eval/airline/generate/avg_tokens_non_zero_rewards\": 4.666666666666667, \"eval/airline/generate/avg_tokens_zero_rewards\": 4.2, \"eval/airline/generate/avg_assistant_tokens\": 2.25, \"eval/airline/generate/min_assistant_tokens\": 0, \"eval/airline/generate/max_assistant_tokens\": 3, \"eval/airline/generate/std_assistant_tokens\": 0.9682458365518543, \"eval/airline/environment/raw_reward\": 0.5, \"eval/airline/environment/success\": 0.5, \"eval/airline/environment/num_turns\": 5.5, \"eval/airline/environment/tool_errors\": 1.0, \"eval/all/avg_score\": 0.35, \"eval/all/pass_at_4\": 0.8, \"eval/all/mean_positive_reward\": 0.35, \"eval/all/pass_at_1\": 0.4, \"eval/all/generate/min_num_tokens\": 1, \"eval/all/generate/max_num_tokens\": 7, \"eval/all/generate/avg_num_tokens\": 4.7, \"eval/all/generate/std_num_tokens\": 1.7916472867168918, \"eval/all/generate/avg_tokens_non_zero_rewards\": 5.142857142857143, \"eval/all/generate/avg_tokens_zero_rewards\": 4.461538461538462, \"eval/all/generate/avg_assistant_tokens\": 2.5, \"eval/all/generate/min_assistant_tokens\": 0, \"eval/all/generate/max_assistant_tokens\": 4, \"eval/all/generate/std_assistant_tokens\": 0.9746794344808963, \"eval/all/environment/raw_reward\": 0.4, \"eval/all/environment/success\": 0.4, \"eval/all/environment/num_turns\": 6.0, \"eval/all/environment/tool_errors\": 0.9, \"eval/all/custom/avg_turn_latency\": 1.1674, \"eval/all/custom/min_turns_seen\": 2.0, \"eval/all/custom/max_turns_seen\": 28.0, \"eval/all/custom/infra_failures\": 2.0}\n",
+  "dumped_evals/global_step_3_evals/airline.jsonl": "{\"input_prompt\": \"<23><61><21>\", \"output_response\": \"<180><549><724>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-1\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-1\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"max_steps\", \"num_turns\": 8, \"tool_errors\": 2}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<23><61><21>\", \"output_response\": \"<251><785><851><926>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-1\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-1\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 2, \"tool_errors\": 0}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<23><61><21>\", \"output_response\": \"<389>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-1\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-1\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"completed\", \"num_turns\": 3, \"tool_errors\": 0}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<23><61><21>\", \"output_response\": \"<741><176><435><782>\", \"score\": 1.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-1\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-1\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"completed\", \"num_turns\": 10, \"tool_errors\": 1}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<67><65><61>\", \"output_response\": \"<542><704><546><690><222><647>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-3\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-3\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"completed\", \"num_turns\": 3, \"tool_errors\": 0}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<67><65><61>\", \"output_response\": \"<355><905><385><956><549><442><172>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-3\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-3\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 9, \"tool_errors\": 2}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<67><65><61>\", \"output_response\": \"<564><402><706><401>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-3\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-3\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"max_steps\", \"num_turns\": 8, \"tool_errors\": 2}, \"data_source\": \"airline\"}\n{\"input_prompt\": \"<67><65><61>\", \"output_response\": \"<138><559><101><336><110><101>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"airline\", \"task_id\": \"airline-task-3\"}, \"env_metrics\": {\"domain\": \"airline\", \"task_id\": \"airline-task-3\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"completed\", \"num_turns\": 1, \"tool_errors\": 1}, \"data_source\": \"airline\"}\n",
+  "dumped_evals/global_step_3_evals/retail.jsonl": "{\"input_prompt\": \"<21><46><36><15>\", \"output_response\": \"<357><708><454><116><693><806>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-0\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-0\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 7, \"tool_errors\": 0}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<21><46><36><15>\", \"output_response\": \"<646><510><174><498><336>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-0\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-0\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"completed\", \"num_turns\": 4, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<21><46><36><15>\", \"output_response\": \"<353><254><420><621><315>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-0\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-0\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"completed\", \"num_turns\": 3, \"tool_errors\": 0}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<21><46><36><15>\", \"output_response\": \"<517><419>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-0\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-0\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"completed\", \"num_turns\": 11, \"tool_errors\": 0}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<24><1><31><52>\", \"output_response\": \"<390><886><825><201><984><221>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-2\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-2\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"completed\", \"num_turns\": 1, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<24><1><31><52>\", \"output_response\": \"<521><319><490><803><638>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-2\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-2\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"completed\", \"num_turns\": 9, \"tool_errors\": 0}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<24><1><31><52>\", \"output_response\": \"<395>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-2\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-2\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 5, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<24><1><31><52>\", \"output_response\": \"<312><464><399><163><390><120><306>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-2\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-2\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 9, \"tool_errors\": 2}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<61><22><93><51>\", \"output_response\": \"<686><133><891><840>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-4\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-4\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 11, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<61><22><93><51>\", \"output_response\": \"<800><717><481><587><732><369>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-4\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-4\", \"raw_reward\": 0.0, \"success\": false, \"status\": \"max_steps\", \"num_turns\": 8, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<61><22><93><51>\", \"output_response\": \"<784><928><983><564><295><280><507>\", \"score\": 1.0, \"stop_reason\": \"length\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-4\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-4\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"completed\", \"num_turns\": 2, \"tool_errors\": 1}, \"data_source\": \"retail\"}\n{\"input_prompt\": \"<61><22><93><51>\", \"output_response\": \"<586><636><554><506><980>\", \"score\": 1.0, \"stop_reason\": \"stop\", \"env_class\": \"tau2_bench\", \"env_extras\": {\"data_source\": \"retail\", \"task_id\": \"retail-task-4\"}, \"env_metrics\": {\"domain\": \"retail\", \"task_id\": \"retail-task-4\", \"raw_reward\": 1.0, \"success\": true, \"status\": \"max_steps\", \"num_turns\": 6, \"tool_errors\": 2}, \"data_source\": \"retail\"}\n"
+ }
+}

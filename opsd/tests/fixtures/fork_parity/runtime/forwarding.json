@@ -1,0 +1,450 @@
+{
+ "meta": {
+  "source": "OLD tree (SkyRL fork) skyrl/train/utils/utils.py + skyrl/train/utils/tracking.py",
+  "upstream_base": "ecdaa946",
+  "fixed_now": [
+   2026,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "default_module_flags": {
+   "_SKYRL_USE_NEW_INFERENCE": true,
+   "SKYRL_LD_LIBRARY_PATH_EXPORT": false,
+   "SKYRL_PYTHONPATH_EXPORT": false
+  }
+ },
+ "is_secret_env_name": {
+  "ALFWORLD_BASE_PORT": false,
+  "ALFWORLD_PASSWD": true,
+  "ALFWORLD_PASSWORD": true,
+  "ALFWORLD_SERVER_URLS": false,
+  "APPWORLD_EXPERIMENT": false,
+  "APPWORLD_REMOTE_ENVIRONMENT_URL": false,
+  "APPWORLD_ROOT": false,
+  "APPWORLD_SECRET": true,
+  "AWS_SECRET_ACCESS_KEY": true,
+  "DAYTONA_API_KEY": true,
+  "HOME": false,
+  "LD_LIBRARY_PATH": false,
+  "MLFLOW_TRACKING_TOKEN": true,
+  "MLFLOW_TRACKING_URI": false,
+  "MY_PASSWD": true,
+  "OPENAI_API_KEY": true,
+  "OPSD_ANALYZER_AUTH": false,
+  "OPSD_AWS_CREDENTIALS": true,
+  "OPSD_HINTS_PATH": false,
+  "OPSD_HINT_KEY_FIELD": false,
+  "OPSD_KNOB_00": false,
+  "OPSD_KNOB_01": false,
+  "OPSD_KNOB_02": false,
+  "OPSD_KNOB_03": false,
+  "OPSD_KNOB_04": false,
+  "OPSD_KNOB_05": false,
+  "OPSD_KNOB_06": false,
+  "OPSD_KNOB_07": false,
+  "OPSD_KNOB_08": false,
+  "OPSD_KNOB_09": false,
+  "OPSD_KNOB_10": false,
+  "OPSD_KNOB_11": false,
+  "OPSD_ONLINE_HINTS_ANALYZER_API_KEY": true,
+  "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS": false,
+  "OPSD_ONLINE_HINTS_KEY": false,
+  "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS": false,
+  "OPSD_PI_ANALYZER_API_KEY": true,
+  "OPSD_PI_ANALYZER_API_KEY_ENV": false,
+  "OPSD_PI_ANALYZER_API_KEY_ENV_VALUE": true,
+  "OPSD_STRIP_THINK": false,
+  "OPSD_TOKEN": true,
+  "OPSD_TOKEN_ADV": false,
+  "OPSD_TOKEN_ADV_COEF": false,
+  "OPSD_TOKEN_ADV_ENV": false,
+  "OPSD_TOKEN_ADV_STD": false,
+  "OPSD_TOKEN_CLIP": false,
+  "OPSD_TOKEN_CLIP_API_KEY": true,
+  "Opsd_Token_Adv": false,
+  "PATH": false,
+  "PYTHONHASHSEED": false,
+  "PYTHONPATH": false,
+  "RAY_ADDRESS": false,
+  "RAY_CGRAPH_get_timeout": false,
+  "SKYRL_DATABASE_URL": true,
+  "SKYRL_EVAL_COMPACT": false,
+  "SKYRL_EVAL_NAMESPACE": false,
+  "SKYRL_LOG_FILE": false,
+  "SKYRL_LOG_STEP_OVERRIDE": false,
+  "SKYRL_RAY_NUM_CPUS": false,
+  "SKYRL_RAY_PG_TIMEOUT_IN_S": false,
+  "SKYRL_WANDB_N_GENERATIONS": false,
+  "SYNTH_PROVIDER_API_KEY": true,
+  "TAU2_DOMAIN": false,
+  "TAU2_FW_CRED": false,
+  "TAU2_JUDGE_TOKEN": true,
+  "TAU2_REVISION": false,
+  "TAU2_USER_MODEL": false,
+  "TAU2_api_key": true,
+  "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": false,
+  "VLLM_USE_V1": false,
+  "WANDB_API_KEY": true,
+  "WANDB_PROJECT": false,
+  "WANDB_RESUME": false,
+  "WANDB_RUN_GROUP": false,
+  "WANDB_RUN_ID": false,
+  "XOPSD_FOO": false,
+  "opsd_api_key": true,
+  "opsd_lower": false,
+  "opsd_token_clip": false
+ },
+ "constants": {
+  "RUNTIME_ENV_FORWARD_PREFIXES": [
+   "OPSD_",
+   "ALFWORLD_",
+   "APPWORLD_",
+   "TAU2_",
+   "SKYRL_"
+  ],
+  "RUNTIME_ENV_FORWARD_NAMES": [
+   "PYTHONHASHSEED"
+  ],
+  "RUNTIME_ENV_SECRET_MARKERS": [
+   "KEY",
+   "TOKEN",
+   "SECRET",
+   "PASSWORD",
+   "PASSWD",
+   "CREDENTIAL",
+   "DATABASE_URL"
+  ],
+  "RUNTIME_ENV_MARKER_ALLOWLIST": [
+   "OPSD_HINT_KEY_FIELD",
+   "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS",
+   "OPSD_ONLINE_HINTS_KEY",
+   "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS",
+   "OPSD_PI_ANALYZER_API_KEY_ENV",
+   "OPSD_TOKEN_ADV",
+   "OPSD_TOKEN_ADV_COEF",
+   "OPSD_TOKEN_ADV_ENV",
+   "OPSD_TOKEN_ADV_STD",
+   "OPSD_TOKEN_CLIP"
+  ],
+  "RUNTIME_ENV_KEY_POINTERS": [
+   "OPSD_PI_ANALYZER_API_KEY_ENV"
+  ]
+ },
+ "collect_forwarded_env_vars": [
+  {
+   "name": "empty",
+   "environ": {},
+   "forwarded": {},
+   "warnings": []
+  },
+  {
+   "name": "prefix_vars",
+   "environ": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "ALFWORLD_BASE_PORT": "8200",
+    "APPWORLD_ROOT": "data/appworld",
+    "TAU2_REVISION": "rev-synthetic",
+    "SKYRL_EVAL_COMPACT": "1",
+    "PYTHONHASHSEED": "0",
+    "HOME": "/nonexistent/home",
+    "PATH": "/nonexistent/bin",
+    "XOPSD_FOO": "1",
+    "opsd_lower": "1",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "RAY_ADDRESS": "local"
+   },
+   "forwarded": {
+    "ALFWORLD_BASE_PORT": "8200",
+    "APPWORLD_ROOT": "data/appworld",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "PYTHONHASHSEED": "0",
+    "SKYRL_EVAL_COMPACT": "1",
+    "TAU2_REVISION": "rev-synthetic"
+   },
+   "warnings": []
+  },
+  {
+   "name": "credential_names",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY": "not-a-real-key-1",
+    "OPSD_ONLINE_HINTS_ANALYZER_API_KEY": "not-a-real-key-2",
+    "TAU2_JUDGE_TOKEN": "not-a-real-key-3",
+    "APPWORLD_SECRET": "not-a-real-key-4",
+    "ALFWORLD_PASSWORD": "not-a-real-key-5",
+    "ALFWORLD_PASSWD": "not-a-real-key-6",
+    "SKYRL_DATABASE_URL": "not-a-real-url",
+    "OPSD_AWS_CREDENTIALS": "not-a-real-key-7",
+    "OPSD_TOKEN": "not-a-real-key-8",
+    "OPSD_TOKEN_CLIP_API_KEY": "not-a-real-key-9",
+    "opsd_api_key": "not-a-real-key-10",
+    "TAU2_api_key": "not-a-real-key-11",
+    "OPENAI_API_KEY": "not-a-real-key-12",
+    "WANDB_API_KEY": "not-a-real-wandb-key",
+    "MLFLOW_TRACKING_URI": "http://mlflow.invalid",
+    "MLFLOW_TRACKING_TOKEN": "not-a-real-mlflow-token",
+    "DAYTONA_API_KEY": "not-a-real-daytona-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "warnings": []
+  },
+  {
+   "name": "allowlisted_marker_names",
+   "environ": {
+    "OPSD_TOKEN_ADV": "1",
+    "OPSD_TOKEN_ADV_COEF": "0.5",
+    "OPSD_TOKEN_ADV_STD": "1",
+    "OPSD_TOKEN_ADV_ENV": "alfworld",
+    "OPSD_TOKEN_CLIP": "0",
+    "OPSD_HINT_KEY_FIELD": "task_id",
+    "OPSD_ONLINE_HINTS_KEY": "uid",
+    "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS": "4096",
+    "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS": "1024",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "SYNTH_PROVIDER_API_KEY",
+    "SYNTH_PROVIDER_API_KEY": "not-a-real-key"
+   },
+   "forwarded": {
+    "OPSD_HINT_KEY_FIELD": "task_id",
+    "OPSD_ONLINE_HINTS_ANALYZER_MAX_TOKENS": "1024",
+    "OPSD_ONLINE_HINTS_KEY": "uid",
+    "OPSD_ONLINE_HINTS_MAX_INPUT_TOKENS": "4096",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "SYNTH_PROVIDER_API_KEY",
+    "OPSD_TOKEN_ADV": "1",
+    "OPSD_TOKEN_ADV_COEF": "0.5",
+    "OPSD_TOKEN_ADV_ENV": "alfworld",
+    "OPSD_TOKEN_ADV_STD": "1",
+    "OPSD_TOKEN_CLIP": "0"
+   },
+   "warnings": []
+  },
+  {
+   "name": "key_pointer_prefixed_target",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "OPSD_ANALYZER_AUTH",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "OPSD_ANALYZER_AUTH"
+   },
+   "warnings": []
+  },
+  {
+   "name": "key_pointer_pythonhashseed_target",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "PYTHONHASHSEED",
+    "PYTHONHASHSEED": "0",
+    "TAU2_FW_CRED": "not-a-real-key"
+   },
+   "forwarded": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "PYTHONHASHSEED",
+    "TAU2_FW_CRED": "not-a-real-key"
+   },
+   "warnings": []
+  },
+  {
+   "name": "key_pointer_invalid_value",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "sk-not-a-real-key",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "warnings": [
+    "Not exporting OPSD_PI_ANALYZER_API_KEY_ENV to the ray runtime env: its value is not a valid env-var name (value not shown). Set it to the NAME of the variable that holds the key."
+   ]
+  },
+  {
+   "name": "key_pointer_padded_value",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": " OPSD_ANALYZER_AUTH",
+    "OPSD_ANALYZER_AUTH": "not-a-real-key",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "warnings": [
+    "Not exporting OPSD_PI_ANALYZER_API_KEY_ENV to the ray runtime env: its value is not a valid env-var name (value not shown). Set it to the NAME of the variable that holds the key."
+   ]
+  },
+  {
+   "name": "key_pointer_empty",
+   "environ": {
+    "OPSD_PI_ANALYZER_API_KEY_ENV": "",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "OPSD_PI_ANALYZER_API_KEY_ENV": ""
+   },
+   "warnings": []
+  },
+  {
+   "name": "allowlist_vars",
+   "environ": {
+    "WANDB_RUN_ID": "synthrun01",
+    "WANDB_RESUME": "must",
+    "WANDB_RUN_GROUP": "synth-group",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121",
+    "SKYRL_EVAL_COMPACT": "1",
+    "WANDB_PROJECT": "synth-project"
+   },
+   "forwarded": {
+    "SKYRL_EVAL_COMPACT": "1",
+    "SKYRL_EVAL_NAMESPACE": "test",
+    "SKYRL_LOG_STEP_OVERRIDE": "121"
+   },
+   "warnings": []
+  },
+  {
+   "name": "allowlist_vars_empty",
+   "environ": {
+    "WANDB_RUN_ID": "",
+    "WANDB_RESUME": "",
+    "WANDB_RUN_GROUP": "",
+    "SKYRL_EVAL_NAMESPACE": "",
+    "SKYRL_LOG_STEP_OVERRIDE": "",
+    "SKYRL_EVAL_COMPACT": ""
+   },
+   "forwarded": {
+    "SKYRL_EVAL_COMPACT": "",
+    "SKYRL_EVAL_NAMESPACE": "",
+    "SKYRL_LOG_STEP_OVERRIDE": ""
+   },
+   "warnings": []
+  },
+  {
+   "name": "empty_values",
+   "environ": {
+    "OPSD_STRIP_THINK": "",
+    "TAU2_USER_MODEL": "",
+    "APPWORLD_EXPERIMENT": "",
+    "PYTHONHASHSEED": ""
+   },
+   "forwarded": {
+    "APPWORLD_EXPERIMENT": "",
+    "OPSD_STRIP_THINK": "",
+    "PYTHONHASHSEED": "",
+    "TAU2_USER_MODEL": ""
+   },
+   "warnings": []
+  },
+  {
+   "name": "wandb_n_generations",
+   "environ": {
+    "SKYRL_WANDB_N_GENERATIONS": "4",
+    "WANDB_RUN_ID": "synthrun02",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_WANDB_N_GENERATIONS": "4"
+   },
+   "warnings": []
+  },
+  {
+   "name": "upstream_tail_keys",
+   "environ": {
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600",
+    "LD_LIBRARY_PATH": "synthetic/lib",
+    "PYTHONPATH": "synthetic/pythonpath",
+    "VLLM_USE_V1": "1",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "900",
+    "RAY_CGRAPH_get_timeout": "300",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "600"
+   },
+   "warnings": []
+  },
+  {
+   "name": "pg_timeout_empty",
+   "environ": {
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": "",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_RAY_PG_TIMEOUT_IN_S": ""
+   },
+   "warnings": []
+  },
+  {
+   "name": "stale_skyrl_log_file",
+   "environ": {
+    "SKYRL_LOG_FILE": "logs/stale-infra.log",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "SKYRL_LOG_FILE": "logs/stale-infra.log"
+   },
+   "warnings": []
+  },
+  {
+   "name": "ray_address_external",
+   "environ": {
+    "RAY_ADDRESS": "192.0.2.10:6379",
+    "OPSD_HINTS_PATH": "hints/pi_hints.json",
+    "WANDB_RUN_ID": "synthrun03"
+   },
+   "forwarded": {
+    "OPSD_HINTS_PATH": "hints/pi_hints.json"
+   },
+   "warnings": []
+  },
+  {
+   "name": "many_prefixed",
+   "environ": {
+    "OPSD_KNOB_00": "0",
+    "OPSD_KNOB_01": "1",
+    "OPSD_KNOB_02": "2",
+    "OPSD_KNOB_03": "3",
+    "OPSD_KNOB_04": "4",
+    "OPSD_KNOB_05": "5",
+    "OPSD_KNOB_06": "6",
+    "OPSD_KNOB_07": "7",
+    "OPSD_KNOB_08": "8",
+    "OPSD_KNOB_09": "9",
+    "OPSD_KNOB_10": "10",
+    "OPSD_KNOB_11": "11",
+    "ALFWORLD_SERVER_URLS": "http://127.0.0.1:8200,http://127.0.0.1:8201",
+    "APPWORLD_REMOTE_ENVIRONMENT_URL": "http://127.0.0.1:9200",
+    "TAU2_DOMAIN": "retail",
+    "SKYRL_EVAL_NAMESPACE": "dev"
+   },
+   "forwarded": {
+    "ALFWORLD_SERVER_URLS": "http://127.0.0.1:8200,http://127.0.0.1:8201",
+    "APPWORLD_REMOTE_ENVIRONMENT_URL": "http://127.0.0.1:9200",
+    "OPSD_KNOB_00": "0",
+    "OPSD_KNOB_01": "1",
+    "OPSD_KNOB_02": "2",
+    "OPSD_KNOB_03": "3",
+    "OPSD_KNOB_04": "4",
+    "OPSD_KNOB_05": "5",
+    "OPSD_KNOB_06": "6",
+    "OPSD_KNOB_07": "7",
+    "OPSD_KNOB_08": "8",
+    "OPSD_KNOB_09": "9",
+    "OPSD_KNOB_10": "10",
+    "OPSD_KNOB_11": "11",
+    "SKYRL_EVAL_NAMESPACE": "dev",
+    "TAU2_DOMAIN": "retail"
+   },
+   "warnings": []
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+# AppWorld privileged-information (PI) hint files, per student.
+#   hint            path relative to $OPSD_DATA_ROOT -> OPSD_HINTS_PATH. Every AppWorld file ships inside the
+#                   ENCRYPTED bundle appworld/appworld_opsd_pi.bundle (AppWorld's license requires encrypted
+#                   redistribution of anything derived from its task data);
+#                   scripts/setup/setup_appworld.sh unpacks it into appworld/plain/ (original names).
+#   content_sha256  sha256 of the canonical {task_id: hint} JSON (= the bundle's CONTENTS.json); checked by
+#                   the launcher's preflight before a run starts.
+# Every PI covers the 90 AppWorld train tasks (Qwen3.7-Plus trajectories: 89; a train task without a hint
+# gets the generic static hint, as in the runs).
+# Forms: a = executed code only, ao = code + observations, aot = code + observations + the author's
+# reasoning (the raw trajectory), aat = code + reasoning (no observations); skill = "on-policy skill"
+# analysis and summ = plain summary, both written by an analyzer FROM THE GLM-5.2 REFERENCE TRAJECTORY
+# (the "on-policy" name is historical); chk = checklist contrasting the GLM-5.2 win with the student's own
+# failed rollouts (built with the scaffold's demo task line -- a known defect kept for reproduction).
+# self = the student itself is the analyzer; the checklist and self files are student-specific.
+# The teacher-forward cap OPSD_REF_SEQ_CAP is set per objective/table (arms.yaml), not here.
+
+# Executed code of the verified glm-5.2 train-90 reference trajectory.
+glm_a:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Action"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/glm-5.2/hints_actions.json, content_sha256: 9103da98071fdf1fff6467678378547436da7d12d081502715eabef8142279fc}
+
+# Code + observations (the raw trajectory without the author's reasoning).
+glm_ao:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Action+Obs."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/glm-5.2/hints_raw_no_think.json, content_sha256: 9d587e4e5927efcf2ef7e474ca665aee351b1372c289215dcfbda30a94836bd8}
+
+# Reasoning + code + observations (the raw trajectory).
+glm_aot:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Action+Obs.+Thou."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/glm-5.2/hints_raw.json, content_sha256: ad6e46f5516576632e687f34e42db6995ec67b17d546f95195953c65da7a149c}
+
+# Reasoning + code, observations excluded.
+glm_aat:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Action+Thou."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/glm-5.2/hints_actions_think.json, content_sha256: de91e4bdee27944d5ed975b5e92cda9803bfa3c6e2b45d6694b720e3241796fe}
+
+# Executed code of the verified qwen3.7-plus train-90 reference trajectory. Covers 89 of the 90 train tasks.
+qwen_a:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: "Action"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/qwen3.7-plus/hints_actions.json, content_sha256: aca39d99ab0d9a565947de721e4b2255a8267fd4659163017b55c97f080c6311}
+
+# Code + observations (the raw trajectory without the author's reasoning). Covers 89 of the 90 train tasks.
+qwen_ao:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: "Action+Obs."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/qwen3.7-plus/hints_raw_no_think.json, content_sha256: 345ff86a800eab1c4e0fc85f13aea613b483e64e54cd51155346f566194be34b}
+
+# Reasoning + code + observations (the raw trajectory). Covers 89 of the 90 train tasks.
+qwen_aot:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: "Action+Obs.+Thou."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/qwen3.7-plus/hints_raw.json, content_sha256: 50f2eb1c79da3ff80bde45ab4de5431d04bd374a8ee7e359daefac030037738c}
+
+# Reasoning + code, observations excluded. Covers 89 of the 90 train tasks.
+qwen_aat:
+  author: qwen3.7-plus
+  analyzer: null
+  paper_row: "Action+Thou."
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/trajectory/qwen3.7-plus/hints_actions_think.json, content_sha256: b857f10df2c2c65a52f2a7270e4c13b6c7de2b18202061ccd6be0f2c2647bd61}
+
+glm_skill:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: "On-policy skill"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/skill/glm52_from_glm52_train90.json, content_sha256: 40ce7bdc1c2e48a94fe5366ef9425a78c0b5551f6493a56caab1e088f4177ebd}
+
+qwen_skill:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: "On-policy skill"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/skill/qwen37_from_glm52_train90.json, content_sha256: f8cf9a22f9025d3bdb478df0e94972f20afbd67e54dd98c7a8ee9e38fa4d7fb1}
+
+self_skill:
+  author: glm-5.2
+  analyzer: student
+  paper_row: "On-policy skill"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/skill/4bi_from_glm52_train90.json, content_sha256: 1130f52b6844e0290b5b1f7a95bb00c1157df4308d91e6d40d461f12a161036b}
+  4bt: {hint: appworld/plain/opsd_appworld_pi/hints/skill/4bt_from_glm52_train90.json, content_sha256: 6b3e344c15df733345d8bdd2630dfaee598e680b8ca747c8c41491d6d5596c1e}
+  30bi: {hint: appworld/plain/opsd_appworld_pi/hints/skill/30bi_from_glm52_train90.json, content_sha256: e00a12a7423817a1adbf2911123821c1a6fba888911c059f7837cc7299f47c8a}
+
+glm_summ:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: "Summarised reference"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/summary/glm52_from_glm52_train90.json, content_sha256: 32ed9f87bf9b9757eda8f03f8316b162b59afeb4c632b89ffa86604321ae95fd}
+
+qwen_summ:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: "Summarised reference"
+  default: {hint: appworld/plain/opsd_appworld_pi/hints/summary/qwen37_from_glm52_train90.json, content_sha256: 2fa5e846d9e7ae0909daa8dc828a31167acdc646ca43bbe976e21a83d42b01b7}
+
+self_summ:
+  author: glm-5.2
+  analyzer: student
+  paper_row: "Summarised reference"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/summary/4bi_from_glm52_train90.json, content_sha256: 2d34a1ec3a144f1b849fec6dab5bcda9e9e3557877ec4114aa736b330ac948f4}
+  4bt: {hint: appworld/plain/opsd_appworld_pi/hints/summary/4bt_from_glm52_train90.json, content_sha256: fb990afe79ca85d9b73c6fa7c48b8febeedb26d81ea0616e1479f16b357108d5}
+  30bi: {hint: appworld/plain/opsd_appworld_pi/hints/summary/30bi_from_glm52_train90.json, content_sha256: 8c1a614f3ca944ca2adb0e5124ddd581b113c658fecc353ea1cb7cf4bbe13f00}
+
+glm_chk:
+  author: glm-5.2
+  analyzer: glm-5.2
+  paper_row: "Checklist"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=glm-5.2/student=4bi/hints_checklist.json, content_sha256: c9aa7c8c334b378cf5d8cf39ae64862f65f08af391b7891a08bd94afeafb08b9}
+  4bt: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=glm-5.2/student=4bt/hints_checklist_4bt.json, content_sha256: 9f129ef8811b6e635a8856d6fad08b3466bd5f83f92e2c0731623a20dba00480}
+  30bi: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=glm-5.2/student=30bi/hints_checklist.json, content_sha256: 41a03dd50985b5014e3a8d12f525407b3302dddab9aa83e18c5c88556ee40915}
+
+qwen_chk:
+  author: glm-5.2
+  analyzer: qwen3.7-plus
+  paper_row: "Checklist"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=qwen3.7-plus/student=4bi/hints_checklist.json, content_sha256: 6fa4e97651a5208f27998e345a33f12f1c589864db618000a26f1d1e1afc97b2}
+  4bt: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=qwen3.7-plus/student=4bt/hints_checklist.json, content_sha256: 1eebba26a2e83fe05812102dc0e1891ecbd591157e0f5901e1fdf5eb45c4c5e6}
+  30bi: {hint: appworld/plain/opsd_appworld_pi/hints/checklist/analyzer=qwen3.7-plus/student=30bi/hints_checklist.json, content_sha256: 6b3c8076009611194cac61de663f4c51a5d27c6f6d2b30cb3b796f0283a6be4e}
+
+# glm_aot hints permuted across tasks (scenario-aware derangement): same strings and lengths, wrong task.
+null_task:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Mismatched-task null"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/nulls/glm52_mismatched/hints_raw.json, content_sha256: c2c27f364f8916d387668040258736301d65297e58187daf551b5fa80ceed6f2}
+
+# Each task gets ALFWorld glm-5.2 hint text truncated to the length of its glm_aot hint.
+null_xdomain:
+  author: glm-5.2
+  analyzer: null
+  paper_row: "Cross-domain null"
+  4bi: {hint: appworld/plain/opsd_appworld_pi/hints/nulls/alfworld_crossdomain/hints_raw.json, content_sha256: de2f13005692cb852c8d58c459b76de55d3e8f8dde0c35ab8e525611f0bbf1fd}

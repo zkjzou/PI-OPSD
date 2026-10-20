@@ -1,0 +1,15 @@
+# ALFWorld environment-server venv (separate from the training venv). Python 3.10+ (tested: 3.10).
+#   python3.10 -m venv "$ALFWORLD_VENV"
+#   "$ALFWORLD_VENV/bin/pip" install -r alfworld_server.txt -c alfworld_server.constraints.txt   (in this directory)
+#   (or: bash scripts/setup/setup_alfworld.sh)
+#   ALFWORLD_DATA=... "$ALFWORLD_VENV/bin/alfworld-download" -f
+# The constraints file pins every transitive package to the versions the paper's servers ran with.
+alfworld==0.4.2
+textworld==1.7.0
+gymnasium==0.29.1
+stable-baselines3==2.6.0
+fastapi
+uvicorn[standard]
+pyyaml
+pandas
+pyarrow

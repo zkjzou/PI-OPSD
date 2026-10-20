@@ -1,0 +1,30 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.9
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^(opsd|scripts)/
+
+  # Black needs to be ran after ruff with --fix
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        files: ^(opsd|scripts)/
+
+  # Detect secrets and sensitive information
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+
+  # Block secrets, host-local paths, private-infrastructure references, data files and any SkyRL inside the
+  # repository (it is an external checkout, see pyproject [tool.uv.sources])
+  - repo: local
+    hooks:
+      - id: release-guard
+        name: release-guard
+        entry: python scripts/release_guard/check_release.py --staged
+        language: system
+        pass_filenames: false

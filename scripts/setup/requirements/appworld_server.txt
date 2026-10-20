@@ -1,0 +1,11 @@
+# AppWorld environment-server venv (separate from the training venv: AppWorld 0.1.x pins pydantic<2).
+# Python 3.12 (tested).
+#   python3.12 -m venv "$APPWORLD_VENV"
+#   "$APPWORLD_VENV/bin/pip" install -r appworld_server.txt -c appworld_server.constraints.txt   (in this directory)
+#   (or: bash scripts/setup/setup_appworld.sh)
+#   "$APPWORLD_VENV/bin/appworld" install && APPWORLD_ROOT=... "$APPWORLD_VENV/bin/appworld" download data
+# The constraints file pins every transitive package to the versions the paper's servers ran with.
+appworld==0.1.3.post1
+pandas
+pyarrow
+jinja2

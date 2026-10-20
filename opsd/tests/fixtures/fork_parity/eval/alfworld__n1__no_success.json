@@ -1,0 +1,567 @@
+{
+ "name": "alfworld__n1__no_success",
+ "env_class": "alfworld",
+ "n_samples_per_prompt": 1,
+ "env_metrics_mode": "no_success",
+ "global_step": 3,
+ "eval_batches": [
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "alfworld task 0"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-0"
+    },
+    "uid": "uid-0"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "alfworld task 1"
+     }
+    ],
+    "env_class": "alfworld",
+    "env_extras": {
+     "data_source": "alfworld_valid_unseen",
+     "task_id": "alfworld_valid_unseen-task-1"
+    },
+    "uid": "uid-1"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "alfworld task 2"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-2"
+    },
+    "uid": "uid-2"
+   }
+  ],
+  [
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "alfworld task 3"
+     }
+    ],
+    "env_class": "alfworld",
+    "env_extras": {
+     "data_source": "alfworld_valid_unseen",
+     "task_id": "alfworld_valid_unseen-task-3"
+    },
+    "uid": "uid-3"
+   },
+   {
+    "prompt": [
+     {
+      "role": "user",
+      "content": "alfworld task 4"
+     }
+    ],
+    "env_class": null,
+    "env_extras": {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-4"
+    },
+    "uid": "uid-4"
+   }
+  ]
+ ],
+ "generator_outputs": [
+  {
+   "prompt_token_ids": [
+    [
+     8,
+     33,
+     20
+    ],
+    [
+     6,
+     91,
+     71
+    ],
+    [
+     7,
+     67,
+     1,
+     26
+    ]
+   ],
+   "response_ids": [
+    [
+     404,
+     809,
+     158
+    ],
+    [
+     858,
+     350
+    ],
+    [
+     492,
+     609,
+     248,
+     242,
+     157,
+     635
+    ]
+   ],
+   "rewards": [
+    10.0,
+    0.0,
+    10.0
+   ],
+   "loss_masks": [
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "stop_reasons": [
+    "stop",
+    "length",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "partial_success": 0.0,
+     "num_turns": 7.0,
+     "num_invalid_actions": 4.0
+    },
+    {
+     "partial_success": 0.5,
+     "num_turns": 8.0,
+     "num_invalid_actions": 1.0
+    },
+    {
+     "partial_success": 1.0,
+     "num_turns": 8.0,
+     "num_invalid_actions": 0.0
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 2,
+    "generate/max_num_tokens": 6,
+    "generate/avg_num_tokens": 3.6666666666666665,
+    "generate/std_num_tokens": 1.699673171197595,
+    "generate/avg_tokens_non_zero_rewards": 4.5,
+    "generate/avg_tokens_zero_rewards": 2.0,
+    "generate/avg_assistant_tokens": 1.6666666666666667,
+    "generate/min_assistant_tokens": 1,
+    "generate/max_assistant_tokens": 2,
+    "generate/std_assistant_tokens": 0.4714045207910317,
+    "environment/partial_success": 0.5,
+    "environment/num_turns": 7.666666666666667,
+    "environment/num_invalid_actions": 1.6666666666666667,
+    "custom/avg_turn_latency": 2.8095,
+    "custom/min_turns_seen": 9.0,
+    "custom/max_turns_seen": 28.0,
+    "custom/infra_failures": 2.0
+   }
+  },
+  {
+   "prompt_token_ids": [
+    [
+     72,
+     27,
+     53
+    ],
+    [
+     13,
+     40,
+     63,
+     21
+    ]
+   ],
+   "response_ids": [
+    [
+     187,
+     223,
+     535,
+     521,
+     843,
+     829
+    ],
+    [
+     294,
+     854,
+     990,
+     162,
+     468
+    ]
+   ],
+   "rewards": [
+    0.0,
+    0.0
+   ],
+   "loss_masks": [
+    [
+     0,
+     1,
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     1,
+     0,
+     0
+    ]
+   ],
+   "stop_reasons": [
+    "stop",
+    "stop"
+   ],
+   "rollout_logprobs": null,
+   "env_metrics": [
+    {
+     "partial_success": 0.5,
+     "num_turns": 5.0,
+     "num_invalid_actions": 4.0
+    },
+    {
+     "partial_success": 0.5,
+     "num_turns": 21.0,
+     "num_invalid_actions": 2.0
+    }
+   ],
+   "rollout_metrics": {
+    "generate/min_num_tokens": 5,
+    "generate/max_num_tokens": 6,
+    "generate/avg_num_tokens": 5.5,
+    "generate/std_num_tokens": 0.5,
+    "generate/avg_tokens_non_zero_rewards": 0.0,
+    "generate/avg_tokens_zero_rewards": 5.5,
+    "generate/avg_assistant_tokens": 3.0,
+    "generate/min_assistant_tokens": 3,
+    "generate/max_assistant_tokens": 3,
+    "generate/std_assistant_tokens": 0.0,
+    "environment/partial_success": 0.5,
+    "environment/num_turns": 13.0,
+    "environment/num_invalid_actions": 3.0,
+    "custom/avg_turn_latency": 1.5643,
+    "custom/min_turns_seen": 12.0,
+    "custom/max_turns_seen": 13.0,
+    "custom/infra_failures": 0.0
+   }
+  }
+ ],
+ "metrics": {
+  "plain": {
+   "eval/alfworld/avg_score": 6.666666666666667,
+   "eval/alfworld/pass_at_1": 0.6666666666666666,
+   "eval/alfworld/mean_positive_reward": 6.666666666666667,
+   "eval/alfworld/generate/min_num_tokens": 3,
+   "eval/alfworld/generate/max_num_tokens": 6,
+   "eval/alfworld/generate/avg_num_tokens": 4.666666666666667,
+   "eval/alfworld/generate/std_num_tokens": 1.247219128924647,
+   "eval/alfworld/generate/avg_tokens_non_zero_rewards": 4.5,
+   "eval/alfworld/generate/avg_tokens_zero_rewards": 5.0,
+   "eval/alfworld/generate/avg_assistant_tokens": 2.0,
+   "eval/alfworld/generate/min_assistant_tokens": 1,
+   "eval/alfworld/generate/max_assistant_tokens": 3,
+   "eval/alfworld/generate/std_assistant_tokens": 0.816496580927726,
+   "eval/alfworld/environment/partial_success": 0.5,
+   "eval/alfworld/environment/num_turns": 12.0,
+   "eval/alfworld/environment/num_invalid_actions": 2.0,
+   "eval/alfworld_valid_unseen/avg_score": 0.0,
+   "eval/alfworld_valid_unseen/pass_at_1": 0.0,
+   "eval/alfworld_valid_unseen/mean_positive_reward": 0.0,
+   "eval/alfworld_valid_unseen/generate/min_num_tokens": 2,
+   "eval/alfworld_valid_unseen/generate/max_num_tokens": 6,
+   "eval/alfworld_valid_unseen/generate/avg_num_tokens": 4.0,
+   "eval/alfworld_valid_unseen/generate/std_num_tokens": 2.0,
+   "eval/alfworld_valid_unseen/generate/avg_tokens_non_zero_rewards": 0.0,
+   "eval/alfworld_valid_unseen/generate/avg_tokens_zero_rewards": 4.0,
+   "eval/alfworld_valid_unseen/generate/avg_assistant_tokens": 2.5,
+   "eval/alfworld_valid_unseen/generate/min_assistant_tokens": 2,
+   "eval/alfworld_valid_unseen/generate/max_assistant_tokens": 3,
+   "eval/alfworld_valid_unseen/generate/std_assistant_tokens": 0.5,
+   "eval/alfworld_valid_unseen/environment/partial_success": 0.5,
+   "eval/alfworld_valid_unseen/environment/num_turns": 6.5,
+   "eval/alfworld_valid_unseen/environment/num_invalid_actions": 2.5,
+   "eval/all/avg_score": 4.0,
+   "eval/all/pass_at_1": 0.4,
+   "eval/all/mean_positive_reward": 4.0,
+   "eval/all/generate/min_num_tokens": 2,
+   "eval/all/generate/max_num_tokens": 6,
+   "eval/all/generate/avg_num_tokens": 4.4,
+   "eval/all/generate/std_num_tokens": 1.624807680927192,
+   "eval/all/generate/avg_tokens_non_zero_rewards": 4.5,
+   "eval/all/generate/avg_tokens_zero_rewards": 4.333333333333333,
+   "eval/all/generate/avg_assistant_tokens": 2.2,
+   "eval/all/generate/min_assistant_tokens": 1,
+   "eval/all/generate/max_assistant_tokens": 3,
+   "eval/all/generate/std_assistant_tokens": 0.7483314773547882,
+   "eval/all/environment/partial_success": 0.5,
+   "eval/all/environment/num_turns": 9.8,
+   "eval/all/environment/num_invalid_actions": 2.2,
+   "eval/all/custom/avg_turn_latency": 2.1869,
+   "eval/all/custom/min_turns_seen": 9.0,
+   "eval/all/custom/max_turns_seen": 28.0,
+   "eval/all/custom/infra_failures": 2.0
+  },
+  "compact": {
+   "eval/alfworld/avg_score": 6.666666666666667,
+   "eval/alfworld/pass_at_1": 0.6666666666666666,
+   "eval/alfworld/generate/avg_num_tokens": 4.666666666666667,
+   "eval/alfworld/environment/partial_success": 0.5,
+   "eval/alfworld/environment/num_turns": 12.0,
+   "eval/alfworld/environment/num_invalid_actions": 2.0,
+   "eval/alfworld_valid_unseen/avg_score": 0.0,
+   "eval/alfworld_valid_unseen/pass_at_1": 0.0,
+   "eval/alfworld_valid_unseen/generate/avg_num_tokens": 4.0,
+   "eval/alfworld_valid_unseen/environment/partial_success": 0.5,
+   "eval/alfworld_valid_unseen/environment/num_turns": 6.5,
+   "eval/alfworld_valid_unseen/environment/num_invalid_actions": 2.5,
+   "eval/all/avg_score": 4.0,
+   "eval/all/pass_at_1": 0.4,
+   "eval/all/generate/avg_num_tokens": 4.4,
+   "eval/all/environment/partial_success": 0.5,
+   "eval/all/environment/num_turns": 9.8,
+   "eval/all/environment/num_invalid_actions": 2.2
+  },
+  "namespace_test": {
+   "test/alfworld/avg_score": 6.666666666666667,
+   "test/alfworld/pass_at_1": 0.6666666666666666,
+   "test/alfworld/mean_positive_reward": 6.666666666666667,
+   "test/alfworld/generate/min_num_tokens": 3,
+   "test/alfworld/generate/max_num_tokens": 6,
+   "test/alfworld/generate/avg_num_tokens": 4.666666666666667,
+   "test/alfworld/generate/std_num_tokens": 1.247219128924647,
+   "test/alfworld/generate/avg_tokens_non_zero_rewards": 4.5,
+   "test/alfworld/generate/avg_tokens_zero_rewards": 5.0,
+   "test/alfworld/generate/avg_assistant_tokens": 2.0,
+   "test/alfworld/generate/min_assistant_tokens": 1,
+   "test/alfworld/generate/max_assistant_tokens": 3,
+   "test/alfworld/generate/std_assistant_tokens": 0.816496580927726,
+   "test/alfworld/environment/partial_success": 0.5,
+   "test/alfworld/environment/num_turns": 12.0,
+   "test/alfworld/environment/num_invalid_actions": 2.0,
+   "test/alfworld_valid_unseen/avg_score": 0.0,
+   "test/alfworld_valid_unseen/pass_at_1": 0.0,
+   "test/alfworld_valid_unseen/mean_positive_reward": 0.0,
+   "test/alfworld_valid_unseen/generate/min_num_tokens": 2,
+   "test/alfworld_valid_unseen/generate/max_num_tokens": 6,
+   "test/alfworld_valid_unseen/generate/avg_num_tokens": 4.0,
+   "test/alfworld_valid_unseen/generate/std_num_tokens": 2.0,
+   "test/alfworld_valid_unseen/generate/avg_tokens_non_zero_rewards": 0.0,
+   "test/alfworld_valid_unseen/generate/avg_tokens_zero_rewards": 4.0,
+   "test/alfworld_valid_unseen/generate/avg_assistant_tokens": 2.5,
+   "test/alfworld_valid_unseen/generate/min_assistant_tokens": 2,
+   "test/alfworld_valid_unseen/generate/max_assistant_tokens": 3,
+   "test/alfworld_valid_unseen/generate/std_assistant_tokens": 0.5,
+   "test/alfworld_valid_unseen/environment/partial_success": 0.5,
+   "test/alfworld_valid_unseen/environment/num_turns": 6.5,
+   "test/alfworld_valid_unseen/environment/num_invalid_actions": 2.5,
+   "test/all/avg_score": 4.0,
+   "test/all/pass_at_1": 0.4,
+   "test/all/mean_positive_reward": 4.0,
+   "test/all/generate/min_num_tokens": 2,
+   "test/all/generate/max_num_tokens": 6,
+   "test/all/generate/avg_num_tokens": 4.4,
+   "test/all/generate/std_num_tokens": 1.624807680927192,
+   "test/all/generate/avg_tokens_non_zero_rewards": 4.5,
+   "test/all/generate/avg_tokens_zero_rewards": 4.333333333333333,
+   "test/all/generate/avg_assistant_tokens": 2.2,
+   "test/all/generate/min_assistant_tokens": 1,
+   "test/all/generate/max_assistant_tokens": 3,
+   "test/all/generate/std_assistant_tokens": 0.7483314773547882,
+   "test/all/environment/partial_success": 0.5,
+   "test/all/environment/num_turns": 9.8,
+   "test/all/environment/num_invalid_actions": 2.2,
+   "test/all/custom/avg_turn_latency": 2.1869,
+   "test/all/custom/min_turns_seen": 9.0,
+   "test/all/custom/max_turns_seen": 28.0,
+   "test/all/custom/infra_failures": 2.0
+  },
+  "compact_namespace_test": {
+   "test/alfworld/avg_score": 6.666666666666667,
+   "test/alfworld/pass_at_1": 0.6666666666666666,
+   "test/alfworld/generate/avg_num_tokens": 4.666666666666667,
+   "test/alfworld/environment/partial_success": 0.5,
+   "test/alfworld/environment/num_turns": 12.0,
+   "test/alfworld/environment/num_invalid_actions": 2.0,
+   "test/alfworld_valid_unseen/avg_score": 0.0,
+   "test/alfworld_valid_unseen/pass_at_1": 0.0,
+   "test/alfworld_valid_unseen/generate/avg_num_tokens": 4.0,
+   "test/alfworld_valid_unseen/environment/partial_success": 0.5,
+   "test/alfworld_valid_unseen/environment/num_turns": 6.5,
+   "test/alfworld_valid_unseen/environment/num_invalid_actions": 2.5,
+   "test/all/avg_score": 4.0,
+   "test/all/pass_at_1": 0.4,
+   "test/all/generate/avg_num_tokens": 4.4,
+   "test/all/environment/partial_success": 0.5,
+   "test/all/environment/num_turns": 9.8,
+   "test/all/environment/num_invalid_actions": 2.2
+  }
+ },
+ "generator_inputs": [
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "alfworld task 0"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "alfworld task 1"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "alfworld task 2"
+     }
+    ]
+   ],
+   "env_classes": [
+    "alfworld",
+    "alfworld",
+    "alfworld"
+   ],
+   "env_extras": [
+    {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-0"
+    },
+    {
+     "data_source": "alfworld_valid_unseen",
+     "task_id": "alfworld_valid_unseen-task-1"
+    },
+    {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-2"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-0",
+     0
+    ],
+    [
+     "uid-1",
+     0
+    ],
+    [
+     "uid-2",
+     0
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  },
+  {
+   "prompts": [
+    [
+     {
+      "role": "user",
+      "content": "alfworld task 3"
+     }
+    ],
+    [
+     {
+      "role": "user",
+      "content": "alfworld task 4"
+     }
+    ]
+   ],
+   "env_classes": [
+    "alfworld",
+    "alfworld"
+   ],
+   "env_extras": [
+    {
+     "data_source": "alfworld_valid_unseen",
+     "task_id": "alfworld_valid_unseen-task-3"
+    },
+    {
+     "data_source": "alfworld",
+     "task_id": "alfworld-task-4"
+    }
+   ],
+   "sampling_params": {
+    "min_tokens": 1,
+    "skip_special_tokens": true,
+    "include_stop_str_in_output": true,
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "logprobs": null,
+    "stop": [
+     "</answer>"
+    ]
+   },
+   "trajectory_ids": [
+    [
+     "uid-3",
+     0
+    ],
+    [
+     "uid-4",
+     0
+    ]
+   ],
+   "batch_metadata": {
+    "global_step": 3,
+    "training_phase": "eval"
+   }
+  }
+ ],
+ "dumps": {
+  "dumped_evals/global_step_3_evals/aggregated_results.jsonl": "{\"eval/alfworld/avg_score\": 6.666666666666667, \"eval/alfworld/pass_at_1\": 0.6666666666666666, \"eval/alfworld/mean_positive_reward\": 6.666666666666667, \"eval/alfworld/generate/min_num_tokens\": 3, \"eval/alfworld/generate/max_num_tokens\": 6, \"eval/alfworld/generate/avg_num_tokens\": 4.666666666666667, \"eval/alfworld/generate/std_num_tokens\": 1.247219128924647, \"eval/alfworld/generate/avg_tokens_non_zero_rewards\": 4.5, \"eval/alfworld/generate/avg_tokens_zero_rewards\": 5.0, \"eval/alfworld/generate/avg_assistant_tokens\": 2.0, \"eval/alfworld/generate/min_assistant_tokens\": 1, \"eval/alfworld/generate/max_assistant_tokens\": 3, \"eval/alfworld/generate/std_assistant_tokens\": 0.816496580927726, \"eval/alfworld/environment/partial_success\": 0.5, \"eval/alfworld/environment/num_turns\": 12.0, \"eval/alfworld/environment/num_invalid_actions\": 2.0, \"eval/alfworld_valid_unseen/avg_score\": 0.0, \"eval/alfworld_valid_unseen/pass_at_1\": 0.0, \"eval/alfworld_valid_unseen/mean_positive_reward\": 0.0, \"eval/alfworld_valid_unseen/generate/min_num_tokens\": 2, \"eval/alfworld_valid_unseen/generate/max_num_tokens\": 6, \"eval/alfworld_valid_unseen/generate/avg_num_tokens\": 4.0, \"eval/alfworld_valid_unseen/generate/std_num_tokens\": 2.0, \"eval/alfworld_valid_unseen/generate/avg_tokens_non_zero_rewards\": 0.0, \"eval/alfworld_valid_unseen/generate/avg_tokens_zero_rewards\": 4.0, \"eval/alfworld_valid_unseen/generate/avg_assistant_tokens\": 2.5, \"eval/alfworld_valid_unseen/generate/min_assistant_tokens\": 2, \"eval/alfworld_valid_unseen/generate/max_assistant_tokens\": 3, \"eval/alfworld_valid_unseen/generate/std_assistant_tokens\": 0.5, \"eval/alfworld_valid_unseen/environment/partial_success\": 0.5, \"eval/alfworld_valid_unseen/environment/num_turns\": 6.5, \"eval/alfworld_valid_unseen/environment/num_invalid_actions\": 2.5, \"eval/all/avg_score\": 4.0, \"eval/all/pass_at_1\": 0.4, \"eval/all/mean_positive_reward\": 4.0, \"eval/all/generate/min_num_tokens\": 2, \"eval/all/generate/max_num_tokens\": 6, \"eval/all/generate/avg_num_tokens\": 4.4, \"eval/all/generate/std_num_tokens\": 1.624807680927192, \"eval/all/generate/avg_tokens_non_zero_rewards\": 4.5, \"eval/all/generate/avg_tokens_zero_rewards\": 4.333333333333333, \"eval/all/generate/avg_assistant_tokens\": 2.2, \"eval/all/generate/min_assistant_tokens\": 1, \"eval/all/generate/max_assistant_tokens\": 3, \"eval/all/generate/std_assistant_tokens\": 0.7483314773547882, \"eval/all/environment/partial_success\": 0.5, \"eval/all/environment/num_turns\": 9.8, \"eval/all/environment/num_invalid_actions\": 2.2, \"eval/all/custom/avg_turn_latency\": 2.1869, \"eval/all/custom/min_turns_seen\": 9.0, \"eval/all/custom/max_turns_seen\": 28.0, \"eval/all/custom/infra_failures\": 2.0}\n",
+  "dumped_evals/global_step_3_evals/alfworld.jsonl": "{\"input_prompt\": \"<8><33><20>\", \"output_response\": \"<404><809><158>\", \"score\": 10.0, \"stop_reason\": \"stop\", \"env_class\": \"alfworld\", \"env_extras\": {\"data_source\": \"alfworld\", \"task_id\": \"alfworld-task-0\"}, \"env_metrics\": {\"partial_success\": 0.0, \"num_turns\": 7.0, \"num_invalid_actions\": 4.0}, \"data_source\": \"alfworld\"}\n{\"input_prompt\": \"<7><67><1><26>\", \"output_response\": \"<492><609><248><242><157><635>\", \"score\": 10.0, \"stop_reason\": \"stop\", \"env_class\": \"alfworld\", \"env_extras\": {\"data_source\": \"alfworld\", \"task_id\": \"alfworld-task-2\"}, \"env_metrics\": {\"partial_success\": 1.0, \"num_turns\": 8.0, \"num_invalid_actions\": 0.0}, \"data_source\": \"alfworld\"}\n{\"input_prompt\": \"<13><40><63><21>\", \"output_response\": \"<294><854><990><162><468>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"alfworld\", \"env_extras\": {\"data_source\": \"alfworld\", \"task_id\": \"alfworld-task-4\"}, \"env_metrics\": {\"partial_success\": 0.5, \"num_turns\": 21.0, \"num_invalid_actions\": 2.0}, \"data_source\": \"alfworld\"}\n",
+  "dumped_evals/global_step_3_evals/alfworld_valid_unseen.jsonl": "{\"input_prompt\": \"<6><91><71>\", \"output_response\": \"<858><350>\", \"score\": 0.0, \"stop_reason\": \"length\", \"env_class\": \"alfworld\", \"env_extras\": {\"data_source\": \"alfworld_valid_unseen\", \"task_id\": \"alfworld_valid_unseen-task-1\"}, \"env_metrics\": {\"partial_success\": 0.5, \"num_turns\": 8.0, \"num_invalid_actions\": 1.0}, \"data_source\": \"alfworld_valid_unseen\"}\n{\"input_prompt\": \"<72><27><53>\", \"output_response\": \"<187><223><535><521><843><829>\", \"score\": 0.0, \"stop_reason\": \"stop\", \"env_class\": \"alfworld\", \"env_extras\": {\"data_source\": \"alfworld_valid_unseen\", \"task_id\": \"alfworld_valid_unseen-task-3\"}, \"env_metrics\": {\"partial_success\": 0.5, \"num_turns\": 5.0, \"num_invalid_actions\": 4.0}, \"data_source\": \"alfworld_valid_unseen\"}\n"
+ }
+}

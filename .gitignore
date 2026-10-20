@@ -1,0 +1,44 @@
+.venv
+.env*
+__pycache__/
+*.pyc
+nohup.out
+
+# Python / tooling
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# SkyRL is an external checkout NEXT TO the repository (../SkyRL-ecdaa946, see pyproject [tool.uv.sources]);
+# one placed inside it by mistake must never be committed (the release guard also rejects it)
+/SkyRL/
+/SkyRL-*/
+.gitmodules
+
+# Release hygiene: secrets & credentials (the release guard also rejects tracked .env* files)
+*.env.vars
+*.secrets
+secrets/
+.aws/
+credentials
+*.pem
+*.key
+.netrc
+.pypirc
+
+# Run outputs and data that are never committed (fetch data with `python -m opsd.data.fetch`)
+/runs/
+/outputs/
+/artifacts/
+*.pids
+*.parquet
+*.bundle
+json_2.1.1/
+wandb/

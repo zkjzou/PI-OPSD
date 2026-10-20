@@ -1,0 +1,1243 @@
+{
+ "meta": {
+  "source": "OLD tree (SkyRL fork) skyrl/train/utils/utils.py + skyrl/train/utils/tracking.py",
+  "upstream_base": "ecdaa946",
+  "fixed_now": [
+   2026,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "default_module_flags": {
+   "_SKYRL_USE_NEW_INFERENCE": true,
+   "SKYRL_LD_LIBRARY_PATH_EXPORT": false,
+   "SKYRL_PYTHONPATH_EXPORT": false
+  }
+ },
+ "cases": [
+  {
+   "name": "unset",
+   "override": null,
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  },
+  {
+   "name": "empty",
+   "override": "",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  },
+  {
+   "name": "whitespace",
+   "override": "   ",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  },
+  {
+   "name": "int",
+   "override": "7",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 7,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 7,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 7
+     }
+    ]
+   }
+  },
+  {
+   "name": "padded_int",
+   "override": " 12 ",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 12,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 12,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 12,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 12,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 12
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 12
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 12
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 12
+     }
+    ]
+   }
+  },
+  {
+   "name": "tab_newline_int",
+   "override": "\t9\n",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 9,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 9,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 9,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 9,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 9
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 9
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 9
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 9
+     }
+    ]
+   }
+  },
+  {
+   "name": "plus_sign",
+   "override": "+5",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 5,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 5,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 5
+     }
+    ]
+   }
+  },
+  {
+   "name": "zero",
+   "override": "0",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 0,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 0,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 0,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 0,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 0
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 0
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 0
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 0
+     }
+    ]
+   }
+  },
+  {
+   "name": "negative",
+   "override": "-3",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": -3,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": -3,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": -3,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": -3,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": -3
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": -3
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": -3
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": -3
+     }
+    ]
+   }
+  },
+  {
+   "name": "underscore",
+   "override": "1_000",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 1000,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 1000,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 1000,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 1000,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 1000
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 1000
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 1000
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": 1000
+     }
+    ]
+   }
+  },
+  {
+   "name": "not_an_int",
+   "override": "abc",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  },
+  {
+   "name": "float",
+   "override": "3.5",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  },
+  {
+   "name": "exponent",
+   "override": "1e3",
+   "calls": [
+    {
+     "data": {
+      "eval/all/pass_at_1": 0.5,
+      "eval/all/environment/success": 0.25
+     },
+     "step": 5,
+     "commit": false
+    },
+    {
+     "data": {
+      "test/all/pass_at_1": 0.75
+     },
+     "step": 6,
+     "commit": true
+    },
+    {
+     "data": {
+      "timing/step": 1.5
+     },
+     "step": 7
+    },
+    {
+     "data": {
+      "policy/loss": -0.125
+     },
+     "step": null,
+     "commit": false
+    }
+   ],
+   "received": {
+    "wandb": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5,
+      "commit": false
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6,
+      "commit": true
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7,
+      "commit": false
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null,
+      "commit": false
+     }
+    ],
+    "tensorboard": [
+     {
+      "data": {
+       "eval/all/pass_at_1": 0.5,
+       "eval/all/environment/success": 0.25
+      },
+      "step": 5
+     },
+     {
+      "data": {
+       "test/all/pass_at_1": 0.75
+      },
+      "step": 6
+     },
+     {
+      "data": {
+       "timing/step": 1.5
+      },
+      "step": 7
+     },
+     {
+      "data": {
+       "policy/loss": -0.125
+      },
+      "step": null
+     }
+    ]
+   }
+  }
+ ]
+}
